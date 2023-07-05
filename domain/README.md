@@ -7,7 +7,7 @@ Projeto de representação de domínio para ser utilizado pelas outras camadas d
 - [x] Entidades
 - [ ] Relacionamentos
 - [ ] Normalização de tipos
-- [ ] Repositórios
+- [x] Repositórios
 - [ ] Mappers
 - [ ] DTO
 
