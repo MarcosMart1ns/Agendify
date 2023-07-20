@@ -1,13 +1,13 @@
-package com.agendify.domain;
+package com.agendify.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DomainApplication {
+public class UsersApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DomainApplication.class, args);
+        SpringApplication.run(UsersApplication.class, args);
     }
 
 }
