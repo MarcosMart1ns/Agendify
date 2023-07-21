@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.agendify</groupId>
+        <artifactId>projectAgendify</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.agendify</groupId>
+
     <artifactId>webapp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${project.version}</version>
     <name>webapp</name>
     <description>webapp</description>
     <properties>
+        <project.version>0.0.1-SNAPSHOT</project.version>
         <java.version>17</java.version>
     </properties>
     <dependencies>
@@ -25,9 +25,14 @@
         <dependency>
             <groupId>com.agendify</groupId>
             <artifactId>users</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.agendify</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
