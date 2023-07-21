@@ -11,5 +11,5 @@ public interface ClienteMapper {
 
     Cliente fromEntity(com.agendify.domain.entities.Cliente cliente);
 
-//    com.agendify.domain.entities.Usuario toEntity(Usuario usuario);
+    com.agendify.domain.entities.Usuario toEntity(Cliente usuario);
 }
