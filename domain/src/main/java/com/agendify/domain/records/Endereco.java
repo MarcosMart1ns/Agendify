@@ -9,5 +9,6 @@ public record Endereco(
         Cidade cidade,
         Long numero,
         String Complemento,
-        String cep) {
+        String cep
+) {
 }

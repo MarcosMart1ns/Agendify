@@ -7,9 +7,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface ClienteMapper {
 
-    ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class );
-
     Cliente fromEntity(com.agendify.domain.entities.Cliente cliente);
 
-    com.agendify.domain.entities.Usuario toEntity(Cliente usuario);
+
+    com.agendify.domain.entities.Cliente toEntity(Cliente cliente);
 }
