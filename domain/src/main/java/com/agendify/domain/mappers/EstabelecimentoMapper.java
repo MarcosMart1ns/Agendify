@@ -4,7 +4,6 @@ import com.agendify.domain.records.Estabelecimento;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import javax.swing.text.html.parser.Entity;
 
 @Mapper
 public interface EstabelecimentoMapper {
