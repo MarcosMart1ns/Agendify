@@ -2,13 +2,10 @@ package com.agendify.domain.mappers;
 
 import com.agendify.domain.records.Estabelecimento;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EstabelecimentoMapper {
-
-    EstabelecimentoMapper INSTANCE = Mappers.getMapper(EstabelecimentoMapper.class);
 
     Estabelecimento fromEntity(com.agendify.domain.entities.Estabelecimento estabelecimento);
 

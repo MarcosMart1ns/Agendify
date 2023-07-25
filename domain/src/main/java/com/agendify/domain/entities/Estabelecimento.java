@@ -26,6 +26,6 @@ public class Estabelecimento extends Usuario {
     @OneToMany
     private List<Servico> servicos;
 
-    @OneToMany(mappedBy = "periodoatendimento_id")
+    @OneToMany
     private List<PeriodoAtendimento> periodosAtendimento;
 }

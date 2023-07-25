@@ -30,7 +30,7 @@ public class Estado {
 
     private String nome;
 
-    @OneToMany(mappedBy = "Estado")
+    @OneToMany
     private List<Cidade> cidades;
 
 }
