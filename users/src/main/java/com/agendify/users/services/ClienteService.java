@@ -19,7 +19,11 @@ public class ClienteService {
 
     public Cliente find(UUID id){
         com.agendify.domain.entities.Cliente cliente = clienteRepository.findById(id).orElse(null);
-
         return clienteMapper.fromEntity(cliente);
+    }
+
+    public Cliente createUser(Cliente cliente) {
+        com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clienteMapper.toEntity(cliente));
+        return clienteMapper.fromEntity(clienteSaved);
     }
 }
