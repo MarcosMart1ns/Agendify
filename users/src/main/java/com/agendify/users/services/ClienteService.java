@@ -22,7 +22,7 @@ public class ClienteService {
         return clienteMapper.fromEntity(cliente);
     }
 
-    public Cliente createUser(Cliente cliente) {
+    public Cliente createCliente(Cliente cliente) {
         com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clienteMapper.toEntity(cliente));
         return clienteMapper.fromEntity(clienteSaved);
     }

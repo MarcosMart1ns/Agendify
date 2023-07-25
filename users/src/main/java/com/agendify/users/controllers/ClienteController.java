@@ -3,6 +3,7 @@ package com.agendify.users.controllers;
 import com.agendify.domain.records.Cliente;
 import com.agendify.users.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.UUID;
 
 @RestController
@@ -28,8 +31,9 @@ public class ClienteController {
 
     @PostMapping
     @ResponseBody
-    public Cliente createUser(@RequestBody Cliente cliente){
-        return clienteService.createUser(cliente);
+    public ResponseEntity<Cliente> createUser(@RequestBody Cliente cliente) throws URISyntaxException {
+        Cliente clienteCreated = clienteService.createCliente(cliente);
+        return ResponseEntity.created(new URI("/cliente/" + clienteCreated.id().toString())).body(clienteCreated);
     }
 
 }
