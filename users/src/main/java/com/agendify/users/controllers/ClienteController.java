@@ -25,13 +25,13 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Cliente getUser(@PathVariable UUID id){
+    public Cliente getCliente(@PathVariable UUID id) {
         return clienteService.find(id);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Cliente> createUser(@RequestBody Cliente cliente) throws URISyntaxException {
+    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws URISyntaxException {
         Cliente clienteCreated = clienteService.createCliente(cliente);
         return ResponseEntity.created(new URI("/cliente/" + clienteCreated.id().toString())).body(clienteCreated);
     }
