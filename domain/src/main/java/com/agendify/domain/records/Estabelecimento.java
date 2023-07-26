@@ -10,7 +10,7 @@ public record Estabelecimento(
         String senha,
         Long tipo,
         Endereco endereco,
-        String cpnj,
+        String cnpj,
         String descricao
 //        List<Servico> servicos,
 //        List<PeriodoAtendimento> periodosAtendimento

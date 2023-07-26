@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Estabelecimento extends Usuario {
 
-    private String cpnj;
+    private String cnpj;
 
     private String descricao;
 
