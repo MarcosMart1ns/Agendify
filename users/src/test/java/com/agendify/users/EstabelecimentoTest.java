@@ -49,7 +49,9 @@ class EstabelecimentoTest {
                 ).andExpect(status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(cliente.nome()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(cliente.email()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.cnpj").value(cliente.cnpj()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.senha").value(cliente.senha()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.cnpj").value(cliente.cnpj()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
 
     private String parseObjectToJson(Estabelecimento cliente) throws JsonProcessingException {
@@ -67,8 +69,9 @@ class EstabelecimentoTest {
     private com.agendify.domain.entities.Estabelecimento buildEstabelecimentoEntity() {
         return com.agendify.domain.entities.Estabelecimento.builder()
                 .nome("Fulano Teste")
-                .cnpj("109230129311")
-                .email("fulanoHost")
+                .cnpj("1092301293111")
+                .email("fulano@Host.com")
+                .senha("senha123")
                 .build();
     }
 

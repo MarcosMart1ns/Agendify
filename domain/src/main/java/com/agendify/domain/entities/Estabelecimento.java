@@ -1,6 +1,8 @@
 package com.agendify.domain.entities;
 
 
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Estabelecimento extends Usuario {
 
+    @Nonnull
+    @Column(length = 14)
     private String cnpj;
 
     private String descricao;

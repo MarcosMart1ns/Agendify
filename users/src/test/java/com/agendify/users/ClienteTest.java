@@ -39,7 +39,7 @@ class ClienteTest {
 
     @Test
     void createClienteTest() throws Exception {
-        Cliente cliente = clienteMapper.fromEntity(buildClienteEntity());
+        Cliente cliente = clienteMapper.fromEntity(buildCompleteClienteEntity());
 
         mockMvc.perform(
                         post("/cliente")
@@ -49,7 +49,9 @@ class ClienteTest {
                 ).andExpect(status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(cliente.nome()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(cliente.email()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.cpf").value(cliente.cpf()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.senha").value(cliente.senha()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.cpf").value(cliente.cpf()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
 
     private String parseObjectToJson(Cliente cliente) throws JsonProcessingException {
@@ -60,15 +62,16 @@ class ClienteTest {
     }
 
     private Cliente createClienteData() {
-        com.agendify.domain.entities.Cliente cliente = clienteRepository.saveAndFlush(buildClienteEntity());
+        com.agendify.domain.entities.Cliente cliente = clienteRepository.saveAndFlush(buildCompleteClienteEntity());
         return clienteMapper.fromEntity(cliente);
     }
 
-    private com.agendify.domain.entities.Cliente buildClienteEntity() {
+    private com.agendify.domain.entities.Cliente buildCompleteClienteEntity() {
         return com.agendify.domain.entities.Cliente.builder()
                 .nome("Fulano Teste")
-                .cpf("1092301293")
-                .email("fulanoHost")
+                .cpf("10923012931")
+                .email("fulano@Host.com")
+                .senha("senha123")
                 .build();
     }
 

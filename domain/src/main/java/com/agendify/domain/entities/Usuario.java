@@ -1,5 +1,6 @@
 package com.agendify.domain.entities;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,12 +28,15 @@ public class Usuario {
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
+    @Nonnull
     private String nome;
 
     private String urlFotoPerfil;
 
+    @Nonnull
     private String email;
 
+    @Nonnull
     private String senha;
 
     private Long tipo;
