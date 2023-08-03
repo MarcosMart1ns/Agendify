@@ -1,7 +1,6 @@
 package com.agendify.users;
 
 import com.agendify.domain.mappers.EstabelecimentoMapper;
-import com.agendify.domain.records.Cliente;
 import com.agendify.domain.records.Estabelecimento;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
 import com.agendify.users.config.TestsConfig;
@@ -17,9 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Map;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,36 +29,53 @@ class EstabelecimentoTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private EstabelecimentoRepository clienteRepository;
+    private EstabelecimentoRepository estabelecimentoRepository;
 
     @Autowired
-    EstabelecimentoMapper clienteMapper;
+    EstabelecimentoMapper estabelecimentoMapper;
 
     @Test
     void getEstabelecimentoTest() throws Exception {
-        Estabelecimento cliente = createEstabelecimentoData();
-        mockMvc.perform(get("/estabelecimento/" + cliente.id())).andExpect(status().is2xxSuccessful());
+        Estabelecimento estabelecimento = createEstabelecimentoData();
+        mockMvc.perform(get("/estabelecimento/" + estabelecimento.id())).andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void createEstabelecimentoTest() throws Exception {
-        Estabelecimento cliente = clienteMapper.fromEntity(buildEstabelecimentoEntity());
+        Estabelecimento estabelecimento = estabelecimentoMapper.fromEntity(buildEstabelecimentoEntity());
 
         mockMvc.perform(
                         post("/estabelecimento")
-                                .content(parseObjectToJson(cliente))
+                                .content(parseObjectToJson(estabelecimento))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                 ).andExpect(status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(cliente.nome()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(cliente.email()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.cnpj").value(cliente.cnpj()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(estabelecimento.nome()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(estabelecimento.email()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.cnpj").value(estabelecimento.cnpj()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
     }
 
     @Test
-    public void validatePassword() throws Exception {
-        Estabelecimento estabelecimento = clienteMapper.fromEntity(buildEstabelecimentoEntity());
+    void updateEstabelecimentoTest() throws Exception {
+        com.agendify.domain.entities.Estabelecimento estabelecimento = estabelecimentoRepository.saveAndFlush(buildEstabelecimentoEntity());
+
+        String updatedNome = "Maria Alzira";
+        estabelecimento.setNome(updatedNome);
+
+        Estabelecimento estabelecimentoRequest = estabelecimentoMapper.fromEntity(estabelecimento);
+
+        mockMvc.perform(patch("/estabelecimento/" + estabelecimentoRequest.id())
+                        .content(parseObjectToJson(estabelecimentoRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(updatedNome));
+    }
+
+    @Test
+    void validatePassword() throws Exception {
+        Estabelecimento estabelecimento = estabelecimentoMapper.fromEntity(buildEstabelecimentoEntity());
 
         String response = mockMvc.perform(
                         post("/estabelecimento")
@@ -79,16 +94,16 @@ class EstabelecimentoTest {
         Assertions.assertTrue(BCrypt.checkpw(estabelecimento.senha(), estabelecimentoResponse.senha()));
     }
 
-    private String parseObjectToJson(Estabelecimento cliente) throws JsonProcessingException {
+    private String parseObjectToJson(Estabelecimento estabelecimento) throws JsonProcessingException {
         return new ObjectMapper()
                 .writer()
                 .withDefaultPrettyPrinter()
-                .writeValueAsString(cliente);
+                .writeValueAsString(estabelecimento);
     }
 
     private Estabelecimento createEstabelecimentoData() {
-        com.agendify.domain.entities.Estabelecimento cliente = clienteRepository.saveAndFlush(buildEstabelecimentoEntity());
-        return clienteMapper.fromEntity(cliente);
+        com.agendify.domain.entities.Estabelecimento estabelecimento = estabelecimentoRepository.saveAndFlush(buildEstabelecimentoEntity());
+        return estabelecimentoMapper.fromEntity(estabelecimento);
     }
 
     private com.agendify.domain.entities.Estabelecimento buildEstabelecimentoEntity() {

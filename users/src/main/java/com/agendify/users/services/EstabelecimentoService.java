@@ -5,6 +5,7 @@ import com.agendify.domain.records.Estabelecimento;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,5 +32,14 @@ public class EstabelecimentoService {
 
     public List<Estabelecimento> searchEstabelecimento(String searchText) {
         return Collections.emptyList();
+    }
+
+    public Estabelecimento updateEstabelecimento(UUID id, Estabelecimento estabelecimento) throws HttpClientErrorException.NotFound {
+        if (estabelecimentoRepository.existsById(id)) {
+            com.agendify.domain.entities.Estabelecimento estabelecimentoSaved = estabelecimentoRepository.saveAndFlush(estabelecimentoMapper.toEntity(estabelecimento));
+
+            return estabelecimentoMapper.fromEntity(estabelecimentoSaved);
+        }
+        return null;
     }
 }

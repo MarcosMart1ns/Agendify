@@ -5,6 +5,7 @@ import com.agendify.users.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,19 @@ public class ClienteController {
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws URISyntaxException {
         Cliente clienteCreated = clienteService.createCliente(cliente);
         return ResponseEntity.created(new URI("/cliente/" + clienteCreated.id().toString())).body(clienteCreated);
+    }
+
+    @PatchMapping("{id}")
+    @ResponseBody
+    public ResponseEntity<Cliente> updateCliente(@PathVariable UUID id, @RequestBody Cliente cliente) {
+
+        Cliente clienteUpdated = clienteService.updateCliente(id, cliente);
+
+        if (clienteUpdated == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(clienteUpdated);
     }
 
 }

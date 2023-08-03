@@ -16,9 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Map;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -58,7 +57,24 @@ class ClienteTest {
     }
 
     @Test
-    public void validatePassword() throws Exception {
+    void updateClienteTest() throws Exception {
+        com.agendify.domain.entities.Cliente cliente = clienteRepository.saveAndFlush(buildCompleteClienteEntity());
+
+        String updatedNome = "Maria Alzira";
+        cliente.setNome(updatedNome);
+
+        Cliente clienteRequest = clienteMapper.fromEntity(cliente);
+
+        mockMvc.perform(patch("/cliente/" + clienteRequest.id())
+                        .content(parseObjectToJson(clienteRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.nome").value(updatedNome));
+    }
+
+    @Test
+    void validatePassword() throws Exception {
         Cliente cliente = clienteMapper.fromEntity(buildCompleteClienteEntity());
 
         String response = mockMvc.perform(
