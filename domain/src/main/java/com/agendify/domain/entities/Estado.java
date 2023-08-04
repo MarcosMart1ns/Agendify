@@ -26,11 +26,11 @@ public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, unique = true, nullable = false)
-    private UUID Id;
+    private UUID id;
 
-    private String Nome;
+    private String nome;
 
-    @OneToMany(mappedBy = "Estado")
+    @OneToMany
     private List<Cidade> cidades;
 
 }

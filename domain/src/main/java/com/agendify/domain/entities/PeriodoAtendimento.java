@@ -26,7 +26,7 @@ public class PeriodoAtendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, unique = true, nullable = false)
-    private UUID Id;
+    private UUID id;
 
     @ManyToOne
     private Estabelecimento estabelecimento;
