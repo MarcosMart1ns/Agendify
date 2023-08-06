@@ -14,13 +14,24 @@ import java.util.UUID;
 public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> {
 
     @Query("SELECT a FROM Agendamento a " +
-            "WHERE a.cliente.id = :id OR a.estabelecimento.id = :id")
+            "WHERE a.cliente.id = :id OR a.estabelecimento.id = :id " +
+            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
     List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoId(@Param("id") UUID id);
 
     //TODO: Provavelmente esse será o metodo usado na pesquisa de agendamento
     @Query("SELECT a FROM Agendamento a " +
             "WHERE (a.cliente.id = :id OR a.estabelecimento.id = :id) " +
             "AND FUNCTION('TRUNC', a.data, 'MM') = FUNCTION('TRUNC', :data, 'MM') " +
-            "AND FUNCTION('TRUNC', a.data, 'YYYY') = FUNCTION('TRUNC', :data, 'YYYY')")
-    List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoIdAndMonthYear(@Param("id") UUID id, @Param("data") Date data);
+            "AND FUNCTION('TRUNC', a.data, 'YYYY') = FUNCTION('TRUNC', :data, 'YYYY') " +
+            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
+    List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoIdAndMonthYear(@Param("id") UUID id,
+                                                                             @Param("data") Date data);
+    @Query("SELECT a FROM Agendamento a " +
+            "WHERE a.data BETWEEN :horaInicio AND FUNCTION('DATE_ADD', a.data, FUNCTION('INTERVAL', a.servico.duracao, 'MINUTE')) " +
+            "AND a.estabelecimento.id = :estabelecimentoId " +
+            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
+    List<Agendamento> findAgendamentosDisponiveis(
+            @Param("horaInicio") Date horaInicio,
+            @Param("estabelecimentoId") UUID estabelecimentoId
+    );
 }

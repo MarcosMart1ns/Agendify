@@ -33,10 +33,22 @@ public class CalendarioService {
 
     public Agendamento createAgendamento(Agendamento entity) {
 
-        return agendamentoRepository.save(entity);
+        if (isPeriodoValido(entity.getData(), entity.getEstabelecimento())
+                && isHorarioDisponivel(entity)) {
+            return agendamentoRepository.save(entity);
+
+        }
+
+        return null;
     }
 
-    private boolean isPeriodoValido(Date data, Estabelecimento estabelecimento){
+    private boolean isHorarioDisponivel(Agendamento entity) {
+        return agendamentoRepository
+                .findAgendamentosDisponiveis(entity.getData(), entity.getEstabelecimento().getId())
+                .isEmpty();
+    }
+
+    private boolean isPeriodoValido(Date data, Estabelecimento estabelecimento) {
         List<PeriodoAtendimento> periodosAtendimento = periodoAtendimentoRepository
                 .findyByEstabelecimentoId(estabelecimento.getId());
 
