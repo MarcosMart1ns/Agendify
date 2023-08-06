@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -33,6 +34,8 @@ class EstabelecimentoTest {
 
     @Autowired
     EstabelecimentoMapper estabelecimentoMapper;
+
+    BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 
     @Test
     void getEstabelecimentoTest() throws Exception {
@@ -91,7 +94,7 @@ class EstabelecimentoTest {
         ObjectMapper mapper = new ObjectMapper();
         Estabelecimento estabelecimentoResponse = mapper.readValue(response, Estabelecimento.class);
 
-        Assertions.assertTrue(BCrypt.checkpw(estabelecimento.senha(), estabelecimentoResponse.senha()));
+        Assertions.assertTrue(encode.matches(estabelecimento.senha(), estabelecimentoResponse.senha()));
     }
 
     private String parseObjectToJson(Estabelecimento estabelecimento) throws JsonProcessingException {
