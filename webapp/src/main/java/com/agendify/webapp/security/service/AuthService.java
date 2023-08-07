@@ -2,6 +2,8 @@ package com.agendify.webapp.security.service;
 
 import com.agendify.domain.entities.Usuario;
 import com.agendify.domain.repositories.ClienteRepository;
+import com.agendify.webapp.security.exceptions.InvalidCredentialsException;
+import com.agendify.webapp.security.exceptions.InvalidTokenException;
 import com.agendify.webapp.security.records.AuthRequest;
 import com.agendify.webapp.security.records.AuthResponse;
 import com.agendify.webapp.security.records.KeycloakTokenResponse;
@@ -36,7 +38,7 @@ public class AuthService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public AuthResponse handleAuthRequest(AuthRequest authRequest) throws Exception {
+    public AuthResponse handleAuthRequest(AuthRequest authRequest) throws InvalidCredentialsException, InvalidTokenException {
 
         Usuario usuario = usuarioRepository.findByEmail(authRequest.email());
 
@@ -47,19 +49,19 @@ public class AuthService {
         return new AuthResponse(usuario.getEmail(), token);
     }
 
-    private void checkPassword(AuthRequest authRequest, Usuario usuario) throws Exception {
+    private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
         if (usuario == null) {
-            throw new Exception("Wrong email or password");
+            throw new InvalidCredentialsException("Wrong email or password");
         }
 
         boolean isPasswordValid = passwordEncoder.matches(authRequest.password(), usuario.getSenha());
 
         if (!isPasswordValid) {
-            throw new Exception("Wrong email or password");
+            throw new InvalidCredentialsException("Wrong email or password");
         }
     }
 
-    private String getToken() throws Exception {
+    private String getToken() throws InvalidTokenException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -74,8 +76,7 @@ public class AuthService {
         ResponseEntity<KeycloakTokenResponse> response = restTemplate.postForEntity(verifyTokenUrl, request, KeycloakTokenResponse.class);
 
         if (response.getBody() == null) {
-            throw new Exception("Erro ao obter access token");
-            //TODO: Especializar exception
+            throw new InvalidTokenException("Erro ao obter access token, resposta invalida do keycloak");
         }
 
         return response.getBody().access_token();

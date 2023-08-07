@@ -1,10 +1,14 @@
 package com.agendify.webapp.security.controller;
 
+import com.agendify.webapp.security.exceptions.InvalidCredentialsException;
+import com.agendify.webapp.security.exceptions.InvalidTokenException;
 import com.agendify.webapp.security.records.AuthRequest;
 import com.agendify.webapp.security.records.AuthResponse;
 import com.agendify.webapp.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +22,15 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) throws Exception {
-
-        AuthResponse authResponse = authService.handleAuthRequest(authRequest);
-
-        return ResponseEntity.accepted().body(authResponse);
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest){
+        try {
+            AuthResponse authResponse = authService.handleAuthRequest(authRequest);
+            return ResponseEntity.accepted().body(authResponse);
+        } catch (InvalidTokenException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (InvalidCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(null);
+        }
     }
 
 }
