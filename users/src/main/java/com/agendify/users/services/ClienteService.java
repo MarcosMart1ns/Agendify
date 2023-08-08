@@ -3,6 +3,7 @@ package com.agendify.users.services;
 import com.agendify.domain.mappers.ClienteMapper;
 import com.agendify.domain.records.Cliente;
 import com.agendify.domain.repositories.ClienteRepository;
+import com.agendify.users.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
@@ -18,8 +19,8 @@ public class ClienteService {
     @Autowired
     private ClienteMapper clienteMapper;
 
-    public Cliente find(UUID id){
-        com.agendify.domain.entities.Cliente cliente = clienteRepository.findById(id).orElse(null);
+    public Cliente find(UUID id) throws UserNotFoundException {
+        com.agendify.domain.entities.Cliente cliente = clienteRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return clienteMapper.fromEntity(cliente);
     }
 

@@ -31,12 +31,9 @@ public class SecurityConfig {
         http.oauth2ResourceServer().jwt(Customizer.withDefaults());
 
         //TODO: Verificar tratamento quando o token expira, neste cenário a aplicação retona 500 em um nullpointer
-        //TODO: Expecializar Exceptions
         //TODO: Inserir verificações em cenários de erro
         //TODO: Fazer docker compose com keycloak já inserindo o realm necessário
-        //TODO: Inserir limitação de acesso a clientes e estabelecimentos
-        //TODO: Testes automáticos validando cenários de autenticação
-        //TODO: Atualizar métodos deprecados
+        //TODO: Inserir limitação de acesso a clientes e estabelecimento
         return http.build();
     }
 
