@@ -1,6 +1,7 @@
 package com.agendify.users.controllers;
 
 import com.agendify.domain.records.Cliente;
+import com.agendify.users.UserNotFoundException;
 import com.agendify.users.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Cliente getCliente(@PathVariable UUID id) {
+    public Cliente getCliente(@PathVariable UUID id) throws UserNotFoundException {
         return clienteService.find(id);
     }
 

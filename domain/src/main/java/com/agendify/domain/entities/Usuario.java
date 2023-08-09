@@ -34,6 +34,7 @@ public class Usuario {
     private String urlFotoPerfil;
 
     @Nonnull
+    @Column(unique = true)
     private String email;
 
     @Nonnull
