@@ -7,6 +7,7 @@ import com.agendify.users.config.TestsConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,6 +36,11 @@ class EstabelecimentoTest {
     EstabelecimentoMapper estabelecimentoMapper;
 
     BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
+
+    @BeforeEach
+    void beforeAllTests(){
+        estabelecimentoRepository.deleteAll();
+    }
 
     @Test
     void getEstabelecimentoTest() throws Exception {
