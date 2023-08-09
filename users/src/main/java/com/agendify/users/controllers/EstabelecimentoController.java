@@ -40,7 +40,7 @@ public class EstabelecimentoController {
     }
 
     @GetMapping
-    public List<Estabelecimento> findEstabelecimentos(@RequestParam("searchText") String searchText){
+    public List<Estabelecimento> searchEstabelecimentos(@RequestParam("searchText") String searchText){
         return estabelecimentoService.searchEstabelecimento(searchText);
     }
 

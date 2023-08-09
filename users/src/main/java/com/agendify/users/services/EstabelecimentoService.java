@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -31,7 +32,23 @@ public class EstabelecimentoService {
     }
 
     public List<Estabelecimento> searchEstabelecimento(String searchText) {
-        return Collections.emptyList();
+
+        List<com.agendify.domain.entities.Estabelecimento> nome = estabelecimentoRepository.findByNome(searchText);
+
+        List<com.agendify.domain.entities.Estabelecimento> descricao = estabelecimentoRepository.findByDescricao(searchText);
+        //TODO: findByServiços
+//        List<com.agendify.domain.entities.Estabelecimento> servicos = estabelecimentoRepository.findByServicos(searchText);
+
+        List<com.agendify.domain.entities.Estabelecimento> result = new ArrayList<>();
+
+        result.addAll(nome);
+        result.addAll(descricao);
+
+
+        return result
+                .stream()
+                .map(estabelecimento -> estabelecimentoMapper.fromEntity(estabelecimento))
+                .toList();
     }
 
     public Estabelecimento updateEstabelecimento(UUID id, Estabelecimento estabelecimento) throws HttpClientErrorException.NotFound {
@@ -42,4 +59,5 @@ public class EstabelecimentoService {
         }
         return null;
     }
+
 }
