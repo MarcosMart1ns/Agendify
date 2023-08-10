@@ -1,0 +1,39 @@
+* {
+  color: #f2cd88;
+  line-height: 26%;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.non-logged-nav-bar {
+  height: 144px;
+  width: 100%;
+  align-items: stretch;
+  background-color: #162d59;
+  justify-content: space-between;
+}
+
+.logo-container{
+  margin-left: 8%;
+}
+.logo-border {
+  border-top: 2px solid #0b64d9;
+  border-bottom: 2px solid #0b64d9;
+  width: 138px;
+  height: 48px;
+}
+
+.logo-text {
+  font-size: 24px;
+}
+
+.links-container{
+  margin-right: 8%;
+}
+
+.nav-bar-text{
+  margin:30px;
+}

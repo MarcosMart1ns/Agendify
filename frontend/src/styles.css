@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+*{
+  font-family: inter, serif;
+}
+
+body {
+  background-color: #F2F2F2;
+  margin: 0;
+}
