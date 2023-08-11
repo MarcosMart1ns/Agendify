@@ -1,0 +1,18 @@
+input {
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  background: #F2CD88;
+  color: #162D59F7;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+}
+
+input:active {
+  color: #F2CD88;
+  background-color: #162D59F7;
+}
