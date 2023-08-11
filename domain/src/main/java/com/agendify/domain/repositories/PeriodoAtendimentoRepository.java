@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface PeriodoAtendimentoRepository extends JpaRepository<PeriodoAtendimento, UUID> {
 
-    List<PeriodoAtendimento> findyByEstabelecimentoId(UUID id);
+    List<PeriodoAtendimento> findByEstabelecimento_Id(UUID id);
 }
