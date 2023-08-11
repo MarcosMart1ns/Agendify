@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class NavBarLinkComponent {
   @Input() buttonName :string = "defaultName";
+  @Input() url :string = "";
 }

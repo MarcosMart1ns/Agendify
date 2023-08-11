@@ -9,6 +9,8 @@ import { SearchHomePageComponent } from './pages/search-home-page/search-home-pa
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SearchComponentComponent } from './components/search-component/search-component.component';
 import { ConfirmButtonComponent } from './components/confirm-button/confirm-button.component';
+import { SearchResultsPageComponent } from './pages/search-results-page/search-results-page.component';
+import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ConfirmButtonComponent } from './components/confirm-button/confirm-butt
     SearchHomePageComponent,
     SearchInputComponent,
     SearchComponentComponent,
-    ConfirmButtonComponent
+    ConfirmButtonComponent,
+    SearchResultsPageComponent,
+    SignUpPageComponent
   ],
   imports: [
     BrowserModule,
