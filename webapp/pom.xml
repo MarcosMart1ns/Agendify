@@ -31,6 +31,12 @@
 
         <dependency>
             <groupId>com.agendify</groupId>
+            <artifactId>calendar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.agendify</groupId>
             <artifactId>domain</artifactId>
             <version>${project.version}</version>
         </dependency>

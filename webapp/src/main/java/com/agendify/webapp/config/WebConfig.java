@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableJpaRepositories("com.agendify.domain.repositories")
 @EntityScan("com.agendify.domain.entities")
-@ComponentScan({"com.agendify.domain", "com.agendify.users"})
+@ComponentScan({"com.agendify.domain", "com.agendify.users","com.agendify.calendar"})
 public class WebConfig {
 }
