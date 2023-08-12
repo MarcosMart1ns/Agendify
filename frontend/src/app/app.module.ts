@@ -12,6 +12,7 @@ import { ConfirmButtonComponent } from './components/confirm-button/confirm-butt
 import { SearchResultsPageComponent } from './pages/search-results-page/search-results-page.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { LogoComponentComponent } from './components/logo-component/logo-component.component';
+import { FormComponentComponent } from './components/form-component/form-component.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LogoComponentComponent } from './components/logo-component/logo-compone
     ConfirmButtonComponent,
     SearchResultsPageComponent,
     SignUpPageComponent,
-    LogoComponentComponent
+    LogoComponentComponent,
+    FormComponentComponent
   ],
   imports: [
     BrowserModule,
