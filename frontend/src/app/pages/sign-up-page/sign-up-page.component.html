@@ -1,7 +1,16 @@
 <app-navbar mode="form"></app-navbar>
 <main>
   <div class="form-container">
-    <app-form-component></app-form-component>
+
+    <div class="form-picker">
+      <div class="service-pick">
+        <p class="selected-service">Quero Agendar</p>
+        <a href="/signup">Quero oferecer atendmento</a>
+      </div>
+    </div>
+
+    <app-form-component [formModel]="formClientModel" [formTitle]="'Crie sua conta'"></app-form-component>
+
   </div>
   <div class="image">
     <img

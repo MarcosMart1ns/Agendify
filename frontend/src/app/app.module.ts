@@ -13,6 +13,7 @@ import { SearchResultsPageComponent } from './pages/search-results-page/search-r
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { LogoComponentComponent } from './components/logo-component/logo-component.component';
 import { FormComponentComponent } from './components/form-component/form-component.component';
+import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormComponentComponent } from './components/form-component/form-compone
     SearchResultsPageComponent,
     SignUpPageComponent,
     LogoComponentComponent,
-    FormComponentComponent
+    FormComponentComponent,
+    FormInputComponentComponent
   ],
   imports: [
     BrowserModule,

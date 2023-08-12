@@ -1,0 +1,10 @@
+<form action="http://localhost:8080/cliente" method="post">
+  <p class="title">Crie sua conta</p>
+  <app-form-input-component
+    *ngFor="let input of formModel"
+    [type]="input.fieldType"
+    [inputName]="input.fieldName"
+    [inputIcon]="input.iconUrl"
+  />
+  <app-confirm-button [buttonText]="'Cadastrar-se'"/>
+</form>
