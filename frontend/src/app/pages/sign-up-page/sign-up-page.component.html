@@ -9,7 +9,13 @@
       </div>
     </div>
 
-    <app-form-component [model]="clienteModel" [formFieldsModel]="formClientModel" [formTitle]="'Crie sua conta'"></app-form-component>
+    <app-form-component
+            [model]="clienteModel"
+            [formFieldsModel]="formClientModel"
+            [formTitle]="'Crie sua conta'"
+            (formOutputData)="formSubmit($event)"
+    />
+
 
   </div>
   <div class="image">
