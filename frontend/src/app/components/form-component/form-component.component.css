@@ -9,3 +9,20 @@ form {
   font-size: 24px;
   font-weight: 500;
 }
+
+input {
+  width: 324px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  color: #08348CF7;
+}
+
+::placeholder {
+  color: #08348CF7;
+}

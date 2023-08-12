@@ -1,10 +1,13 @@
-<form action="http://localhost:8080/cliente" method="post">
-  <p class="title">Crie sua conta</p>
-  <app-form-input-component
-    *ngFor="let input of formModel"
-    [type]="input.fieldType"
-    [inputName]="input.fieldName"
-    [inputIcon]="input.iconUrl"
-  />
-  <app-confirm-button [buttonText]="'Cadastrar-se'"/>
+<form [formGroup]="formGroup" >
+  <p class="title">{{formTitle}}</p>
+
+  <input *ngFor="let input of formFieldsModel"
+         id="{{input.fieldName.toLowerCase()}}"
+         name="{{input.fieldName.toLowerCase()}}"
+         placeholder="{{input.fieldName}}"
+         type="{{input.fieldType}}"
+         formControlName="{{input.controlName}}"
+  >
+
+  <app-confirm-button disabled="!formGroup.valid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'"/>
 </form>

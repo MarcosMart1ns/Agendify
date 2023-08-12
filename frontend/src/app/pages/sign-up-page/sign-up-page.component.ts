@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {FieldModel} from "../../model/FieldModel";
+import {ClienteModel} from "../../model/ClienteModel";
+import {ClienteFieldModel} from "../../model/ClienteFieldModel";
+import {EstabelecimentoFieldModel} from "../../model/EstabelecimentoFieldModel";
 
 @Component({
   selector: 'app-sign-up-page',
@@ -7,46 +10,7 @@ import {FieldModel} from "../../model/FieldModel";
   styleUrls: ['./sign-up-page.component.css']
 })
 export class SignUpPageComponent {
-  formClientModel: FieldModel[] = [
-    {
-      fieldName: "Nome",
-      iconUrl: "",
-      fieldType: "text"
-    },
-    {
-      fieldName: "CPF",
-      iconUrl: "",
-      fieldType: "number"
-    },
-    {
-      fieldName: "Email",
-      iconUrl: "",
-      fieldType: "email"
-    },
-    {
-      fieldName: "Senha",
-      iconUrl: "",
-      fieldType: "password"
-    },
-    {
-      fieldName: "Confirmar Senha",
-      iconUrl: "",
-      fieldType: "password"
-    },
-    {
-      fieldName: "Logradouro",
-      iconUrl: "",
-      fieldType: "text"
-    },
-    {
-      fieldName: "Bairro",
-      iconUrl: "",
-      fieldType: "text"
-    },
-    {
-      fieldName: "Cidade",
-      iconUrl: "",
-      fieldType: "text"
-    }
-    ]
+  clienteModel = new ClienteModel();
+  formClientModel: FieldModel[] = new ClienteFieldModel().fields;
+  formEstabelecimentoModel: FieldModel[] = new EstabelecimentoFieldModel().fields;
 }

@@ -14,6 +14,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { LogoComponentComponent } from './components/logo-component/logo-component.component';
 import { FormComponentComponent } from './components/form-component/form-component.component';
 import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormInputComponentComponent } from './components/form-input-component/f
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],
