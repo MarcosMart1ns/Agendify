@@ -1,9 +1,7 @@
-<div class="non-logged-nav-bar">
+<div  *ngIf="mode=='non-logged-home'" class="non-logged-nav-bar">
 
   <div class="logo-container">
-    <div class="logo-border">
-      <p class="logo-text">Agendify</p>
-    </div>
+    <app-logo-component></app-logo-component>
   </div>
 
   <div class="links-container">
@@ -11,4 +9,11 @@
     <app-nav-bar-link buttonName="Login"></app-nav-bar-link>
   </div>
 
+</div>
+
+<div *ngIf="mode==='form'" class="signup-login-nav-bar">
+  <a [routerLink]="''" style="text-decoration: none;margin: 2%">
+    <img src="./assets/images/back.svg" alt="">
+  </a>
+  <app-logo-component></app-logo-component>
 </div>

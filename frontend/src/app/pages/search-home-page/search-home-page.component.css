@@ -37,3 +37,7 @@ main {
 .selected-service {
   color: #08348CF7;
 }
+
+app-navbar {
+  width: 100%;
+}

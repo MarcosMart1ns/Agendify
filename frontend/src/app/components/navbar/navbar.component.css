@@ -16,14 +16,16 @@
   justify-content: space-between;
 }
 
-.logo-container{
-  margin-left: 8%;
+.signup-login-nav-bar {
+  height: 100px;
+  width: 100%;
+
+  background-color: #162d59;
+  justify-content: flex-start;
 }
-.logo-border {
-  border-top: 2px solid #0b64d9;
-  border-bottom: 2px solid #0b64d9;
-  width: 138px;
-  height: 48px;
+
+.logo-container{
+  margin-left: 7%;
 }
 
 .logo-text {
@@ -34,6 +36,4 @@
   margin-right: 8%;
 }
 
-.nav-bar-text{
-  margin:30px;
-}
+

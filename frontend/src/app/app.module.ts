@@ -11,6 +11,7 @@ import { SearchComponentComponent } from './components/search-component/search-c
 import { ConfirmButtonComponent } from './components/confirm-button/confirm-button.component';
 import { SearchResultsPageComponent } from './pages/search-results-page/search-results-page.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { LogoComponentComponent } from './components/logo-component/logo-component.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
     SearchComponentComponent,
     ConfirmButtonComponent,
     SearchResultsPageComponent,
-    SignUpPageComponent
+    SignUpPageComponent,
+    LogoComponentComponent
   ],
   imports: [
     BrowserModule,
