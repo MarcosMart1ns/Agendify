@@ -15,6 +15,7 @@ import { LogoComponentComponent } from './components/logo-component/logo-compone
 import { FormComponentComponent } from './components/form-component/form-component.component';
 import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
