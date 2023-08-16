@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ConfirmButtonComponent {
   @Input()buttonText: string = "Confirm";
+  @Input()disabled: boolean = false;
 }

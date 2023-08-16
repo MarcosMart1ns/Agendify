@@ -16,3 +16,8 @@ input:active {
   color: #F2CD88;
   background-color: #162D59F7;
 }
+
+input:disabled{
+  color: rgba(126, 144, 182, 0.97);
+  background-color: rgb(239, 212, 171);
+}

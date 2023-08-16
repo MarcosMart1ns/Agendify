@@ -3,4 +3,5 @@ export interface FieldModel {
   iconUrl: string;
   fieldType: string;
   controlName: string;
+  errorMessage: string;
 }

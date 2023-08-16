@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FieldModel} from "../../model/FieldModel";
 import {ClienteModel} from "../../model/ClienteModel";
 import {ClienteFieldModel} from "../../model/ClienteFieldModel";
@@ -11,7 +11,7 @@ import {ClienteService} from "../../services/cliente.service";
   styleUrls: ['./sign-up-page.component.css']
 })
 export class SignUpPageComponent {
-  clienteModel = new ClienteModel();
+  clienteModel = new ClienteModel().model;
   formClientModel: FieldModel[] = new ClienteFieldModel().fields;
   formEstabelecimentoModel: FieldModel[] = new EstabelecimentoFieldModel().fields;
 

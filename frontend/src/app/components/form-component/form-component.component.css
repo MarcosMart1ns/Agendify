@@ -12,7 +12,7 @@ form {
 
 input {
   width: 324px;
-  margin-bottom: 10px;
+  margin: 10px 10px 0px 10px;
   border-radius: 10px;
   height: 50px;
   padding-left: 16px;
@@ -27,7 +27,6 @@ input {
   color: #08348CF7;
 }
 
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -38,4 +37,15 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.error-msg p{
+  margin: 0 18px;
+  color: red;
+  font-size: 14px;
+  border-top: 1px solid red;
+}
+
+app-confirm-button {
+  margin: 30px;
 }
