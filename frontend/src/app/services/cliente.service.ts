@@ -29,16 +29,16 @@ export class ClienteService {
         retry(2),
         catchError(this.handleError)
       )
-      .toPromise()
-      .then(
-        (response) => {
-          // @ts-ignore
-          window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-        },
-        error => {
-          window.alert("Ocorreu um erro ao efetuar cadastro: " + error)
-        }
-      )
+        .toPromise()
+        .then(
+          (response) => {
+            // @ts-ignore TODO: Criar classe que representa o response
+            window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
+          },
+          error => {
+            window.alert("Ocorreu um erro ao efetuar cadastro: " + error)
+          }
+        )
     } catch (e) {
       window.alert("erro ao efetuar o cadastro: " + e);
     }
@@ -47,11 +47,10 @@ export class ClienteService {
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
+
     if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do client
       errorMessage = error.error.message;
     } else {
-      // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
     console.log(errorMessage);

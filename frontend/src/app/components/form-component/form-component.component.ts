@@ -20,7 +20,33 @@ export class FormComponentComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        this.formGroup = new FormBuilder().group(this.model);
+        this.formGroup = new FormBuilder().group(this.model,{
+          validator: this.matchPassword('senha','confirm_senha')
+        });
     }
+
+  matchPassword(password: string, confirmPassword: string) {
+    return (formGroup: FormGroup) => {
+
+      const passwordControl = formGroup.controls[password];
+      const confirmPasswordControl = formGroup.controls[confirmPassword];
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (confirmPasswordControl.errors && !confirmPasswordControl.errors['passwordMismatch']) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
+
+      return null;
+    }
+  }
 
 }
