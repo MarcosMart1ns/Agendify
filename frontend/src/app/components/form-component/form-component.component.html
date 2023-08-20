@@ -10,12 +10,16 @@
       formControlName="{{input.controlName}}"
     >
 
-    <div *ngIf="!formGroup.controls[input.controlName].valid && formGroup.controls[input.controlName].touched" class="error-msg">
+    <div *ngIf="!formGroup.controls[input.controlName].valid &&
+                  formGroup.controls[input.controlName].touched"
+         class="error-msg"
+    >
       <p>{{input.errorMessage}}</p>
     </div>
 
   </div>
-  
+
   <app-confirm-button *ngIf="formGroup.valid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'" [disabled]="false"/>
   <app-confirm-button *ngIf="!formGroup.valid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'" [disabled]="true"/>
+
 </form>

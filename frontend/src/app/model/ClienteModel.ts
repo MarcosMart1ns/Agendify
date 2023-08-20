@@ -1,37 +1,57 @@
 import {Usuario} from "./Usuario";
-import {AbstractControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {of} from "rxjs";
+import {AbstractControl, ValidatorFn, Validators} from "@angular/forms";
 
-export class ClienteModel implements Usuario{
+export class ClienteModel implements Usuario {
 
   model = {
     nome: ['', Validators.required],
-    cpf:  ['', [Validators.required, Validators.max(11)]],
-    email:  ['', [Validators.required, Validators.email]],
-    senha:  ['', Validators.compose([Validators.required, this.validatePassword()])],
-    confirm_senha:  ['', Validators.required],
-    logradouro:  '',
-    bairro:  '',
-    cidade:  ''
+    cpf: ['', Validators.compose([Validators.required, this.validateCPF()])],
+    email: ['', [Validators.required, Validators.email]],
+    senha: ['', Validators.compose([Validators.required, this.validatePassword()])],
+    confirm_senha: ['', Validators.required],
+    logradouro: '',
+    bairro: '',
+    cidade: ''
   }
 
-  validatePassword() : ValidatorFn{
-    return (control: AbstractControl):{ [key: string]: any }=> {
+  /*
+    A senha deve ter um mínimo de oito caracteres.
+    Precisa ter pelo menos uma letra minúscula.
+    Precisa ter pelo menos uma letra maiúscula.
+    Precisa ter pelo menos um número.
+  */
+  validatePassword(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
         return {};
       }
-      /* Arsenal01234  Arsenal01239
-        A senha deve ter um mínimo de oito caracteres.
-        Precisa ter pelo menos uma letra minúscula.
-        Precisa ter pelo menos uma letra maiúscula.
-        Precisa ter pelo menos um número.
-     */
-      const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+
+      const regex = new RegExp(`^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$`);
 
       const valid = regex.test(control.value);
 
-      return valid ? {} : { invalidPassword: true };
+      return valid ? {} : {invalidPassword: true};
     };
   }
 
+  /*
+  Aceitar qualquer sequência de 11 números;
+  */
+  validateCPF() {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (!control.value) {
+        return {};
+      }
+
+      if (control.value.length != 11) {
+        return {invalid: true};
+      }
+
+      const regex = new RegExp(`([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})`);
+
+      const valid = regex.test(control.value);
+
+      return valid ? {} : {invalid: true};
+    };
+  }
 }
