@@ -1,59 +1,41 @@
 import {Injectable} from '@angular/core';
-import {ClienteModel} from "../model/ClienteModel";
+import {ClienteFormModel} from "../model/ClienteFormModel";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, retry, throwError} from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ClienteService {
 
-  url = 'http://localhost:9090/cliente'
+    url = 'http://localhost:9090/cliente'
 
-  constructor(private httpClient: HttpClient) {
-  }
+    constructor(private httpClient: HttpClient) {
+    }
 
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  }
+    httpOptions = {
+        headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
 
-  createCliente(cliente: ClienteModel) {
+    createCliente(cliente: ClienteFormModel) {
 
-    try {
-      console.log(cliente);
-      let response = this.httpClient.post(
-        this.url,
-        JSON.stringify(cliente),
-        this.httpOptions
-      ).pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-        .toPromise()
-        .then(
-          (response) => {
-            // @ts-ignore TODO: Criar classe que representa o response
-            window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-          },
-          error => {
-            window.alert("Ocorreu um erro ao efetuar cadastro: " + error)
-          }
+        this.httpClient.post(
+            this.url,
+            JSON.stringify(cliente),
+            this.httpOptions
         )
-    } catch (e) {
-      window.alert("erro ao efetuar o cadastro: " + e);
+            .toPromise()
+            .then(
+                (response) => {
+                    // TODO: Criar classe que representa o response
+                    // @ts-ignore
+                    window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
+                    return response;
+                },
+                (error: HttpErrorResponse) => {
+                    window.alert(`Erro ao criar usuário: ${error.error.message}`)
+                }
+            )
+
     }
 
-  }
-
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
-    }
-    console.log(errorMessage);
-    return throwError(() => new Error(errorMessage))
-  };
 }

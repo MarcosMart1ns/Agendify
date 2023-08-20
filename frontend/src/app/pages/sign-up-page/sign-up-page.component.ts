@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FieldModel} from "../../model/FieldModel";
-import {ClienteModel} from "../../model/ClienteModel";
+import {ClienteFormModel} from "../../model/ClienteFormModel";
 import {ClienteFieldModel} from "../../model/ClienteFieldModel";
 import {EstabelecimentoFieldModel} from "../../model/EstabelecimentoFieldModel";
 import {ClienteService} from "../../services/cliente.service";
@@ -11,7 +11,7 @@ import {ClienteService} from "../../services/cliente.service";
   styleUrls: ['./sign-up-page.component.css']
 })
 export class SignUpPageComponent {
-  clienteModel = new ClienteModel().model;
+  clienteModel = new ClienteFormModel().model;
   formClientModel: FieldModel[] = new ClienteFieldModel().fields;
   formEstabelecimentoModel: FieldModel[] = new EstabelecimentoFieldModel().fields;
 
@@ -20,7 +20,7 @@ export class SignUpPageComponent {
   ) {
   }
 
-  formSubmit(cliente:ClienteModel){
+  formSubmit(cliente:ClienteFormModel){
     this.clienteService.createCliente(cliente)
   }
 }
