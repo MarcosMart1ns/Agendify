@@ -20,6 +20,6 @@
   </div>
 
   <app-confirm-button *ngIf="formGroup.valid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'" [disabled]="false"/>
-  <app-confirm-button *ngIf="!formGroup.valid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'" [disabled]="true"/>
+  <app-confirm-button *ngIf="formGroup.invalid" (click)="onSubmit()" [buttonText]="'Cadastrar-se'" [disabled]="true"/>
 
 </form>
