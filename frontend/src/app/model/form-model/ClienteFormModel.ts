@@ -1,7 +1,6 @@
-import {Usuario} from "./Usuario";
 import {AbstractControl, ValidatorFn, Validators} from "@angular/forms";
 
-export class ClienteFormModel implements Usuario {
+export class ClienteFormModel {
 
   model = {
     nome: ['', Validators.required],

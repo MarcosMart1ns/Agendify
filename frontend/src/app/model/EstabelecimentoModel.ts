@@ -1,6 +1,4 @@
-import {Usuario} from "./Usuario";
-
-export class ClienteModel implements Usuario{
+export class EstabelecimentoModel {
   nome: string = '';
   cnpj: string= '';
   email: string= '';

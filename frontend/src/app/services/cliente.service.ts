@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ClienteFormModel} from "../model/ClienteFormModel";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import {ClienteFormModel} from "../model/form-model/ClienteFormModel";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
@@ -18,23 +18,11 @@ export class ClienteService {
 
     createCliente(cliente: ClienteFormModel) {
 
-        this.httpClient.post(
+        return this.httpClient.post(
             this.url,
             JSON.stringify(cliente),
             this.httpOptions
-        )
-            .toPromise()
-            .then(
-                (response) => {
-                    // TODO: Criar classe que representa o response
-                    // @ts-ignore
-                    window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-                    return response;
-                },
-                (error: HttpErrorResponse) => {
-                    window.alert(`Erro ao criar usuário: ${error.error.message}`)
-                }
-            )
+        );
 
     }
 

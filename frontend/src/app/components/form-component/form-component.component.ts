@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FieldModel} from "../../model/FieldModel";
+import {FieldModel} from "../../model/field-model/FieldModel";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ClienteFormModel} from "../../model/ClienteFormModel";
+import {ClienteFormModel} from "../../model/form-model/ClienteFormModel";
 
 @Component({
     selector: 'app-form-component',
