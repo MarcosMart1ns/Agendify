@@ -28,6 +28,9 @@ public abstract class AgendamentoMapper {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ServicoMapper servicoMapper;
+
     @Mappings({
             @Mapping(target = "estabelecimento", source = "estabelecimentoId", qualifiedByName = "getEstabelecimento"),
             @Mapping(target = "cliente", source = "clienteId", qualifiedByName = "getCliente"),
@@ -37,7 +40,8 @@ public abstract class AgendamentoMapper {
 
     @Mappings({
             @Mapping(target = "estabelecimentoId", source = "estabelecimento.id"),
-            @Mapping(target = "clienteId", source = "cliente.id")
+            @Mapping(target = "clienteId", source = "cliente.id"),
+            @Mapping( target = "servico", source = "servico", qualifiedByName = "mappServicoResponse")
     })
     public abstract AgendamentoResponse fromEntity(Agendamento agendamento);
 
@@ -57,6 +61,11 @@ public abstract class AgendamentoMapper {
     Cliente getCliente(UUID uuid) {
         return clienteRepository.findById(uuid)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado: " + uuid));
+    }
+
+    @Named("mappServicoResponse")
+    ServicoResponse mappServicoResponse(Servico servico){
+        return servicoMapper.fromEntity(servico);
     }
 
 }

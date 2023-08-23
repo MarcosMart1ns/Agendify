@@ -77,6 +77,7 @@ public class CalendarioService {
                             horaData.isBefore(periodo.getHoraFim());
                 })
                 .findAny()
-                .orElseThrow(() -> new HorarioIndisponivelException("O horário se encontra fora do periodo de atendimento do pres"));
+                .orElseThrow(() ->
+                        new HorarioIndisponivelException("O horário se encontra fora do periodo de atendimento do prestador"));
     }
 }
