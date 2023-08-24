@@ -1,6 +1,8 @@
 package com.agendify.users.controllers;
 
 import com.agendify.domain.records.Estabelecimento;
+import com.agendify.users.exceptions.UserAlreadyExistsException;
+import com.agendify.users.exceptions.UserNotFoundException;
 import com.agendify.users.services.EstabelecimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +30,13 @@ public class EstabelecimentoController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    public Estabelecimento getEstabelecimento(@PathVariable UUID id) {
+    public Estabelecimento getEstabelecimento(@PathVariable UUID id) throws UserNotFoundException {
         return estabelecimentoService.findEstabelecimento(id);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Estabelecimento> createEstabelecimento(@RequestBody Estabelecimento estabelecimento) throws URISyntaxException {
+    public ResponseEntity<Estabelecimento> createEstabelecimento(@RequestBody Estabelecimento estabelecimento) throws URISyntaxException, UserAlreadyExistsException {
         Estabelecimento estabelecimentoCreated = estabelecimentoService.createEstabelecimento(estabelecimento);
         return ResponseEntity.created(new URI("/estabelecimento/" + estabelecimentoCreated.id().toString())).body(estabelecimentoCreated);
     }
