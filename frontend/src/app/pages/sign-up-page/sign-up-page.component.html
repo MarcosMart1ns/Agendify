@@ -4,8 +4,22 @@
 
     <div class="form-picker">
       <div class="service-pick">
-        <p (click)="toggleCliente()" class="selected-service">Quero Agendar</p>
-        <p (click)='toggleEstabelecimento()' class="unselected-service">Quero oferecer atendmento</p>
+
+        <p
+          (click)="toggleCliente()"
+          [ngClass]="{
+            'selected-service': enableClienteField,
+            'unselected-service': enableEstabelecimentoField
+          }" >
+          Quero Agendar
+        </p>
+        <p (click)='toggleEstabelecimento()'
+           [ngClass]="{
+           'selected-service': enableEstabelecimentoField,
+           'unselected-service': enableClienteField}">
+          Quero oferecer atendmento
+        </p>
+
       </div>
     </div>
 
