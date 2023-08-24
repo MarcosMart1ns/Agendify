@@ -30,7 +30,7 @@ export class EstabelecimentoFieldControl {
       },
       {
         fieldName: "Confirmar Senha",
-        controlName: "senha",
+        controlName: "confirm_senha",
         iconUrl: "",
         fieldType: "password",
         errorMessage: "Senha Inválida"

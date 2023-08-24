@@ -42,7 +42,7 @@ export class EstabelecimentoFormGroup {
         return {};
       }
 
-      if (control.value.length != 13) {
+      if (control.value.length != 14) {
         return {invalid: true};
       }
 
