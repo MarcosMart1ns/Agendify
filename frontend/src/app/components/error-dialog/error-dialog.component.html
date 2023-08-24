@@ -1,0 +1,8 @@
+<div *ngIf="showDialog" class="modal">
+    <p>
+        {{message}}
+    </p>
+
+    <app-confirm-button [buttonText]="'OK'" (click)="toggle()"></app-confirm-button>
+</div>
+

@@ -18,9 +18,13 @@
 
 
   </div>
+
   <div class="image">
     <img
       src="assets/images/signup.png"
+      alt="Faça seu agendamento"
     >
   </div>
+
+  <app-error-dialog [showDialog]="showErrorDialog" [message]="errorMessage"></app-error-dialog>
 </main>

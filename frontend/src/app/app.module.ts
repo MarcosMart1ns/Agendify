@@ -16,6 +16,7 @@ import { FormComponentComponent } from './components/form-component/form-compone
 import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from "@angular/common/http";
     SignUpPageComponent,
     LogoComponentComponent,
     FormComponentComponent,
-    FormInputComponentComponent
+    FormInputComponentComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,

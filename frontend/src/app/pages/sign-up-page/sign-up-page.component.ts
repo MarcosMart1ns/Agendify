@@ -15,6 +15,8 @@ export class SignUpPageComponent {
     clienteModel = new ClienteFormModel().model;
     formClientModel: FieldModel[] = new ClienteFieldModel().fields;
     formEstabelecimentoModel: FieldModel[] = new EstabelecimentoFieldModel().fields;
+    showErrorDialog: boolean = false;
+    errorMessage:string = 'Exemplo';
 
     constructor(
         private clienteService: ClienteService
@@ -30,7 +32,8 @@ export class SignUpPageComponent {
                 return response;
             },
             (error: HttpErrorResponse) => {
-                window.alert(`Erro ao criar usuário: ${error.error.message}`)
+                this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
+                this.showErrorDialog = true;
             }
         )
     }
