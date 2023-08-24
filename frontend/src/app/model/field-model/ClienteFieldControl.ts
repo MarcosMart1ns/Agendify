@@ -1,5 +1,5 @@
-export class ClienteFieldModel {
-  fields = [
+export class ClienteFieldControl {
+  static fields = [
     {
       fieldName: "Nome",
       controlName: "nome",

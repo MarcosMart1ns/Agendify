@@ -1,8 +1,8 @@
 import {AbstractControl, ValidatorFn, Validators} from "@angular/forms";
 
-export class ClienteFormModel {
+export class ClienteFormGroup {
 
-  model = {
+  static model = {
     nome: ['', Validators.required],
     cpf: ['', Validators.compose([Validators.required, this.validateCPF()])],
     email: ['', [Validators.required, Validators.email]],
@@ -19,7 +19,7 @@ export class ClienteFormModel {
     Precisa ter pelo menos uma letra maiúscula.
     Precisa ter pelo menos um número.
   */
-  validatePassword(): ValidatorFn {
+  static validatePassword(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
         return {};
@@ -36,7 +36,7 @@ export class ClienteFormModel {
   /*
   Aceitar qualquer sequência de 11 números;
   */
-  validateCPF() {
+  static validateCPF() {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
         return {};

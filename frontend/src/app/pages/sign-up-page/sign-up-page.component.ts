@@ -1,40 +1,77 @@
 import {Component, OnInit} from '@angular/core';
 import {FieldModel} from "../../model/field-model/FieldModel";
-import {ClienteFormModel} from "../../model/form-model/ClienteFormModel";
-import {ClienteFieldModel} from "../../model/field-model/ClienteFieldModel";
-import {EstabelecimentoFieldModel} from "../../model/field-model/EstabelecimentoFieldModel";
+import {ClienteFormGroup} from "../../model/form-model/ClienteFormGroup";
+import {ClienteFieldControl} from "../../model/field-model/ClienteFieldControl";
+import {EstabelecimentoFieldControl} from "../../model/field-model/EstabelecimentoFieldControl";
 import {ClienteService} from "../../services/cliente.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {EstabelecimentoFormGroup} from "../../model/form-model/EstabelecimentoFormGroup";
+import {EstabelecimentoService} from "../../estabelecimento.service";
 
 @Component({
-    selector: 'app-sign-up-page',
-    templateUrl: './sign-up-page.component.html',
-    styleUrls: ['./sign-up-page.component.css']
+  selector: 'app-sign-up-page',
+  templateUrl: './sign-up-page.component.html',
+  styleUrls: ['./sign-up-page.component.css']
 })
 export class SignUpPageComponent {
-    clienteModel = new ClienteFormModel().model;
-    formClientModel: FieldModel[] = new ClienteFieldModel().fields;
-    formEstabelecimentoModel: FieldModel[] = new EstabelecimentoFieldModel().fields;
-    showErrorDialog: boolean = false;
-    errorMessage:string = 'Exemplo';
 
-    constructor(
-        private clienteService: ClienteService
-    ) {
-    }
+  clienteFormGroup= ClienteFormGroup.model;
+  clienteFormField: FieldModel[] = ClienteFieldControl.fields;
 
-    formSubmit(cliente: ClienteFormModel) {
-        return this.clienteService.createCliente(cliente).subscribe(
-            response => {
-                // TODO: Criar classe que representa o response
-                // @ts-ignore
-                window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-                return response;
-            },
-            (error: HttpErrorResponse) => {
-                this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
-                this.showErrorDialog = true;
-            }
-        )
-    }
+  estabelecimentoFormGroup = EstabelecimentoFormGroup.model;
+  estabelecimntoFormField: FieldModel[] = EstabelecimentoFieldControl.fields;
+
+  enableClienteField: boolean = true;
+  enableEstabelecimentoField: boolean = false;
+
+  showErrorDialog: boolean = false;
+  errorMessage: string = 'Exemplo';
+
+  constructor(
+    private clienteService: ClienteService,
+    private estabelecimentoService: EstabelecimentoService
+  ) {
+  }
+
+  submitCliente(cliente: ClienteFormGroup) {
+    return this.clienteService.createCliente(cliente).subscribe(
+      response => {
+        // TODO: Criar classe que representa o response
+        // @ts-ignore
+        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
+        return response;
+        //TODO: Redirecionar para a página logada
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
+        this.showErrorDialog = true;
+      }
+    )
+  }
+
+  submitEstabelecimento(estabelecimento: EstabelecimentoFormGroup) {
+    return this.estabelecimentoService.createCliente(estabelecimento).subscribe(
+      response => {
+        // TODO: Criar classe que representa o response
+        // @ts-ignore
+        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
+        return response;
+        //TODO: Redirecionar para a página logada
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
+        this.showErrorDialog = true;
+      }
+    )
+  }
+
+  toggleCliente() {
+    this.enableClienteField = true;
+    this.enableEstabelecimentoField = false;
+  }
+
+  toggleEstabelecimento() {
+    this.enableClienteField = false;
+    this.enableEstabelecimentoField = true;
+  }
 }

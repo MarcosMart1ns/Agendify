@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ClienteFormModel} from "../model/form-model/ClienteFormModel";
+import {ClienteFormGroup} from "../model/form-model/ClienteFormGroup";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ClienteService {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
 
-    createCliente(cliente: ClienteFormModel) {
+    createCliente(cliente: ClienteFormGroup) {
 
         return this.httpClient.post(
             this.url,

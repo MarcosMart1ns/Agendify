@@ -1,5 +1,5 @@
-export class EstabelecimentoFieldModel{
-    fields = [
+export class EstabelecimentoFieldControl {
+    static fields = [
       {
         fieldName: "Nome",
         controlName: "nome",
@@ -9,7 +9,7 @@ export class EstabelecimentoFieldModel{
       },
       {
         fieldName: "CNPJ",
-        controlName: "CPNPJ",
+        controlName: "cnpj",
         iconUrl: "",
         fieldType: "number",
         errorMessage: "CPNJ inválido"

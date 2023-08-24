@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FieldModel} from "../../model/field-model/FieldModel";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ClienteFormModel} from "../../model/form-model/ClienteFormModel";
+import {ClienteFormGroup} from "../../model/form-model/ClienteFormGroup";
 
 @Component({
     selector: 'app-form-component',
@@ -12,7 +12,7 @@ export class FormComponentComponent implements OnInit{
     @Input()formTitle: string = "Form Title";
     @Input()formFieldsModel: FieldModel[] = [];
     @Input()model = {};
-    @Output() formOutputData = new EventEmitter<ClienteFormModel>();
+    @Output() formOutputData = new EventEmitter<ClienteFormGroup>();
     formGroup:FormGroup = new FormBuilder().group(this.model);
 
     onSubmit(){

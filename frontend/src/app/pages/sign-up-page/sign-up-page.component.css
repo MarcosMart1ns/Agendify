@@ -28,13 +28,7 @@ main {
   font-weight: 500;
 }
 
-.service-pick p {
-  margin-left: 30px;
-  padding: 5px;
-  border-bottom: 2px solid  #162d59;
-}
-
-.service-pick a {
+.unselected-service {
   text-decoration: none;
   text-align: center;
   margin-left: 30px;
@@ -44,6 +38,9 @@ main {
 
 .selected-service {
   color: #08348CF7;
+  margin-left: 30px;
+  padding: 5px;
+  border-bottom: 2px solid  #162d59;
 }
 
 @media (max-width: 1200px) or (min-width: 2500px){

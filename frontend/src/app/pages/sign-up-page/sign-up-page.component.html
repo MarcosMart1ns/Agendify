@@ -4,18 +4,24 @@
 
     <div class="form-picker">
       <div class="service-pick">
-        <p class="selected-service">Quero Agendar</p>
-        <a href="/signup">Quero oferecer atendmento</a>
+        <p (click)="toggleCliente()" class="selected-service">Quero Agendar</p>
+        <p (click)='toggleEstabelecimento()' class="unselected-service">Quero oferecer atendmento</p>
       </div>
     </div>
 
-    <app-form-component
-            [model]="clienteModel"
-            [formFieldsModel]="formClientModel"
+    <app-form-component *ngIf="enableClienteField"
+            [model]="clienteFormGroup"
+            [formFieldsModel]="clienteFormField"
             [formTitle]="'Crie sua conta'"
-            (formOutputData)="formSubmit($event)"
+            (formOutputData)="submitCliente($event)"
     />
 
+    <app-form-component *ngIf="enableEstabelecimentoField"
+                        [model]="estabelecimentoFormGroup"
+                        [formFieldsModel]="estabelecimntoFormField"
+                        [formTitle]="'Crie sua conta'"
+                        (formOutputData)="submitEstabelecimento($event)"
+    />
 
   </div>
 
