@@ -10,7 +10,7 @@
           [ngClass]="{
             'selected-service': enableClienteField,
             'unselected-service': enableEstabelecimentoField
-          }" >
+          }">
           Quero Agendar
         </p>
         <p (click)='toggleEstabelecimento()'
@@ -24,10 +24,10 @@
     </div>
 
     <app-form-component *ngIf="enableClienteField"
-            [model]="clienteFormGroup"
-            [formFieldsModel]="clienteFormField"
-            [formTitle]="'Crie sua conta'"
-            (formOutputData)="submitCliente($event)"
+                        [model]="clienteFormGroup"
+                        [formFieldsModel]="clienteFormField"
+                        [formTitle]="'Crie sua conta'"
+                        (formOutputData)="submitCliente($event)"
     />
 
     <app-form-component *ngIf="enableEstabelecimentoField"
