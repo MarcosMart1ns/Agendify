@@ -14,7 +14,7 @@ export class EstabelecimentoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createCliente(estabelecimento: EstabelecimentoFormGroup) {
+  createEstabelecimento(estabelecimento: EstabelecimentoFormGroup) {
     return this.httpClient.post(
       this.url,
       JSON.stringify(estabelecimento),

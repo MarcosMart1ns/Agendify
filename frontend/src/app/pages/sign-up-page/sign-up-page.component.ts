@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FieldModel} from "../../model/field-model/FieldModel";
 import {ClienteFormGroup} from "../../model/form-model/ClienteFormGroup";
 import {ClienteFieldControl} from "../../model/field-model/ClienteFieldControl";
@@ -50,7 +50,7 @@ export class SignUpPageComponent {
   }
 
   submitEstabelecimento(estabelecimento: EstabelecimentoFormGroup) {
-    return this.estabelecimentoService.createCliente(estabelecimento).subscribe(
+    return this.estabelecimentoService.createEstabelecimento(estabelecimento).subscribe(
       response => {
         // TODO: Criar classe que representa o response
         // @ts-ignore
