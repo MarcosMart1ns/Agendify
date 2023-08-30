@@ -1,0 +1,28 @@
+<app-navbar mode="form"></app-navbar>
+<main>
+  <div class="form-container">
+    <app-form-component
+      [model]="formGroup"
+      [formFieldsModel]="fieldControl"
+      [formTitle]="'Faça seu login'"
+      [subtmitButtonText]="'Entrar'"
+      (formOutputData)="login($event)"
+    >
+    </app-form-component>
+    <div>
+      <a [routerLink]="'/signup'" class="redirect-link">Não tenho uma conta</a>
+    </div>
+
+  </div>
+  <div class="image">
+    <img
+      src="assets/images/signup.png"
+      alt="Faça seu agendamento"
+    >
+  </div>
+
+  <app-error-dialog
+          [showDialog]="showErrorDialog"
+          [message]="errorMessage"></app-error-dialog
+  >
+</main>

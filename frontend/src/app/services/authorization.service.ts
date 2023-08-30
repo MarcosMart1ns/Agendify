@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ClienteFormGroup} from "../model/form-model/signup/ClienteFormGroup";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ClienteService {
+export class AuthorizationService {
 
-    url = 'http://localhost:9090/cliente'
+    url = 'http://localhost:9090/auth/login'
 
     constructor(private httpClient: HttpClient) {
     }
@@ -16,14 +15,11 @@ export class ClienteService {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
 
-    createCliente(cliente: ClienteFormGroup) {
-
+    login(user: any) {
         return this.httpClient.post(
             this.url,
-            JSON.stringify(cliente),
+            JSON.stringify(user),
             this.httpOptions
         );
-
     }
-
 }

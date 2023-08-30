@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {FieldModel} from "../../model/field-model/FieldModel";
-import {ClienteFormGroup} from "../../model/form-model/ClienteFormGroup";
-import {ClienteFieldControl} from "../../model/field-model/ClienteFieldControl";
-import {EstabelecimentoFieldControl} from "../../model/field-model/EstabelecimentoFieldControl";
+import {ClienteFormGroup} from "../../model/form-model/signup/ClienteFormGroup";
+import {ClienteFieldControl} from "../../model/field-model/signup/ClienteFieldControl";
+import {EstabelecimentoFieldControl} from "../../model/field-model/signup/EstabelecimentoFieldControl";
 import {ClienteService} from "../../services/cliente.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {EstabelecimentoFormGroup} from "../../model/form-model/EstabelecimentoFormGroup";
-import {EstabelecimentoService} from "../../estabelecimento.service";
+import {EstabelecimentoFormGroup} from "../../model/form-model/signup/EstabelecimentoFormGroup";
+import {EstabelecimentoService} from "../../services/estabelecimento.service";
 
 @Component({
   selector: 'app-sign-up-page',

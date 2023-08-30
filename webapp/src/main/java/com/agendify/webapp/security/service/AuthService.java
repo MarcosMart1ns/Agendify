@@ -47,6 +47,9 @@ public class AuthService {
     private final String EMAIL_SENHA_INVALIDOS = "Email ou senha incorretos, verique os dados informados e tente novamente";
 
     public AuthResponse handleAuthRequest(AuthRequest authRequest) throws InvalidCredentialsException, RequestTokenException {
+        if (authRequest.password() == null)
+            throw new InvalidCredentialsException("O campo password não foi informado");
+
         logger.trace(String.format("Verificando dados de login do usuário %s", authRequest.email()));
 
         Usuario usuario = usuarioRepository.findByEmail(authRequest.email());
@@ -61,7 +64,7 @@ public class AuthService {
     private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
         logger.trace("Verificando senha fornecida");
 
-        if (usuario == null) {
+        if (usuario == null ) {
             throw new InvalidCredentialsException(EMAIL_SENHA_INVALIDOS);
         }
 

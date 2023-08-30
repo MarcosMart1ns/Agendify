@@ -10,8 +10,8 @@ export class ErrorDialogComponent {
     @Input() message:string = "Example Message";
 
 
-    toggle() {
-        this.showDialog = !this.showDialog;
+    dismissDialog() {
+        this.showDialog = false;
     }
 
 }

@@ -27,6 +27,7 @@
                         [model]="clienteFormGroup"
                         [formFieldsModel]="clienteFormField"
                         [formTitle]="'Crie sua conta'"
+                        [subtmitButtonText]="'Cadastrar-se'"
                         (formOutputData)="submitCliente($event)"
     />
 
@@ -34,8 +35,14 @@
                         [model]="estabelecimentoFormGroup"
                         [formFieldsModel]="estabelecimntoFormField"
                         [formTitle]="'Crie sua conta'"
+                        [subtmitButtonText]="'Cadastrar-se'"
                         (formOutputData)="submitEstabelecimento($event)"
     />
+
+    <div>
+      <a [routerLink]="'/login'" class="redirect-link">Já tenho uma conta</a>
+    </div>
+
 
   </div>
 
