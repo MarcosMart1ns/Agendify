@@ -12,7 +12,7 @@
 
     <groupId>com.agendify</groupId>
     <artifactId>projectAgendify</artifactId>
-    <version>${project.version}</version>
+    <version>>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Project Agendify</name>
     <description>Agendify</description>
