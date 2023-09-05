@@ -58,7 +58,7 @@ public class AuthService {
 
         String token = getToken();
 
-        return new AuthResponse(usuario.getEmail(), token);
+        return new AuthResponse(usuario.getId().toString(), usuario.getEmail(), token);
     }
 
     private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
