@@ -24,8 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.sql.DataSource;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,9 +42,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(classes = TestsConfig.class)
 @AutoConfigureMockMvc
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ActiveProfiles("test")
 public class CalendarTest {
 
     @Autowired
@@ -62,6 +65,9 @@ public class CalendarTest {
 
     @Autowired
     private PeriodoAtendimentoRepository periodoAtendimentoRepository;
+
+    @Autowired
+    private DataSource dataSource;
 
     private Estabelecimento estabelecimento;
 
@@ -182,7 +188,7 @@ public class CalendarTest {
 
         mockMvc.perform(
                         post("/agenda")
-                                .content(parseObjectToJson(request))
+                                .content(parseObjectToJson(secondRequest))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isConflict())

@@ -28,13 +28,23 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
             "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
     List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoIdAndMonthYear(@Param("id") UUID id,
                                                                              @Param("data") Date data);
-    @Query("SELECT a FROM Agendamento a " +
-            "WHERE a.data BETWEEN :horaInicio AND :horaFim " +
-            "AND a.estabelecimento.id = :estabelecimentoId " +
-            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
+//    @Query("SELECT a FROM Agendamento a " +
+//            "WHERE a.data BETWEEN :horaInicio AND :horaFim " +
+//            "AND a.estabelecimento.id = :estabelecimentoId " +
+//            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
+//    List<Agendamento> findAgendamentosDisponiveis(
+//            @Param("horaInicio") Date horaInicio,
+//            @Param("horaFim") Date horaFim,
+//            @Param("estabelecimentoId") UUID estabelecimentoId
+//    );
+
+    @Query(value = "SELECT a.* FROM agendamento a " +
+            "JOIN servico s ON a.servico_id = s.id " +
+            "WHERE :horaInicio >= a.data " +
+            "AND :horaInicio <= ADDTIME(a.data, s.duracao)" +
+            "AND a.estabelecimento_id = :estabelecimentoId "+
+            "AND a.status = 0 ",nativeQuery = true)
     List<Agendamento> findAgendamentosDisponiveis(
             @Param("horaInicio") Date horaInicio,
-            @Param("horaFim") Date horaFim,
-            @Param("estabelecimentoId") UUID estabelecimentoId
-    );
+            @Param("estabelecimentoId") UUID estabelecimentoId);
 }
