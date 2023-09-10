@@ -6,12 +6,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,4 +45,15 @@ public class Agendamento {
     private Date data;
 
     private Status status;
+
+    @Transient
+    public Date getHorarioFinal() {
+        LocalDateTime inicio = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalTime duracao = servico.getDuracao().toLocalTime();
+        Duration duracaoTotal = Duration.ofHours(duracao.getHour()).plusMinutes(duracao.getMinute());
+
+        LocalDateTime fim = inicio.plus(duracaoTotal);
+
+        return Date.from(fim.atZone(ZoneId.systemDefault()).toInstant());
+    }
 }

@@ -1,7 +1,6 @@
 package com.agendify.calendar.services;
 
 import com.agendify.calendar.controllers.exception.HorarioIndisponivelException;
-import com.agendify.calendar.controllers.exception.ValidationError;
 import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.DiaDaSemana;
 import com.agendify.domain.entities.Estabelecimento;
@@ -11,10 +10,7 @@ import com.agendify.domain.repositories.AgendamentoRepository;
 import com.agendify.domain.repositories.PeriodoAtendimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -48,15 +44,9 @@ public class CalendarioService {
     }
 
     private void validaHorarioDisponivel(Agendamento entity) throws HorarioIndisponivelException {
-        Instant dataInstant = entity.getData().toInstant();
-        LocalTime duracao = entity.getServico().getDuracao().toLocalTime();
-
-        Instant novaDataInstant = dataInstant.plus(Duration.ofHours(duracao.getHour()).plusMinutes(duracao.getMinute()));
-        Date dataFinal = Date.from(novaDataInstant);
-
-        List<Agendamento> agendamentosDisponiveis = agendamentoRepository
-                .findAgendamentosDisponiveis(entity.getData(), dataFinal, entity.getEstabelecimento().getId());
-        if(!agendamentosDisponiveis.isEmpty()){
+        List<Agendamento> agendamentosConflitantes = agendamentoRepository
+                .findAgendamentosDisponiveis(entity.getData(), entity.getEstabelecimento().getId());
+        if(!agendamentosConflitantes.isEmpty()){
             throw new HorarioIndisponivelException("O horário solicitado não está disponível");
         }
     }
@@ -77,6 +67,7 @@ public class CalendarioService {
                             horaData.isBefore(periodo.getHoraFim());
                 })
                 .findAny()
-                .orElseThrow(() -> new HorarioIndisponivelException("O horário se encontra fora do periodo de atendimento do pres"));
+                .orElseThrow(() ->
+                        new HorarioIndisponivelException("O horário se encontra fora do periodo de atendimento do prestador"));
     }
 }
