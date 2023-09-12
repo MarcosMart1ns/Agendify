@@ -1,0 +1,12 @@
+<main>
+    <app-navbar mode="non-logged-home"></app-navbar>
+    <div>
+        <img src="./assets/images/homeimg.svg" alt="Bem vindo! Escreva abaixo o que procuras">
+    </div>
+    <p class="homeTitle">Agende seu atendimento!</p>
+    <div class="service-pick">
+        <p class="selected-service">Quero Agendar</p>
+        <a [routerLink]="'/signup'">Quero oferecer atendimento</a>
+    </div>
+    <app-search-component></app-search-component>
+</main>

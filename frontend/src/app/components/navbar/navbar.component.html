@@ -1,0 +1,19 @@
+<div  *ngIf="mode=='non-logged-home'" class="non-logged-nav-bar">
+
+  <div class="logo-container">
+    <app-logo-component></app-logo-component>
+  </div>
+
+  <div class="links-container">
+    <app-nav-bar-link buttonName="Cadastrar-se" url="/signup"></app-nav-bar-link>
+    <app-nav-bar-link buttonName="Login" url="/login"></app-nav-bar-link>
+  </div>
+
+</div>
+
+<div *ngIf="mode==='form'" class="signup-login-nav-bar">
+  <a [routerLink]="''" style="text-decoration: none;margin: 2%">
+    <img src="./assets/images/back.svg" alt="">
+  </a>
+  <app-logo-component></app-logo-component>
+</div>

@@ -12,16 +12,20 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig  implements WebMvcConfigurer {
 
     @Bean
     SecurityFilterChain web(HttpSecurity http) throws Exception {
 
-        http.
-                csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
+                .authorizeHttpRequests(
                         authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
                                 .requestMatchers(HttpMethod.GET, "/cliente/{id}").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/estatabelecimento/{id}").authenticated()
@@ -30,8 +34,6 @@ public class SecurityConfig {
 
         http.oauth2ResourceServer().jwt(Customizer.withDefaults());
 
-        //TODO: Fazer docker compose com keycloak já inserindo o realm necessário
-        //TODO: Inserir limitação de acesso a clientes e estabelecimento
         return http.build();
     }
 
@@ -43,6 +45,12 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:4200")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
     }
 
 }

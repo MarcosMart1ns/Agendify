@@ -1,0 +1,25 @@
+<form [formGroup]="formGroup">
+  <p class="title">{{formTitle}}</p>
+
+  <div *ngFor="let input of formFieldsModel">
+    <input
+      id="{{input.fieldName.toLowerCase()}}"
+      name="{{input.fieldName.toLowerCase()}}"
+      placeholder="{{input.fieldName}}"
+      type="{{input.fieldType}}"
+      formControlName="{{input.controlName}}"
+    >
+
+    <div *ngIf="!formGroup.controls[input.controlName].valid &&
+                  formGroup.controls[input.controlName].touched"
+         class="error-msg"
+    >
+      <p>{{input.errorMessage}}</p>
+    </div>
+
+  </div>
+
+  <app-confirm-button *ngIf="formGroup.valid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="false"/>
+  <app-confirm-button *ngIf="formGroup.invalid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="true"/>
+
+</form>

@@ -1,0 +1,43 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeTitle {
+  color: #162D59;
+  font-size: 24px;
+  line-height: 26%;
+}
+
+.service-pick {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  color: #0B64D9;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.service-pick p {
+  margin-left: 30px;
+  padding: 5px;
+  border-bottom: 2px solid  #162d59;
+}
+
+.service-pick a {
+  text-decoration: none;
+  text-align: center;
+  margin-left: 30px;
+  color: #0B64D9;
+  align-self: center;
+}
+
+.selected-service {
+  color: #08348CF7;
+}
+
+app-navbar {
+  width: 100%;
+}

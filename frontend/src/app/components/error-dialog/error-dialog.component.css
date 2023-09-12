@@ -1,0 +1,16 @@
+.modal {
+    background: #fff;
+    color: red;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #000000;
+    min-width: 320px;
+    position: fixed;
+    left: 60%;
+    padding: 24px;
+    top: 85%;
+}
+
+.button {
+    width: 50px;
+}
+

@@ -1,0 +1,57 @@
+<app-navbar mode="form"></app-navbar>
+<main>
+  <div class="form-container">
+
+    <div class="form-picker">
+      <div class="service-pick">
+
+        <p
+          (click)="toggleCliente()"
+          [ngClass]="{
+            'selected-service': enableClienteField,
+            'unselected-service': enableEstabelecimentoField
+          }">
+          Quero Agendar
+        </p>
+        <p (click)='toggleEstabelecimento()'
+           [ngClass]="{
+           'selected-service': enableEstabelecimentoField,
+           'unselected-service': enableClienteField}">
+          Quero oferecer atendmento
+        </p>
+
+      </div>
+    </div>
+
+    <app-form-component *ngIf="enableClienteField"
+                        [model]="clienteFormGroup"
+                        [formFieldsModel]="clienteFormField"
+                        [formTitle]="'Crie sua conta'"
+                        [subtmitButtonText]="'Cadastrar-se'"
+                        (formOutputData)="submitCliente($event)"
+    />
+
+    <app-form-component *ngIf="enableEstabelecimentoField"
+                        [model]="estabelecimentoFormGroup"
+                        [formFieldsModel]="estabelecimntoFormField"
+                        [formTitle]="'Crie sua conta'"
+                        [subtmitButtonText]="'Cadastrar-se'"
+                        (formOutputData)="submitEstabelecimento($event)"
+    />
+
+    <div>
+      <a [routerLink]="'/login'" class="redirect-link">Já tenho uma conta</a>
+    </div>
+
+
+  </div>
+
+  <div class="image">
+    <img
+      src="assets/images/signup.png"
+      alt="Faça seu agendamento"
+    >
+  </div>
+
+  <app-error-dialog [showDialog]="showErrorDialog" [message]="errorMessage"></app-error-dialog>
+</main>

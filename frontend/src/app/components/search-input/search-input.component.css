@@ -1,0 +1,17 @@
+input {
+  width: 538px;
+  border-radius: 10px;
+  height: 56px;
+  padding: 17px;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  outline: none;
+  border: none;
+  filter: drop-shadow(5px 5px 4px #00000040);
+  color: #08348CF7;
+}
+
+::placeholder {
+  color: #08348CF7;
+}

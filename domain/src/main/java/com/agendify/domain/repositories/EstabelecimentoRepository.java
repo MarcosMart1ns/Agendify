@@ -15,5 +15,8 @@ public interface EstabelecimentoRepository extends JpaRepository<Estabelecimento
 
     List<Estabelecimento> findByDescricao(String nome);
 
+    Estabelecimento findByEmail(String email);
+
     Optional<Estabelecimento> findById(UUID estabelecimentoId);
+
 }

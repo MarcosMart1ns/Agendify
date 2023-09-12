@@ -3,7 +3,8 @@ package com.agendify.users.services;
 import com.agendify.domain.mappers.ClienteMapper;
 import com.agendify.domain.records.Cliente;
 import com.agendify.domain.repositories.ClienteRepository;
-import com.agendify.users.UserNotFoundException;
+import com.agendify.users.exceptions.UserAlreadyExistsException;
+import com.agendify.users.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
@@ -24,7 +25,11 @@ public class ClienteService {
         return clienteMapper.fromEntity(cliente);
     }
 
-    public Cliente createCliente(Cliente cliente) {
+    public Cliente createCliente(Cliente cliente) throws UserAlreadyExistsException {
+
+        if (clienteRepository.findByEmail(cliente.email()) != null)
+            throw new UserAlreadyExistsException("Usuário já existe, tente utilizar outro e-mail");
+
         com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clienteMapper.toEntity(cliente));
         return clienteMapper.fromEntity(clienteSaved);
     }

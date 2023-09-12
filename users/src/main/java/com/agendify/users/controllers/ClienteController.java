@@ -1,7 +1,8 @@
 package com.agendify.users.controllers;
 
 import com.agendify.domain.records.Cliente;
-import com.agendify.users.UserNotFoundException;
+import com.agendify.users.exceptions.UserAlreadyExistsException;
+import com.agendify.users.exceptions.UserNotFoundException;
 import com.agendify.users.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws URISyntaxException {
+    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws URISyntaxException, UserAlreadyExistsException {
         Cliente clienteCreated = clienteService.createCliente(cliente);
         return ResponseEntity.created(new URI("/cliente/" + clienteCreated.id().toString())).body(clienteCreated);
     }

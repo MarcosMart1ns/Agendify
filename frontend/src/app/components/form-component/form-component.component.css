@@ -1,0 +1,51 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title{
+  color: #162D59;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+input {
+  width: 324px;
+  margin: 10px 10px 0px 10px;
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  color: #08348CF7;
+}
+
+::placeholder {
+  color: #08348CF7;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.error-msg p{
+  margin: 0 18px;
+  color: red;
+  font-size: 14px;
+  border-top: 1px solid red;
+}
+
+app-confirm-button {
+  margin: 30px;
+}
