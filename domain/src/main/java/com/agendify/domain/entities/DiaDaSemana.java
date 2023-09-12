@@ -1,5 +1,7 @@
 package com.agendify.domain.entities;
 
+import java.time.DayOfWeek;
+
 public enum DiaDaSemana {
     SEGUNDA,
     TERCA,
@@ -7,5 +9,9 @@ public enum DiaDaSemana {
     QUINTA,
     SEXTA,
     SABADO,
-    DOMINGO
+    DOMINGO;
+
+    public static DiaDaSemana fromDayOfWeek(DayOfWeek dayOfWeek) {
+        return DiaDaSemana.values()[dayOfWeek.ordinal()];
+    }
 }

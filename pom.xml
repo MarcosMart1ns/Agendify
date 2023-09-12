@@ -12,7 +12,7 @@
 
     <groupId>com.agendify</groupId>
     <artifactId>projectAgendify</artifactId>
-    <version>>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Project Agendify</name>
     <description>Agendify</description>
@@ -21,6 +21,7 @@
         <module>domain</module>
         <module>users</module>
         <module>webapp</module>
+        <module>Calendar</module>
     </modules>
 
     <properties>
@@ -35,11 +36,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
