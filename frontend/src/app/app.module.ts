@@ -18,6 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { UserHomeComponent } from './pages/user-home/user-home.component';
+import { LoggedUserNavBarComponent } from './components/logged-user-nav-bar/logged-user-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     FormComponentComponent,
     FormInputComponentComponent,
     ErrorDialogComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    UserHomeComponent,
+    LoggedUserNavBarComponent
   ],
   imports: [
     BrowserModule,

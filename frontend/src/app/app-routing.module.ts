@@ -4,6 +4,7 @@ import {SearchResultsPageComponent} from "./pages/search-results-page/search-res
 import {SignUpPageComponent} from "./pages/sign-up-page/sign-up-page.component";
 import {SearchHomePageComponent} from "./pages/search-home-page/search-home-page.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
+import {UserHomeComponent} from "./pages/user-home/user-home.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'home',
+    component: UserHomeComponent
   }
 ];
 

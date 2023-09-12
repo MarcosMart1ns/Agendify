@@ -5,6 +5,7 @@ import {FieldModel} from "../../model/field-model/FieldModel";
 import {AuthorizationService} from "../../services/authorization.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Authresponse} from "../../model/response/Authresponse";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -20,16 +21,15 @@ export class LoginPageComponent {
   errorMessage: string = 'Exemplo';
 
   constructor(
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private router: Router
   ) {
   }
 
   login(user: any) {
     this.showErrorDialog = false;
     const onSuccess = (response: Authresponse) => {
-      // TODO: Criar classe que representa o response
-      // @ts-ignore
-      window.alert(`Login efetuado com sucesso, seja bem vindo ${response.email}`)
+      this.router.navigateByUrl('/home');
       return response;
     }
 

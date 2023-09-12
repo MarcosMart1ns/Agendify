@@ -1,10 +1,12 @@
 <main>
-    <app-navbar mode="non-logged-home"></app-navbar>
+  <app-navbar *ngIf="!isUserLogged" mode="non-logged"></app-navbar>
+  <app-navbar *ngIf="isUserLogged" mode="logged-home"></app-navbar>
+  <a *ngIf="isUserLogged" [routerLink]="'/home'" class="my-appointments">Meus atendimentos</a>
     <div>
         <img src="./assets/images/homeimg.svg" alt="Bem vindo! Escreva abaixo o que procuras">
     </div>
     <p class="homeTitle">Agende seu atendimento!</p>
-    <div class="service-pick">
+    <div *ngIf="!isUserLogged" class="service-pick">
         <p class="selected-service">Quero Agendar</p>
         <a [routerLink]="'/signup'">Quero oferecer atendimento</a>
     </div>

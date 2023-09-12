@@ -1,4 +1,4 @@
-<div  *ngIf="mode=='non-logged-home'" class="non-logged-nav-bar">
+<div  *ngIf="mode==='non-logged'" class="non-logged-nav-bar">
 
   <div class="logo-container">
     <app-logo-component></app-logo-component>
@@ -11,9 +11,19 @@
 
 </div>
 
-<div *ngIf="mode==='form'" class="signup-login-nav-bar">
+<div *ngIf="mode==='non-logged-back'" class="signup-login-nav-bar">
   <a [routerLink]="''" style="text-decoration: none;margin: 2%">
     <img src="./assets/images/back.svg" alt="">
   </a>
   <app-logo-component></app-logo-component>
+</div>
+
+<div *ngIf="mode==='logged-home'" class="non-logged-nav-bar">
+  <div class="logo-container">
+    <app-logo-component></app-logo-component>
+  </div>
+
+  <div class="links-container">
+    <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
+  </div>
 </div>
