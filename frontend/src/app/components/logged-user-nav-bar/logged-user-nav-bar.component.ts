@@ -18,7 +18,7 @@ export class LoggedUserNavBarComponent {
 
   logout() {
     this.authService.logoutUser();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/').then(()=>window.location.reload());
   }
 
 }

@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   templateUrl: './user-home.component.html',
   styleUrls: ['./user-home.component.css']
 })
-export class UserHomeComponent implements OnInit {
+export class UserHomeComponent {
 
   loggedUser: Cliente;
 
@@ -19,10 +19,6 @@ export class UserHomeComponent implements OnInit {
       router.navigateByUrl('/login');
     }
 
-    this.loggedUser = this.authService.getActiveUser();
-  }
-
-  ngOnInit(): void {
     this.loggedUser = this.authService.getActiveUser();
   }
 
