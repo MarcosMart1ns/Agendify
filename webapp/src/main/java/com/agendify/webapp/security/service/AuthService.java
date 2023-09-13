@@ -2,6 +2,7 @@ package com.agendify.webapp.security.service;
 
 import com.agendify.domain.entities.Usuario;
 import com.agendify.domain.repositories.ClienteRepository;
+import com.agendify.domain.repositories.EstabelecimentoRepository;
 import com.agendify.webapp.security.exceptions.InvalidCredentialsException;
 import com.agendify.webapp.security.exceptions.RequestTokenException;
 import com.agendify.webapp.security.records.AuthRequest;
@@ -29,7 +30,10 @@ public class AuthService {
     Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     @Autowired
-    private ClienteRepository usuarioRepository;
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EstabelecimentoRepository estabelecimentoRepository;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -52,7 +56,11 @@ public class AuthService {
 
         logger.trace(String.format("Verificando dados de login do usuário %s", authRequest.email()));
 
-        Usuario usuario = usuarioRepository.findByEmail(authRequest.email());
+        Usuario usuario = clienteRepository.findByEmail(authRequest.email());
+
+        if(usuario == null){
+            usuario = estabelecimentoRepository.findByEmail(authRequest.email());
+        }
 
         checkPassword(authRequest, usuario);
 

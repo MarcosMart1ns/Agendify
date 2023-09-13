@@ -7,6 +7,8 @@ import {ClienteService} from "../../services/cliente.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EstabelecimentoFormGroup} from "../../model/form-model/signup/EstabelecimentoFormGroup";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
+import {AuthorizationService} from "../../services/authorization.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up-page',
@@ -29,18 +31,26 @@ export class SignUpPageComponent {
 
   constructor(
     private clienteService: ClienteService,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    private authService:AuthorizationService,
+    private router:Router
   ) {
+
+    if(this.authService.isUserLogged()){
+      this.router.navigateByUrl('/home');
+    }
+
   }
 
   submitCliente(cliente: ClienteFormGroup) {
+    const onSuccess = () => {
+      this.router.navigateByUrl('/home').then(()=>window.location.reload());
+    }
+
     return this.clienteService.createCliente(cliente).subscribe(
-      response => {
-        // TODO: Criar classe que representa o response
+      () => {
         // @ts-ignore
-        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-        return response;
-        //TODO: Redirecionar para a página logada
+        this.authService.login({email: cliente.email, password: `${cliente.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
@@ -50,13 +60,14 @@ export class SignUpPageComponent {
   }
 
   submitEstabelecimento(estabelecimento: EstabelecimentoFormGroup) {
+    const onSuccess = () => {
+      this.router.navigateByUrl('/home').then(()=>window.location.reload());
+    }
+
     return this.estabelecimentoService.createEstabelecimento(estabelecimento).subscribe(
-      response => {
-        // TODO: Criar classe que representa o response
+      () => {
         // @ts-ignore
-        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-        return response;
-        //TODO: Redirecionar para a página logada
+        this.authService.login({email: estabelecimento.email, password: `${estabelecimento.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
