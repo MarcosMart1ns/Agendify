@@ -27,6 +27,7 @@ public class SecurityConfig  implements WebMvcConfigurer {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authorizationManagerRequestMatcherRegistry -> authorizationManagerRequestMatcherRegistry
+                                .requestMatchers("/index.html\", \"/.js\", \"/.js.map\", \"/.css\", \"/assets/img/.png\", \"/favicon.ico\"").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/cliente/{id}").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/estatabelecimento/{id}").authenticated()
                                 .anyRequest().permitAll()
