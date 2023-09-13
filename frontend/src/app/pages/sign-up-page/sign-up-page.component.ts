@@ -7,6 +7,8 @@ import {ClienteService} from "../../services/cliente.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {EstabelecimentoFormGroup} from "../../model/form-model/signup/EstabelecimentoFormGroup";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
+import {AuthorizationService} from "../../services/authorization.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up-page',
@@ -29,8 +31,15 @@ export class SignUpPageComponent {
 
   constructor(
     private clienteService: ClienteService,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    private authService:AuthorizationService,
+    private router:Router
   ) {
+
+    if(this.authService.isUserLogged()){
+      this.router.navigateByUrl('/home');
+    }
+
   }
 
   submitCliente(cliente: ClienteFormGroup) {

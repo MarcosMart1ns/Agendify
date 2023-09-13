@@ -24,6 +24,9 @@ export class LoginPageComponent {
     private authorizationService: AuthorizationService,
     private router: Router
   ) {
+    if (this.authorizationService.isUserLogged()) {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   login(user: any) {
