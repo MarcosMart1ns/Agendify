@@ -31,9 +31,8 @@ export class LoginPageComponent {
 
   login(user: any) {
     this.showErrorDialog = false;
-    const onSuccess = (response: Authresponse) => {
+    const onSuccess = () => {
       this.router.navigateByUrl('/home').then(()=>window.location.reload());
-      return response;
     }
 
     const onError = (error: HttpErrorResponse) => {

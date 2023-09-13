@@ -43,13 +43,14 @@ export class SignUpPageComponent {
   }
 
   submitCliente(cliente: ClienteFormGroup) {
+    const onSuccess = () => {
+      this.router.navigateByUrl('/home').then(()=>window.location.reload());
+    }
+
     return this.clienteService.createCliente(cliente).subscribe(
-      response => {
-        // TODO: Criar classe que representa o response
+      () => {
         // @ts-ignore
-        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-        return response;
-        //TODO: Redirecionar para a página logada
+        this.authService.login({email: cliente.email, password: `${cliente.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
@@ -59,13 +60,14 @@ export class SignUpPageComponent {
   }
 
   submitEstabelecimento(estabelecimento: EstabelecimentoFormGroup) {
+    const onSuccess = () => {
+      this.router.navigateByUrl('/home').then(()=>window.location.reload());
+    }
+
     return this.estabelecimentoService.createEstabelecimento(estabelecimento).subscribe(
-      response => {
-        // TODO: Criar classe que representa o response
+      () => {
         // @ts-ignore
-        window.alert(`Cadastro efetuado com sucesso, seja bem vindo ${response.nome}`)
-        return response;
-        //TODO: Redirecionar para a página logada
+        this.authService.login({email: estabelecimento.email, password: `${estabelecimento.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
