@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
 })
 export class UserHomeComponent {
 
-  loggedUser: Cliente;
+
+  loggedUser!: Cliente;
 
   constructor(private authService: AuthorizationService,private router: Router) {
     let authenticated = this.authService.isUserLogged();
@@ -18,8 +19,10 @@ export class UserHomeComponent {
     if (!authenticated){
       router.navigateByUrl('/login');
     }
+    this.authService.getActiveUser().subscribe(
+      (response)=> this.loggedUser = <Cliente>response
+    )
 
-    this.loggedUser = this.authService.getActiveUser();
   }
 
 }

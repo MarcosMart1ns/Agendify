@@ -29,7 +29,7 @@ export class AuthorizationService {
         (response) => {
           if (response) {
 
-            localStorage.setItem("session",JSON.stringify(<Authresponse>response));
+            localStorage.setItem("session", JSON.stringify(<Authresponse>response));
             this.setAutheticated();
 
             if (onSuccess) {
@@ -43,25 +43,16 @@ export class AuthorizationService {
       )
   }
 
-  getActiveUser():Cliente{
+  getActiveUser() {
 
-    const activeSession:Authresponse | null = this.getActiveSession()
+    const activeSession: Authresponse = this.getActiveSession()
 
-    if (activeSession) {
-      this.httpClient.get(
-        `http://localhost:9090/cliente/${activeSession.id}`,
-        {
-          headers: new HttpHeaders({'Content-Type': 'application/json','Authorization':`Bearer ${this.getToken()}`})
-        }
-      )
-        .subscribe(
-          (response)=>{
-            localStorage.setItem("activeUser",JSON.stringify(<Cliente>response));
-          }
-        )
-    }
+    return this.httpClient.get(
+      `http://localhost:9090/cliente/${activeSession.id}`,
+      {
+        headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.getToken()}`})
+      });
 
-    return this.getLoggedUser();
   }
 
   getToken(): string {
@@ -72,40 +63,32 @@ export class AuthorizationService {
     return "";
   }
 
-  isUserLogged(): boolean{
+  isUserLogged(): boolean {
     return localStorage.getItem("authenticated") === 'true';
   }
 
-  setAutheticated(){
-    localStorage.setItem("authenticated","true");
+  setAutheticated() {
+    localStorage.setItem("authenticated", "true");
   }
 
-  getActiveSession():Authresponse | null {
+  getActiveSession(): Authresponse  {
 
-    let session =  localStorage.getItem("session");
+    let session = localStorage.getItem("session");
 
-    if( session != null){
+    if (session != null) {
       return JSON.parse(session);
     }
 
-    return null;
+    return {
+      email: "",
+      id: "",
+      token: ""
+    };
   }
 
-  getLoggedUser(){
-
-    let activeUser =  localStorage.getItem("activeUser");
-
-    if( activeUser != null){
-      return JSON.parse(activeUser);
-    }
-
-    return null;
-  }
-
-  logoutUser(){
-    localStorage.removeItem("activeUser");
+  logoutUser() {
     localStorage.removeItem("session");
-    localStorage.setItem("authenticated","false");
+    localStorage.setItem("authenticated", "false");
   }
 
 }

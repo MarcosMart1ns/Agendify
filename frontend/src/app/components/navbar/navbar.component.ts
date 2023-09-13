@@ -8,10 +8,11 @@ import {AuthorizationService} from "../../services/authorization.service";
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-    @Input() mode: string = '';
-    @Input() user: Cliente;
+  @Input() mode: string = '';
 
-  constructor(private authService: AuthorizationService) {
-      this.user = this.authService.getActiveUser();
+  @Input()
+  user!: Cliente;
+
+  constructor(private authService: AuthorizationService, ) {
   }
 }
