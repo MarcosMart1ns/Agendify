@@ -1,0 +1,13 @@
+<app-navbar [returnPage]="'/home'" [mode]="'non-logged-back'" [user]="loggedUser"></app-navbar>
+<main>
+  <img class="avatar-img" src="{{profileImgUrl}}" alt="">
+  <app-form-component
+    [model]="clienteFormGroup"
+    [formFieldsModel]="clienteFormField"
+
+    [formTitle]="'Meu perfil'"
+    [subtmitButtonText]="'Confirmar Mudanças'"
+    (formOutputData)="saveProfile($event)"
+    (outputFormGroup)="receiveForm($event)"
+  />
+</main>

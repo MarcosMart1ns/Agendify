@@ -1,0 +1,26 @@
+h3{
+  color: #162d59;
+}
+
+main {
+  margin-top: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.avatar-img{
+  border-radius: 50%;
+  width: 186px;
+  position: absolute;
+  top: 40px;
+}
+
+.title {
+  color: #162D59;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
