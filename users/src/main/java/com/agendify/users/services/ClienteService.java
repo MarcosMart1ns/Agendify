@@ -35,8 +35,13 @@ public class ClienteService {
     }
 
     public Cliente updateCliente(UUID id, Cliente cliente) throws NotFound {
+
         if (clienteRepository.existsById(id)) {
-            com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clienteMapper.toEntity(cliente));
+
+            com.agendify.domain.entities.Cliente entity = clienteMapper.toEntity(cliente);
+            entity.setId(id);
+
+            com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(entity);
 
             return clienteMapper.fromEntity(clienteSaved);
         }
