@@ -39,7 +39,7 @@ public class ClienteController {
         return ResponseEntity.created(new URI("/cliente/" + clienteCreated.id().toString())).body(clienteCreated);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Cliente> updateCliente(@PathVariable UUID id, @RequestBody Cliente cliente) {
 
