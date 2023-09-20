@@ -1,4 +1,5 @@
 import {AbstractControl, ValidatorFn, Validators} from "@angular/forms";
+import {Cliente} from "../../response/Cliente";
 
 export class ClienteFormGroup {
 
@@ -52,5 +53,18 @@ export class ClienteFormGroup {
 
       return valid ? {} : {invalid: true};
     };
+  }
+
+  static fromCliente(cliente: Cliente){
+    return {
+      nome: [cliente.nome, Validators.required],
+      cpf: [cliente.cpf, Validators.compose([Validators.required, this.validateCPF()])],
+      email: [cliente.email, [Validators.required, Validators.email]],
+      senha: ['', Validators.compose([Validators.required, this.validatePassword()])],
+      confirm_senha: ['', Validators.required],
+      logradouro: cliente.endereco,
+      bairro: '',
+      cidade: ''
+    }
   }
 }

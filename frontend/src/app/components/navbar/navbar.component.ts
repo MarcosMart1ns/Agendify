@@ -12,7 +12,8 @@ export class NavbarComponent {
 
   @Input()
   user!: Cliente;
+  @Input()returnPage : string = '';
 
-  constructor(private authService: AuthorizationService, ) {
+  constructor() {
   }
 }

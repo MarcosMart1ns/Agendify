@@ -26,4 +26,11 @@ export class ClienteService {
 
     }
 
+  updateCliente(cliente: ClienteFormGroup, id:any) {
+      return this.httpClient.patch(
+        this.url+`/${id}`,
+        JSON.stringify(cliente),
+        this.httpOptions
+      )
+  }
 }

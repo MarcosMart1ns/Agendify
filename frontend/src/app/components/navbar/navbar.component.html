@@ -1,3 +1,4 @@
+<!-- NavBar apresentada na tela inicial sem usuário logado -->
 <div  *ngIf="mode==='non-logged'" class="non-logged-nav-bar">
 
   <div class="logo-container">
@@ -10,7 +11,7 @@
   </div>
 
 </div>
-
+<!-- NavBar apresentada forada tela inicial sem usuário logado, com botão voltar -->
 <div *ngIf="mode==='non-logged-back'" class="signup-login-nav-bar">
   <a [routerLink]="''" style="text-decoration: none;margin: 2%">
     <img src="./assets/images/back.svg" alt="">
@@ -18,9 +19,27 @@
   <app-logo-component></app-logo-component>
 </div>
 
+<!--NavBar quando usuário está logado-->
 <div *ngIf="mode==='logged-home'" class="non-logged-nav-bar">
   <div class="logo-container">
     <app-logo-component></app-logo-component>
+  </div>
+
+  <div class="links-container">
+    <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
+  </div>
+</div>
+
+<!--NavBar quando usuário está logado e com botão voltar -->
+
+<div *ngIf="mode==='logged-home-back'" class="non-logged-nav-bar">
+  <div style="text-decoration: none;margin: 2%">
+    <a [routerLink]="returnPage" style="text-decoration: none;margin-right: 2%">
+      <img src="./assets/images/back.svg" alt="">
+    </a>
+    <div class="logo-container">
+      <app-logo-component></app-logo-component>
+    </div>
   </div>
 
   <div class="links-container">
