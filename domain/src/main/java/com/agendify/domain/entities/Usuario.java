@@ -1,6 +1,7 @@
 package com.agendify.domain.entities;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,6 +43,6 @@ public class Usuario {
 
     private Long tipo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 }

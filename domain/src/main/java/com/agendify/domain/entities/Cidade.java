@@ -1,5 +1,6 @@
 package com.agendify.domain.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +31,6 @@ public class Cidade {
 
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Estado estado;
 }

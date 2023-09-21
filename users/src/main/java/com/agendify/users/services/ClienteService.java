@@ -6,6 +6,7 @@ import com.agendify.domain.repositories.ClienteRepository;
 import com.agendify.users.exceptions.UserAlreadyExistsException;
 import com.agendify.users.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
 
@@ -30,7 +31,10 @@ public class ClienteService {
         if (clienteRepository.findByEmail(cliente.email()) != null)
             throw new UserAlreadyExistsException("Usuário já existe, tente utilizar outro e-mail");
 
-        com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clienteMapper.toEntity(cliente));
+        com.agendify.domain.entities.Cliente clientEntity = clienteMapper.toEntity(cliente);
+        clientEntity.setSenha(encryptSenha(clientEntity.getSenha()));
+
+        com.agendify.domain.entities.Cliente clienteSaved = clienteRepository.saveAndFlush(clientEntity);
         return clienteMapper.fromEntity(clienteSaved);
     }
 
@@ -46,5 +50,9 @@ public class ClienteService {
             return clienteMapper.fromEntity(clienteSaved);
         }
         return null;
+    }
+
+    String encryptSenha(String senha) {
+        return new BCryptPasswordEncoder(16).encode(senha);
     }
 }

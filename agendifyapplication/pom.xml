@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webapp</artifactId>
+    <artifactId>agendifyapplication</artifactId>
     <version>${project.version}</version>
-    <name>webapp</name>
-    <description>webapp</description>
+    <name>agendifyapplication</name>
+    <description>agendifyapplication</description>
     <properties>
         <project.version>0.0.1-SNAPSHOT</project.version>
         <spring-security.version>6.1.2</spring-security.version>

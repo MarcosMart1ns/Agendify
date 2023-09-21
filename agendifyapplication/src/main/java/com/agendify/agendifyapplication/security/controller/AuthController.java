@@ -1,10 +1,10 @@
-package com.agendify.webapp.security.controller;
+package com.agendify.agendifyapplication.security.controller;
 
-import com.agendify.webapp.security.exceptions.InvalidCredentialsException;
-import com.agendify.webapp.security.exceptions.RequestTokenException;
-import com.agendify.webapp.security.records.AuthRequest;
-import com.agendify.webapp.security.records.AuthResponse;
-import com.agendify.webapp.security.service.AuthService;
+import com.agendify.agendifyapplication.security.exceptions.InvalidCredentialsException;
+import com.agendify.agendifyapplication.security.exceptions.RequestTokenException;
+import com.agendify.agendifyapplication.security.records.AuthRequest;
+import com.agendify.agendifyapplication.security.records.AuthResponse;
+import com.agendify.agendifyapplication.security.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

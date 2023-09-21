@@ -13,14 +13,17 @@ export class UserHomeComponent {
 
   loggedUser!: Cliente;
 
-  constructor(private authService: AuthorizationService,private router: Router) {
+  constructor(private authService: AuthorizationService, private router: Router) {
     let authenticated = this.authService.isUserLogged();
 
-    if (!authenticated){
+    if (!authenticated) {
       router.navigateByUrl('/login');
     }
     this.authService.getActiveUser().subscribe(
-      (response)=> this.loggedUser = <Cliente>response
+      (response) => this.loggedUser = <Cliente>response,
+      () => {
+        this.authService.logoutUser();
+      }
     )
 
   }

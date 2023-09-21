@@ -1,4 +1,4 @@
-package com.agendify.webapp.config;
+package com.agendify.agendifyapplication.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.agendify.webapp.security.records;
+package com.agendify.agendifyapplication.security.records;
 
 public record AuthResponse(
         String id,

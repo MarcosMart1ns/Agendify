@@ -1,4 +1,4 @@
-package com.agendify.webapp.config;
+package com.agendify.agendifyapplication.config;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;

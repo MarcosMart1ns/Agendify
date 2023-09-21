@@ -1,13 +1,13 @@
-package com.agendify.webapp.security.service;
+package com.agendify.agendifyapplication.security.service;
 
 import com.agendify.domain.entities.Usuario;
 import com.agendify.domain.repositories.ClienteRepository;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
-import com.agendify.webapp.security.exceptions.InvalidCredentialsException;
-import com.agendify.webapp.security.exceptions.RequestTokenException;
-import com.agendify.webapp.security.records.AuthRequest;
-import com.agendify.webapp.security.records.AuthResponse;
-import com.agendify.webapp.security.records.KeycloakTokenResponse;
+import com.agendify.agendifyapplication.security.exceptions.InvalidCredentialsException;
+import com.agendify.agendifyapplication.security.exceptions.RequestTokenException;
+import com.agendify.agendifyapplication.security.records.AuthRequest;
+import com.agendify.agendifyapplication.security.records.AuthResponse;
+import com.agendify.agendifyapplication.security.records.KeycloakTokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class AuthService {
         if (authRequest.password() == null)
             throw new InvalidCredentialsException("O campo password não foi informado");
 
-        logger.trace(String.format("Verificando dados de login do usuário %s", authRequest.email()));
+        logger.info("Verificando dados de login do usuário {}", authRequest.email());
 
         Usuario usuario = clienteRepository.findByEmail(authRequest.email());
 
@@ -70,15 +70,17 @@ public class AuthService {
     }
 
     private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
-        logger.trace("Verificando senha fornecida");
+        logger.info("Verificando senha fornecida");
 
         if (usuario == null ) {
+            logger.debug("Usuario {} inválido", authRequest.email());
             throw new InvalidCredentialsException(EMAIL_SENHA_INVALIDOS);
         }
 
         boolean isPasswordValid = passwordEncoder.matches(authRequest.password(), usuario.getSenha());
 
         if (!isPasswordValid) {
+            logger.debug("Senha inválida");
             throw new InvalidCredentialsException(EMAIL_SENHA_INVALIDOS);
         }
     }
@@ -102,7 +104,7 @@ public class AuthService {
             response = restTemplate.postForEntity(verifyTokenUrl, request, KeycloakTokenResponse.class);
             return response.getBody().access_token();
 
-        } catch (RestClientException e) {
+        } catch (Exception e) {
             logger.error("Erro ao solicitar token ao keycloak", e);
 
             throw new RequestTokenException("Erro ao obter ao token de acesso");

@@ -89,6 +89,8 @@ export class AuthorizationService {
   logoutUser() {
     localStorage.removeItem("session");
     localStorage.setItem("authenticated", "false");
+
+    this.router.navigateByUrl('/').then(() => window.location.reload());
   }
 
 }
