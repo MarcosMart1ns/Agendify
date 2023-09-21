@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
@@ -18,8 +17,11 @@ import java.util.List;
 @Setter
 @SuperBuilder
 @AllArgsConstructor
-@NoArgsConstructor
 public class Estabelecimento extends Usuario {
+
+    public Estabelecimento() {
+        super.setTipo(2L);
+    }
 
     @Nonnull
     @Column(length = 14)
