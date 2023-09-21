@@ -86,9 +86,7 @@ export class ProfileEditPageComponent {
 
     this.authService.getActiveUser().subscribe(
       (response) => {
-        console.table([response])
         this.setUserOnForm(<Cliente>response);
-        console.table([this.userDetails])
       },
       () => {
         this.authService.logoutUser();
@@ -110,8 +108,6 @@ export class ProfileEditPageComponent {
       }
 
     }
-    console.log(this.userDetails)
-    console.log(clienteToSave)
 
     this.clienteService.updateCliente(clienteToSave, this.userDetails.id).subscribe(
       (response) => {
