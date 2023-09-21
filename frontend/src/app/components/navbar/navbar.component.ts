@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Cliente} from "../../model/response/Cliente";
-import {AuthorizationService} from "../../services/authorization.service";
 
 @Component({
     selector: 'app-navbar',
@@ -12,8 +11,9 @@ export class NavbarComponent {
 
   @Input()
   user!: Cliente;
-  @Input()returnPage : string = '';
 
   constructor() {
   }
+
+  protected readonly window = window;
 }

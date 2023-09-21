@@ -13,7 +13,7 @@
 </div>
 <!-- NavBar apresentada forada tela inicial sem usuário logado, com botão voltar -->
 <div *ngIf="mode==='non-logged-back'" class="signup-login-nav-bar">
-  <a [routerLink]="''" style="text-decoration: none;margin: 2%">
+  <a (click)="window.history.back()" style="text-decoration: none;margin: 2%">
     <img src="./assets/images/back.svg" alt="">
   </a>
   <app-logo-component></app-logo-component>
@@ -34,7 +34,7 @@
 
 <div *ngIf="mode==='logged-home-back'" class="non-logged-nav-bar">
   <div style="text-decoration: none;margin: 2%">
-    <a [routerLink]="returnPage" style="text-decoration: none;margin-right: 2%">
+    <a (click)="window.history.back()" style="text-decoration: none;margin-right: 2%">
       <img src="./assets/images/back.svg" alt="">
     </a>
     <div class="logo-container">
