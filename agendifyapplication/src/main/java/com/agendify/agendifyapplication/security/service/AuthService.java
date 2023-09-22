@@ -20,7 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -66,7 +65,7 @@ public class AuthService {
 
         String token = getToken();
 
-        return new AuthResponse(usuario.getId().toString(), usuario.getEmail(), token);
+        return new AuthResponse(usuario.getId().toString(), usuario.getEmail(), token, usuario.getTipo());
     }
 
     private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
