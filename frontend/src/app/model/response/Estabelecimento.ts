@@ -1,6 +1,6 @@
 import {Endereco} from "./Endereco";
 
-export interface Cliente {
+export interface Estabelecimento {
   id: string;
   nome: string;
   urlFotoPerfil: string;
@@ -8,5 +8,5 @@ export interface Cliente {
   email: string;
   tipo: number;
   endereco: Endereco;
-  cpf: string;
+  cnpj: string;
 }

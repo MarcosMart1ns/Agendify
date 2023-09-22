@@ -82,7 +82,8 @@ export class AuthorizationService {
     return {
       email: "",
       id: "",
-      token: ""
+      token: "",
+      tipo: 1
     };
   }
 
