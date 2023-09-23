@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Cliente} from "../../model/response/Cliente";
 import {AuthorizationService} from "../../services/authorization.service";
 import {Router} from "@angular/router";
+import {Estabelecimento} from "../../model/response/Estabelecimento";
 
 @Component({
   selector: 'app-logged-user-nav-bar',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoggedUserNavBarComponent {
 
-  @Input()activeUser: Cliente | null = null;
+  @Input()activeUser: Cliente | null | Estabelecimento = null;
 
 
   constructor(private authService:AuthorizationService,private router: Router) {

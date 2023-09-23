@@ -8,6 +8,8 @@ import {FormGroup, Validators} from "@angular/forms";
 import {ClienteService} from "../../services/cliente.service";
 import {ValidationUtils} from "../../util/ValidationUtils";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Authresponse} from "../../model/response/Authresponse";
+import {Estabelecimento} from "../../model/response/Estabelecimento";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -15,7 +17,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./profile-edit-page.component.css']
 })
 export class ProfileEditPageComponent {
-  userDetails!: Cliente;
+  userDetails!: Cliente | Estabelecimento;
 
   profileImgUrl: string = 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg';
 
@@ -84,18 +86,20 @@ export class ProfileEditPageComponent {
       this.router.navigateByUrl('/login');
     }
 
-    this.authService.getActiveUser().subscribe(
-      (response) => {
-        this.setUserOnForm(<Cliente>response);
-      },
-      () => {
-        this.authService.logoutUser();
-      }
-    )
+    let activeSession: Authresponse = this.authService.getActiveSession();
+
+    if (activeSession.tipo == 1) {
+      this.clienteService.getClienteLogado(activeSession.id).subscribe(
+        (response) => this.setUserOnForm(<Cliente>response),
+        () => {
+          this.authService.logoutUser();
+        }
+      )
+    }
   }
 
   saveProfile(cliente: ClienteFormGroup) {
-    const clienteToSave: Cliente = this.userDetails;
+    const clienteToSave: Cliente | Estabelecimento = this.userDetails;
 
     for (const clienteProp in cliente) {
       // @ts-ignore
@@ -133,15 +137,23 @@ export class ProfileEditPageComponent {
       this.profileImgUrl = this.userDetails.urlFotoPerfil;
     }
 
+    this.form.get("nome").patchValue(this.userDetails.nome);
 
-      this.form.get("nome").patchValue(this.userDetails.nome);
+    if ("cpf" in this.userDetails) {
       this.form.get("cpf").patchValue(this.userDetails.cpf);
-      this.form.get("email").patchValue(this.userDetails.email);
-      if (this.userDetails.endereco != null) {
-        this.form.get("logradouro").patchValue(this.userDetails.endereco.logradouro);
-        this.form.get("bairro").patchValue(this.userDetails.endereco.bairro);
-        this.form.get("cidade").patchValue(this.userDetails.endereco.cidade);
-      }
+    }
+
+    if ("cnpj" in this.userDetails) {
+      this.form.get("cnpj").patchValue(this.userDetails.cnpj);
+    }
+
+    this.form.get("email").patchValue(this.userDetails.email);
+
+    if (this.userDetails.endereco != null) {
+      this.form.get("logradouro").patchValue(this.userDetails.endereco.logradouro);
+      this.form.get("bairro").patchValue(this.userDetails.endereco.bairro);
+      this.form.get("cidade").patchValue(this.userDetails.endereco.cidade);
+    }
 
   }
 
