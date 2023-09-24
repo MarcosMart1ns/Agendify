@@ -1,0 +1,12 @@
+<div class="card-agendamento-cliente">
+  <div class="barra-vertical"></div>
+  <div class="nome">{{ nome }}</div>
+  <img class="imagem" [src]="urlImagem" alt="Imagem do Cliente" />
+  <div class="status" [ngStyle]="{'background-color': getColorByStatus(status)}">
+    {{ status }}
+  </div>
+  <div class="tipo">{{ tipo }}</div>
+  <div class="data-hora">
+    {{ dataHora }}
+  </div>
+</div>

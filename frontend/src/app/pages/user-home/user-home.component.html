@@ -2,4 +2,14 @@
 <main>
   <a [routerLink]="'/'" >Agende um atendimento</a>
   <h1>Meus horários agendados</h1>
+   <!-- Loop para criar os cards de agendamento -->
+  <div class="card-agendamento-wrapper" *ngFor="let agendamento of agendamentos">
+    <app-card-agendamento-cliente
+      [nome]="agendamento.nome"
+      [urlImagem]="agendamento.urlImagem"
+      [status]="agendamento.status"
+      [tipo]="agendamento.tipo"
+      [dataHora]="agendamento.dataHora"
+    ></app-card-agendamento-cliente>
+  </div>
 </main>

@@ -1,0 +1,87 @@
+.card-agendamento-cliente {
+  width: auto;
+  height: 80px;
+  position: relative;
+  display: block;
+  left: 0px;
+  top: 0px;
+  background: white;
+  border-radius: 10px;
+  /* border-left: 2px solid rgba(8, 52, 140, 0.97); */
+}
+
+.barra-vertical {
+  width: 2px;
+  height: 61px;
+  /* left: 2px; */
+  top: 8px;
+  position: relative;
+  /* transform: rotate(180deg);
+  transform-origin: 0 0; */
+  background: rgba(8, 52, 140, 0.97);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* Adicione outros estilos conforme necessário */
+}
+
+.nome {
+  width: 135px;
+  height: 28px;
+  left: 95px;
+  top: 26px;
+  position: absolute;
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 22px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+  /* Adicione outros estilos conforme necessário */
+}
+
+.imagem {
+  width: 60px;
+  height: 60.71px;
+  left: 19px;
+  top: 10px;
+  position: absolute;
+  border-radius: 98.50px;
+  /* Adicione outros estilos conforme necessário */
+}
+
+.status {
+  width: 150px;
+  height: 30px;
+  line-height: 30px;
+  left: 270px;
+  top: 25px;
+  border-radius: 10px;
+  position: absolute;
+  text-align: center;
+  color: #F2F2F2;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+  /* Adicione outros estilos conforme necessário */
+}
+
+.tipo {
+  width: 160px;
+  height: 30px;
+  left: 440px;
+  top: 25px;
+  position: absolute;
+  /* Adicione outros estilos conforme necessário */
+}
+
+.data-hora {
+  height: 40px;
+  left: 613px;
+  top: 25px;
+  position: absolute;
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 14px;
+  /* font-family: Roboto Slab; */
+  font-weight: 400;
+  word-wrap: break-word;
+}
