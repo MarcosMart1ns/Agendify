@@ -10,6 +10,7 @@ import {ValidationUtils} from "../../util/ValidationUtils";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Authresponse} from "../../model/response/Authresponse";
 import {Estabelecimento} from "../../model/response/Estabelecimento";
+import {EstabelecimentoService} from "../../services/estabelecimento.service";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -20,6 +21,8 @@ export class ProfileEditPageComponent {
   userDetails!: Cliente | Estabelecimento;
 
   profileImgUrl: string = 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg';
+
+  userType!:number;
 
   clienteFormGroup = {
     nome: ['', Validators.required],
@@ -75,27 +78,93 @@ export class ProfileEditPageComponent {
     }
   ]
 
+  estabelecimentoFormGroup = {
+    nome: ['', Validators.required],
+    cnpj: ['', Validators.compose([Validators.required, ValidationUtils.validateCPF()])],
+    email: ['', [Validators.required, Validators.email]],
+    logradouro: '',
+    bairro: '',
+    cidade: ''
+  };
+
+  estabelecimentoFormField: FieldModel[] = [
+    {
+      fieldName: "Nome",
+      controlName: "nome",
+      iconUrl: "",
+      fieldType: "text",
+      errorMessage: "Insira um nome válido"
+    },
+    {
+      fieldName: "CNPJ",
+      controlName: "cnpj",
+      iconUrl: "",
+      fieldType: "number",
+      errorMessage: "cnpj inválido"
+    },
+    {
+      fieldName: "Email",
+      controlName: "email",
+      iconUrl: "",
+      fieldType: "email",
+      errorMessage: "Insira um e-mail válido"
+    },
+    {
+      fieldName: "Logradouro",
+      controlName: "logradouro",
+      iconUrl: "",
+      fieldType: "text",
+      errorMessage: ""
+    },
+    {
+      fieldName: "Bairro",
+      controlName: "bairro",
+      iconUrl: "",
+      fieldType: "text",
+      errorMessage: ""
+    },
+    {
+      fieldName: "Cidade",
+      controlName: "cidade",
+      iconUrl: "",
+      fieldType: "text",
+      errorMessage: ""
+    }
+  ]
+
   private form : FormGroup | any;
 
   constructor(
     private authService: AuthorizationService,
     private router: Router,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private estabelecimentoService:EstabelecimentoService
   ) {
     if (!this.authService.isUserLogged()) {
       this.router.navigateByUrl('/login');
     }
 
     let activeSession: Authresponse = this.authService.getActiveSession();
+    this.userType = activeSession.tipo;
 
     if (activeSession.tipo == 1) {
       this.clienteService.getClienteLogado(activeSession.id).subscribe(
-        (response) => this.setUserOnForm(<Cliente>response),
+        (response) => this.setUserOnForm(response),
         () => {
           this.authService.logoutUser();
         }
       )
     }
+
+    if (activeSession.tipo ==2 ) {
+      this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
+        (response) => this.setUserOnForm(response),
+        () => {
+          this.authService.logoutUser();
+        }
+      )
+    }
+
   }
 
   saveProfile(cliente: ClienteFormGroup) {
@@ -129,7 +198,7 @@ export class ProfileEditPageComponent {
     this.form = formGroup;
   }
 
-  setUserOnForm(cliente: Cliente) {
+  setUserOnForm(cliente: Cliente | Estabelecimento) {
 
     this.userDetails = cliente
 

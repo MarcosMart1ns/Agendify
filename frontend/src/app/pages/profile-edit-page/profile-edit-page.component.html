@@ -2,6 +2,7 @@
 <main>
   <img class="avatar-img" src="{{profileImgUrl}}" alt="">
   <app-form-component
+    *ngIf="userType==1"
     [model]="clienteFormGroup"
     [formFieldsModel]="clienteFormField"
 
@@ -10,4 +11,16 @@
     (formOutputData)="saveProfile($event)"
     (outputFormGroup)="receiveForm($event)"
   />
+
+  <app-form-component
+    *ngIf="userType==2"
+    [model]="estabelecimentoFormGroup"
+    [formFieldsModel]="estabelecimentoFormField"
+
+    [formTitle]="'Meu perfil'"
+    [subtmitButtonText]="'Confirmar Mudanças'"
+    (formOutputData)="saveProfile($event)"
+    (outputFormGroup)="receiveForm($event)"
+  />
+
 </main>

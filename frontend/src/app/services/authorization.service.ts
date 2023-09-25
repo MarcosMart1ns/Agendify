@@ -66,6 +66,7 @@ export class AuthorizationService {
       return JSON.parse(session);
     }
 
+    console.debug("Not found any active session, please verify")
     return {
       email: "",
       id: "",
