@@ -13,12 +13,6 @@ public abstract class EstabelecimentoMapper {
 
     public abstract Estabelecimento fromEntity(com.agendify.domain.entities.Estabelecimento estabelecimento);
 
-    @Mapping(target = "senha", source = "senha", qualifiedByName = "encryptSenha")
     public abstract com.agendify.domain.entities.Estabelecimento toEntity(Estabelecimento estabelecimento);
 
-    @Named("encryptSenha")
-    String decryptId(String senha) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
-        return encoder.encode(senha);
-    }
 }

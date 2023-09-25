@@ -41,7 +41,7 @@ public class ClienteController {
 
     @PatchMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Cliente> updateCliente(@PathVariable UUID id, @RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> updateCliente(@PathVariable UUID id, @RequestBody Cliente cliente) throws UserAlreadyExistsException {
 
         Cliente clienteUpdated = clienteService.updateCliente(id, cliente);
 
