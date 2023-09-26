@@ -11,6 +11,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Authresponse} from "../../model/response/Authresponse";
 import {Estabelecimento} from "../../model/response/Estabelecimento";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -23,6 +24,9 @@ export class ProfileEditPageComponent {
   profileImgUrl: string = 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg';
 
   userType!:number;
+
+  showErrorDialog: boolean = false;
+  errorMessage: string = 'Exemplo';
 
   clienteFormGroup = {
     nome: ['', Validators.required],
@@ -150,7 +154,10 @@ export class ProfileEditPageComponent {
     if (activeSession.tipo == 1) {
       this.clienteService.getClienteLogado(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
-        () => {
+        (error: HttpErrorResponse) => {
+          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
+          this.showErrorDialog = true;
+
           this.authService.logoutUser();
         }
       )
@@ -159,7 +166,10 @@ export class ProfileEditPageComponent {
     if (activeSession.tipo ==2 ) {
       this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
-        () => {
+        (error: HttpErrorResponse) => {
+          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
+          this.showErrorDialog = true;
+
           this.authService.logoutUser();
         }
       )
@@ -182,16 +192,14 @@ export class ProfileEditPageComponent {
 
     }
 
-    this.clienteService.updateCliente(clienteToSave, this.userDetails.id).subscribe(
-      (response) => {
-        this.setUserOnForm(<Cliente>response);
-        window.alert("Usuário Alterado com Sucesso");
-        window.location.reload();
-      },
-      (error:HttpErrorResponse)=>{
-        window.alert("Erro ao tentar salvar os seus dados:" + error.error.message);
-      }
-    );
+    if(this.userType==1){
+      this.handleUserRespons(this.clienteService.updateCliente(clienteToSave, this.userDetails.id))
+    }
+
+    if(this.userType==2){
+      this.handleUserRespons(this.estabelecimentoService.updateCliente(clienteToSave, this.userDetails.id))
+    }
+
   }
 
   receiveForm(formGroup: FormGroup) {
@@ -226,4 +234,17 @@ export class ProfileEditPageComponent {
 
   }
 
+  handleUserRespons(user:Observable<object>){
+    user.subscribe(
+      (response) => {
+        this.setUserOnForm(<Cliente>response);
+        window.alert("Usuário Alterado com Sucesso");
+        window.location.reload();
+      },
+      (error:HttpErrorResponse)=>{
+        this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
+        this.showErrorDialog = true;
+      }
+    );
+  }
 }
