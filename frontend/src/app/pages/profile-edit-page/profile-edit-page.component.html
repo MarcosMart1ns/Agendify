@@ -1,4 +1,5 @@
 <app-navbar [mode]="'non-logged-back'" [user]="userDetails"></app-navbar>
+
 <main>
   <img class="avatar-img" src="{{profileImgUrl}}" alt="">
   <app-form-component
@@ -24,5 +25,5 @@
   />
 
   <app-error-dialog [showDialog]="showErrorDialog" [message]="errorMessage"></app-error-dialog>
-
+  <app-sucess-dialog [showDialog]="showSuccessDialog" [message]="sucessMessage" [onConfirmAction]="onConfirmAction"></app-sucess-dialog>
 </main>

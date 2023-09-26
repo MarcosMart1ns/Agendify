@@ -28,6 +28,13 @@ export class ProfileEditPageComponent {
   showErrorDialog: boolean = false;
   errorMessage: string = 'Exemplo';
 
+  showSuccessDialog:boolean = false;
+  sucessMessage: string = "Dados alterados com sucesso"
+
+  onConfirmAction = ()=>{
+    window.location.reload();
+  }
+
   clienteFormGroup = {
     nome: ['', Validators.required],
     cpf: ['', Validators.compose([Validators.required, ValidationUtils.validateCPF()])],
@@ -88,7 +95,8 @@ export class ProfileEditPageComponent {
     email: ['', [Validators.required, Validators.email]],
     logradouro: '',
     bairro: '',
-    cidade: ''
+    cidade: '',
+    descricao:''
   };
 
   estabelecimentoFormField: FieldModel[] = [
@@ -130,6 +138,13 @@ export class ProfileEditPageComponent {
     {
       fieldName: "Cidade",
       controlName: "cidade",
+      iconUrl: "",
+      fieldType: "text",
+      errorMessage: ""
+    },
+    {
+      fieldName: "Descrição",
+      controlName: "descricao",
       iconUrl: "",
       fieldType: "text",
       errorMessage: ""
@@ -224,6 +239,10 @@ export class ProfileEditPageComponent {
       this.form.get("cnpj").patchValue(this.userDetails.cnpj);
     }
 
+    if ("descricao" in this.userDetails) {
+      this.form.get("descricao").patchValue(this.userDetails.descricao);
+    }
+
     this.form.get("email").patchValue(this.userDetails.email);
 
     if (this.userDetails.endereco != null) {
@@ -238,8 +257,7 @@ export class ProfileEditPageComponent {
     user.subscribe(
       (response) => {
         this.setUserOnForm(<Cliente>response);
-        window.alert("Usuário Alterado com Sucesso");
-        window.location.reload();
+        this.showSuccessDialog = true;
       },
       (error:HttpErrorResponse)=>{
         this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;

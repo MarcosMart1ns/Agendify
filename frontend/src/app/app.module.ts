@@ -21,6 +21,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UserHomeComponent } from './pages/user-home/user-home.component';
 import { LoggedUserNavBarComponent } from './components/logged-user-nav-bar/logged-user-nav-bar.component';
 import { ProfileEditPageComponent } from './pages/profile-edit-page/profile-edit-page.component';
+import { SucessDialogComponent } from './components/sucess-dialog/sucess-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProfileEditPageComponent } from './pages/profile-edit-page/profile-edit
     LoginPageComponent,
     UserHomeComponent,
     LoggedUserNavBarComponent,
-    ProfileEditPageComponent
+    ProfileEditPageComponent,
+    SucessDialogComponent
   ],
   imports: [
     BrowserModule,

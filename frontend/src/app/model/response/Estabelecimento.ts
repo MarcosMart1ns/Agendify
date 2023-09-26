@@ -9,4 +9,5 @@ export interface Estabelecimento {
   tipo: number;
   endereco: Endereco;
   cnpj: string;
+  descricao: string;
 }
