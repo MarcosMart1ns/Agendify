@@ -80,7 +80,7 @@ export class ProfileEditPageComponent {
 
   estabelecimentoFormGroup = {
     nome: ['', Validators.required],
-    cnpj: ['', Validators.compose([Validators.required, ValidationUtils.validateCPF()])],
+    cnpj: ['', Validators.compose([Validators.required, ValidationUtils.validateCNPJ()])],
     email: ['', [Validators.required, Validators.email]],
     logradouro: '',
     bairro: '',
