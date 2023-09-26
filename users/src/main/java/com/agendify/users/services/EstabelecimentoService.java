@@ -65,7 +65,7 @@ public class EstabelecimentoService {
 
     public Estabelecimento updateEstabelecimento(UUID id, Estabelecimento estabelecimento) throws HttpClientErrorException.NotFound, UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(estabelecimento.email());
+        emailAlreadyExistValidation(estabelecimento.email(), id);
 
         if (estabelecimentoRepository.existsById(id)) {
             com.agendify.domain.entities.Estabelecimento estabelecimentoSaved = estabelecimentoRepository.saveAndFlush(estabelecimentoMapper.toEntity(estabelecimento));
@@ -76,9 +76,19 @@ public class EstabelecimentoService {
     }
 
     public void emailAlreadyExistValidation(String email) throws UserAlreadyExistsException {
-        if(estabelecimentoRepository.findByEmail(email) !=null){
+        emailAlreadyExistValidation(email, null);
+    }
+
+    public void emailAlreadyExistValidation(String email, UUID id) throws UserAlreadyExistsException {
+        com.agendify.domain.entities.Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(email);
+
+        if (estabelecimento != null) {
+            if (estabelecimento.getId().equals(id)) {
+                return;
+            }
+
             log.error("Email {} já possui cadastro e pertence a outro usuário", email);
-            throw new UserAlreadyExistsException("Usuário já existe, tente utilizar outro e-mail");
+            throw new UserAlreadyExistsException("Email já utilizado por outro usuário, escolha outro email.");
         }
     }
 

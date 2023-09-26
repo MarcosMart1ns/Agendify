@@ -43,7 +43,7 @@ public class ClienteService {
 
     public Cliente updateCliente(UUID id, Cliente cliente) throws NotFound, UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(cliente.email());
+        emailAlreadyExistValidation(cliente.email(), id);
 
         if (clienteRepository.existsById(id)) {
 
@@ -58,9 +58,19 @@ public class ClienteService {
     }
 
     public void emailAlreadyExistValidation(String email) throws UserAlreadyExistsException {
-        if (clienteRepository.findByEmail(email) != null) {
+        emailAlreadyExistValidation(email, null);
+    }
+
+    public void emailAlreadyExistValidation(String email, UUID id) throws UserAlreadyExistsException {
+        com.agendify.domain.entities.Cliente cliente = clienteRepository.findByEmail(email);
+
+        if (cliente != null) {
+            if ((cliente.getId().equals(id))) {
+                return;
+            }
+
             log.error("Email {} já possui cadastro e pertence a outro usuário", email);
-            throw new UserAlreadyExistsException("Usuário já existe, tente utilizar outro e-mail");
+            throw new UserAlreadyExistsException("Email já utilizado por outro usuário, escolha outro email.");
         }
     }
 
