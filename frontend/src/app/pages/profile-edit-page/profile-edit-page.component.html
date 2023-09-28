@@ -2,28 +2,75 @@
 
 <main>
   <img class="avatar-img" src="{{profileImgUrl}}" alt="">
+
+  <div>
   <app-form-component
     *ngIf="userType==1"
     [model]="clienteFormGroup"
     [formFieldsModel]="clienteFormField"
 
-    [formTitle]="'Meu perfil'"
+    [formTitle]="'Minha Conta'"
     [subtmitButtonText]="'Confirmar Mudanças'"
     (formOutputData)="saveProfile($event)"
     (outputFormGroup)="receiveForm($event)"
   />
 
-  <app-form-component
-    *ngIf="userType==2"
-    [model]="estabelecimentoFormGroup"
-    [formFieldsModel]="estabelecimentoFormField"
 
-    [formTitle]="'Meu perfil'"
-    [subtmitButtonText]="'Confirmar Mudanças'"
-    (formOutputData)="saveProfile($event)"
-    (outputFormGroup)="receiveForm($event)"
-  />
+  <div >
 
+    <div class="form-picker">
+      <div class="service-pick">
+
+        <p
+          (click)="toggleDadosPessoais()"
+          [ngClass]="{
+            'selected-service': enableDadosPessoais,
+            'unselected-service': enableBioDescription
+          }">
+          Minha Conta
+        </p>
+        <p (click)='toggleBioDescription()'
+           [ngClass]="{
+           'selected-service': enableBioDescription,
+           'unselected-service': enableDadosPessoais}">
+          Meu Perfil
+        </p>
+
+      </div>
+    </div>
+
+    <app-form-component
+      *ngIf="userType==2 && enableDadosPessoais"
+      [model]="estabelecimentoFormGroup"
+      [formFieldsModel]="estabelecimentoFormField"
+
+      [formTitle]="''"
+      [subtmitButtonText]="'Confirmar Mudanças'"
+      (formOutputData)="saveProfile($event)"
+      (outputFormGroup)="receiveForm($event)"
+    />
+
+    <form
+      class="form-bio"
+      *ngIf="userType==2 && enableBioDescription"
+      [formGroup]="estabelecimentoExtraFormGroup"
+    >
+      <p class="title"></p>
+      <label>Descrição</label>
+      <p class="description-text">Breve descrição sobre o seu estabelecimento para o cliente ter uma melhor compreensão de sesus serviços</p>
+      <textarea
+        placeholder="Insira sua descrição aqui"
+        class="description-input"
+        formControlName="descricao"
+      ></textarea>
+
+      <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.dirty && estabelecimentoExtraFormGroup.valid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="false"/>
+      <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.pristine || estabelecimentoExtraFormGroup.invalid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="true"/>
+    </form>
+  </div>
+
+
+  </div>
   <app-error-dialog [showDialog]="showErrorDialog" [message]="errorMessage"></app-error-dialog>
   <app-sucess-dialog [showDialog]="showSuccessDialog" [message]="sucessMessage" [onConfirmAction]="onConfirmAction"></app-sucess-dialog>
 </main>

@@ -4,7 +4,7 @@ import {FieldModel} from "../../model/field-model/FieldModel";
 import {AuthorizationService} from "../../services/authorization.service";
 import {Router} from "@angular/router";
 import {Cliente} from "../../model/response/Cliente";
-import {FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ClienteService} from "../../services/cliente.service";
 import {ValidationUtils} from "../../util/ValidationUtils";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -16,22 +16,25 @@ import {Observable} from "rxjs";
 @Component({
   selector: 'app-profile-edit-page',
   templateUrl: './profile-edit-page.component.html',
-  styleUrls: ['./profile-edit-page.component.css']
+  styleUrls: ['./profile-edit-page.component.css', '../../components/form-component/form-component.component.css', '../../pages/sign-up-page/sign-up-page.component.css']
 })
 export class ProfileEditPageComponent {
   userDetails!: Cliente | Estabelecimento;
 
   profileImgUrl: string = 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg';
 
-  userType!:number;
+  userType!: number;
 
   showErrorDialog: boolean = false;
   errorMessage: string = 'Exemplo';
 
-  showSuccessDialog:boolean = false;
-  sucessMessage: string = "Dados alterados com sucesso"
+  showSuccessDialog: boolean = false;
+  sucessMessage: string = "Dados alterados com sucesso";
 
-  onConfirmAction = ()=>{
+  enableDadosPessoais: boolean = true;
+  enableBioDescription: boolean = false;
+
+  onConfirmAction = () => {
     window.location.reload();
   }
 
@@ -89,6 +92,7 @@ export class ProfileEditPageComponent {
     }
   ]
 
+
   estabelecimentoFormGroup = {
     nome: ['', Validators.required],
     cnpj: ['', Validators.compose([Validators.required, ValidationUtils.validateCNPJ()])],
@@ -96,7 +100,6 @@ export class ProfileEditPageComponent {
     logradouro: '',
     bairro: '',
     cidade: '',
-    descricao:''
   };
 
   estabelecimentoFormField: FieldModel[] = [
@@ -141,7 +144,14 @@ export class ProfileEditPageComponent {
       iconUrl: "",
       fieldType: "text",
       errorMessage: ""
-    },
+    }
+  ]
+
+  estabelecimentoExtraFormGroup = new FormBuilder().group({
+    descricao: ''
+  });
+
+  estabelecimentoExtraFormField = [
     {
       fieldName: "Descrição",
       controlName: "descricao",
@@ -151,13 +161,14 @@ export class ProfileEditPageComponent {
     }
   ]
 
-  private form : FormGroup | any;
+
+  private form: FormGroup | any;
 
   constructor(
     private authService: AuthorizationService,
     private router: Router,
     private clienteService: ClienteService,
-    private estabelecimentoService:EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService
   ) {
     if (!this.authService.isUserLogged()) {
       this.router.navigateByUrl('/login');
@@ -178,7 +189,7 @@ export class ProfileEditPageComponent {
       )
     }
 
-    if (activeSession.tipo ==2 ) {
+    if (activeSession.tipo == 2) {
       this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
         (error: HttpErrorResponse) => {
@@ -207,11 +218,11 @@ export class ProfileEditPageComponent {
 
     }
 
-    if(this.userType==1){
+    if (this.userType == 1) {
       this.handleUserRespons(this.clienteService.updateCliente(clienteToSave, this.userDetails.id))
     }
 
-    if(this.userType==2){
+    if (this.userType == 2) {
       this.handleUserRespons(this.estabelecimentoService.updateCliente(clienteToSave, this.userDetails.id))
     }
 
@@ -240,7 +251,8 @@ export class ProfileEditPageComponent {
     }
 
     if ("descricao" in this.userDetails) {
-      this.form.get("descricao").patchValue(this.userDetails.descricao);
+      // @ts-ignore
+      this.estabelecimentoExtraFormGroup.get("descricao").patchValue(this.userDetails.descricao);
     }
 
     this.form.get("email").patchValue(this.userDetails.email);
@@ -253,16 +265,45 @@ export class ProfileEditPageComponent {
 
   }
 
-  handleUserRespons(user:Observable<object>){
+  handleUserRespons(user: Observable<object>) {
     user.subscribe(
       (response) => {
         this.setUserOnForm(<Cliente>response);
         this.showSuccessDialog = true;
       },
-      (error:HttpErrorResponse)=>{
+      (error: HttpErrorResponse) => {
         this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
         this.showErrorDialog = true;
       }
     );
+  }
+
+  toggleDadosPessoais() {
+    window.location.reload()
+    this.enableDadosPessoais = true;
+    this.enableBioDescription = false;
+  }
+
+  toggleBioDescription() {
+    this.enableDadosPessoais = false;
+    this.enableBioDescription = true;
+  }
+
+  saveBio() {
+    let estabelecimentoToSave: Estabelecimento = <Estabelecimento>  this.userDetails;
+
+    estabelecimentoToSave.descricao = <string> this.estabelecimentoExtraFormGroup.value.descricao;
+
+    this.estabelecimentoService.updateCliente(estabelecimentoToSave, this.userDetails.id)
+      .subscribe(
+        (response) => {
+          this.setUserOnForm(<Cliente>response);
+          this.showSuccessDialog = true;
+        },
+        (error: HttpErrorResponse) => {
+          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
+          this.showErrorDialog = true;
+        }
+      );
   }
 }

@@ -24,3 +24,40 @@ main {
   font-weight: 600;
   line-height: normal;
 }
+
+.description-input {
+  width: 324px;
+  height: 210px;
+  margin: 10px 10px 0px 10px;
+  border-radius: 10px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  color: #08348CF7;
+}
+
+
+.form-container{
+  display: flex;
+  flex-direction: row;
+}
+
+label{
+  color: #08348CF7;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 0px 10px;
+}
+
+.description-text {
+  color: #08348CF7;
+  max-width: 350px;
+  margin: 0px 10px;
+  font-size: 12px;
+}
+
+.form-bio{
+  align-items: flex-start;
+}

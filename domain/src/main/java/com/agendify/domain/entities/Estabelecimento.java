@@ -27,6 +27,7 @@ public class Estabelecimento extends Usuario {
     @Column(length = 14)
     private String cnpj;
 
+    @Column(length = 1000)
     private String descricao;
 
     @OneToMany
