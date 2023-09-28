@@ -114,8 +114,8 @@ public class CalendarTest {
         ).andExpect(status().is2xxSuccessful()).andReturn().getResponse().getContentAsString();
         AgendamentoResponse agendamentoResponse = objectMapper.readValue(result, AgendamentoResponse.class);
 
-        assertEquals(request.estabelecimentoId(), agendamentoResponse.estabelecimentoId());
-        assertEquals(request.clienteId(), agendamentoResponse.clienteId());
+        assertEquals(request.estabelecimentoId(), agendamentoResponse.estabelecimento().id());
+        assertEquals(request.clienteId(), agendamentoResponse.cliente().id());
         assertEquals(request.servicoId(), agendamentoResponse.servico().id());
         assertEquals(servico.getEstabelecimento().getId(), agendamentoResponse.servico().estabelecimentoId());
         assertEquals(servico.getNome(), agendamentoResponse.servico().nome());

@@ -4,6 +4,10 @@ import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.Cliente;
 import com.agendify.domain.entities.Estabelecimento;
 import com.agendify.domain.entities.Servico;
+import com.agendify.domain.mappers.ClienteMapper;
+import com.agendify.domain.mappers.EstabelecimentoMapper;
+import com.agendify.domain.records.ClienteResponse;
+import com.agendify.domain.records.EstabelecimentoResponse;
 import com.agendify.domain.repositories.ClienteRepository;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
 import com.agendify.domain.repositories.ServicoRepository;
@@ -31,6 +35,12 @@ public abstract class AgendamentoMapper {
     @Autowired
     private ServicoMapper servicoMapper;
 
+    @Autowired
+    private EstabelecimentoMapper estabelecimentoMapper;
+
+    @Autowired
+    private ClienteMapper clienteMapper;
+
     @Mappings({
             @Mapping(target = "estabelecimento", source = "estabelecimentoId", qualifiedByName = "getEstabelecimento"),
             @Mapping(target = "cliente", source = "clienteId", qualifiedByName = "getCliente"),
@@ -39,9 +49,11 @@ public abstract class AgendamentoMapper {
     public abstract Agendamento toEntity(AgendamentoCreate agendamentoCreate);
 
     @Mappings({
-            @Mapping(target = "estabelecimentoId", source = "estabelecimento.id"),
-            @Mapping(target = "clienteId", source = "cliente.id"),
-            @Mapping( target = "servico", source = "servico", qualifiedByName = "mappServicoResponse")
+//            @Mapping(target = "estabelecimentoId", source = "estabelecimento.id"),
+//            @Mapping(target = "clienteId", source = "cliente.id"),
+            @Mapping(target = "estabelecimento", source = "estabelecimento", qualifiedByName = "mapEstabelecimentoResponse"),
+            @Mapping(target = "cliente", source = "cliente", qualifiedByName = "mapClienteResponse"),
+            @Mapping( target = "servico", source = "servico", qualifiedByName = "mapServicoResponse")
     })
     public abstract AgendamentoResponse fromEntity(Agendamento agendamento);
 
@@ -63,9 +75,19 @@ public abstract class AgendamentoMapper {
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado: " + uuid));
     }
 
-    @Named("mappServicoResponse")
-    ServicoResponse mappServicoResponse(Servico servico){
+    @Named("mapServicoResponse")
+    ServicoResponse mapServicoResponse(Servico servico){
         return servicoMapper.fromEntity(servico);
+    }
+
+    @Named("mapEstabelecimentoResponse")
+    EstabelecimentoResponse mapEstabelecimentoResponse(Estabelecimento estabelecimento){
+        return estabelecimentoMapper.toEstabelecimentoResponse(estabelecimento);
+    }
+
+    @Named("mapClienteResponse")
+    ClienteResponse mapClienteResponse(Cliente cliente){
+        return clienteMapper.toClienteResponse(cliente);
     }
 
 }

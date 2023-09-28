@@ -5,11 +5,11 @@
    <!-- Loop para criar os cards de agendamento -->
   <div class="card-agendamento-wrapper" *ngFor="let agendamento of agendamentos">
     <app-card-agendamento-cliente
-      [nome]="agendamento.nome"
-      [urlImagem]="agendamento.urlImagem"
+      [nome]="agendamento.estabelecimento.nome"
+      [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
       [status]="agendamento.status"
-      [tipo]="agendamento.tipo"
-      [dataHora]="agendamento.dataHora"
+      [tipo]="agendamento.status"
+      [dataHora]="agendamento.data"
     ></app-card-agendamento-cliente>
   </div>
 </main>

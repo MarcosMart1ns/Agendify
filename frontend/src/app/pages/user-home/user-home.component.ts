@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Cliente} from "../../model/response/Cliente";
 import {AuthorizationService} from "../../services/authorization.service";
+import { AgendaService } from 'src/app/services/agenda.service';
 import {Router} from "@angular/router";
+import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse';
 
 @Component({
   selector: 'app-user-home',
@@ -11,32 +13,11 @@ import {Router} from "@angular/router";
 export class UserHomeComponent {
   loggedUser!: Cliente;
 
-  agendamentos = [
-    {
-      nome: 'Josiel',
-      urlImagem: 'https://via.placeholder.com/60x61',
-      status: 'Cancelado',
-      tipo: 'Instalação',
-      dataHora: '23/11/2023 09:00',
-    },
-    {
-      nome: 'Josiel2',
-      urlImagem: 'https://via.placeholder.com/60x61',
-      status: 'Agendado',
-      tipo: 'Instalação',
-      dataHora: '23/11/2023 09:00'
-    },
-    {
-      nome: 'Josiel3',
-      urlImagem: 'https://via.placeholder.com/60x61',
-      status: 'Concluido',
-      tipo: 'Instalação',
-      dataHora: '23/11/2023 09:00'
-    },
-  ];
+  agendamentos: AgendamentoResponse[] = []; // Inicialize a lista vazia aqui
 
   constructor(
     private authService: AuthorizationService,
+    private agendaService: AgendaService,
     private router: Router
   ) {
     let authenticated = this.authService.isUserLogged();
@@ -44,8 +25,11 @@ export class UserHomeComponent {
     if (!authenticated) {
       router.navigateByUrl('/login');
     }
-    this.authService
-      .getActiveUser()
-      .subscribe((response) => (this.loggedUser = <Cliente>response));
+    this.authService.getActiveUser().subscribe((response) => {
+      this.loggedUser = <Cliente>response;
+      this.agendaService
+        .getUserCalendar(this.loggedUser.id)
+        .subscribe((response) => this.agendamentos = response);
+    });
   }
 }
