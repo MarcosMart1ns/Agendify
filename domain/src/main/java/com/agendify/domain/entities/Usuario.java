@@ -1,12 +1,14 @@
 package com.agendify.domain.entities;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,8 +42,9 @@ public class Usuario {
     @Nonnull
     private String senha;
 
+    @Transient
     private Long tipo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 }

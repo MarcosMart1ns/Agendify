@@ -19,7 +19,7 @@
 
   </div>
 
-  <app-confirm-button *ngIf="formGroup.valid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="false"/>
-  <app-confirm-button *ngIf="formGroup.invalid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="true"/>
+  <app-confirm-button *ngIf="formGroup.dirty && formGroup.valid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="false"/>
+  <app-confirm-button *ngIf="formGroup.pristine || formGroup.invalid" (click)="onSubmit()" [buttonText]="subtmitButtonText" [disabled]="true"/>
 
 </form>

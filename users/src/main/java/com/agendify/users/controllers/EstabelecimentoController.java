@@ -48,7 +48,7 @@ public class EstabelecimentoController {
 
     @PatchMapping("{id}")
     @ResponseBody
-    public ResponseEntity<Estabelecimento> updateEstabelecimento(@PathVariable UUID id, @RequestBody Estabelecimento estabelecimento) {
+    public ResponseEntity<Estabelecimento> updateEstabelecimento(@PathVariable UUID id, @RequestBody Estabelecimento estabelecimento) throws UserAlreadyExistsException {
 
         Estabelecimento estabelecimentoUpdated = estabelecimentoService.updateEstabelecimento(id, estabelecimento);
 

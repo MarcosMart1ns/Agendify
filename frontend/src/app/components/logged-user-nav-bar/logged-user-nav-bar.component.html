@@ -6,12 +6,12 @@
       <p class="name">{{activeUser?.nome}}</p>
     </div>
     <div class="avatar">
-        <img src="./assets/images/avatar_default.png" alt="">
+        <img [routerLink]="'/profile'" src="./assets/images/avatar_default.png" alt="" >
     </div>
   </div>
 
   <div>
-    <a>
+    <a >
       <img src="./assets/images/Logout.svg" alt="" (click)="logout()">
     </a>
   </div>

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {AuthRequest} from "../model/request/AuthRequest";
 import {Authresponse} from "../model/response/Authresponse";
-import {Cliente} from "../model/response/Cliente";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -12,7 +11,7 @@ export class AuthorizationService {
 
   url = 'http://localhost:9090/auth/login'
 
-  constructor(private httpClient: HttpClient,private router:Router) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   httpOptions = {
@@ -43,18 +42,6 @@ export class AuthorizationService {
       )
   }
 
-  getActiveUser() {
-
-    const activeSession: Authresponse = this.getActiveSession()
-
-    return this.httpClient.get(
-      `http://localhost:9090/cliente/${activeSession.id}`,
-      {
-        headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.getToken()}`})
-      });
-
-  }
-
   getToken(): string {
     const activeSession = this.getActiveSession();
     if (activeSession) {
@@ -71,7 +58,7 @@ export class AuthorizationService {
     localStorage.setItem("authenticated", "true");
   }
 
-  getActiveSession(): Authresponse  {
+  getActiveSession(): Authresponse {
 
     let session = localStorage.getItem("session");
 
@@ -79,16 +66,20 @@ export class AuthorizationService {
       return JSON.parse(session);
     }
 
+    console.debug("Not found any active session, please verify")
     return {
       email: "",
       id: "",
-      token: ""
+      token: "",
+      tipo: 1
     };
   }
 
   logoutUser() {
     localStorage.removeItem("session");
     localStorage.setItem("authenticated", "false");
+
+    this.router.navigateByUrl('/').then(() => window.location.reload());
   }
 
 }
