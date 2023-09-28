@@ -2,7 +2,7 @@ h3{
   color: #162d59;
 }
 
-main {
+.form {
   margin-top: 130px;
   display: flex;
   flex-direction: column;
