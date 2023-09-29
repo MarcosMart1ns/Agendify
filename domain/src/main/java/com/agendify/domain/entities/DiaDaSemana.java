@@ -1,8 +1,10 @@
 package com.agendify.domain.entities;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 
-public enum DiaDaSemana {
+
+public enum DiaDaSemana implements Serializable {
     SEGUNDA,
     TERCA,
     QUARTA,

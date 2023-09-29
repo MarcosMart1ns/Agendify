@@ -1,5 +1,9 @@
 package com.agendify.domain.records;
 
+import com.agendify.domain.entities.PeriodoAtendimento;
+import com.agendify.domain.entities.Servico;
+
+import java.util.List;
 import java.util.UUID;
 
 public record Estabelecimento(
@@ -11,8 +15,8 @@ public record Estabelecimento(
         Long tipo,
         Endereco endereco,
         String cnpj,
-        String descricao
-//        List<Servico> servicos,
-//        List<PeriodoAtendimento> periodosAtendimento
+        String descricao,
+        List<Servico> servicos,
+        List<PeriodoAtendimento> periodosAtendimento
 ) {
 }
