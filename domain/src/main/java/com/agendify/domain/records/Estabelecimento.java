@@ -16,6 +16,8 @@ public record Estabelecimento(
         Endereco endereco,
         String cnpj,
         String descricao,
+
+        //TODO: Criar records e substituir as entidades abaixo
         List<Servico> servicos,
         List<PeriodoAtendimento> periodosAtendimento
 ) {

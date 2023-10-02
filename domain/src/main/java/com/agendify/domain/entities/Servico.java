@@ -28,10 +28,6 @@ public class Servico {
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
-    //TODO: Verificar a possibilidade de excluir esse mapeamento
-    @ManyToOne
-    private Estabelecimento estabelecimento;
-
     private String nome;
 
     private Time duracao;
