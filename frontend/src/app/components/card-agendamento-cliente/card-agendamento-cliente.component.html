@@ -1,12 +1,48 @@
-<div class="card-agendamento-cliente">
-  <div class="barra-vertical"></div>
-  <div class="nome">{{ nome }}</div>
-  <img class="imagem" [src]="urlImagem" alt="Imagem do Cliente" />
-  <div class="status" [ngStyle]="{'background-color': getColorByStatus(status)}">
-    {{ status }}
-  </div>
-  <div class="tipo">{{ tipo }}</div>
-  <div class="data-hora">
-    {{ dataHora }}
+<div class="card-agendamento-cliente container">
+  <div class="row">
+    <!-- Colunas para dispositivos pequenos -->
+    <div class="col-12 col-sm-3 col-lg-2 text-center">
+      <img
+        class="imagem"
+        [src]="
+          urlImagem == null ? 'https://via.placeholder.com/60x61' : urlImagem
+        "
+        alt="Imagem do Cliente"
+      />
+    </div>
+    <div class="col-12 col-sm-5 col-lg-2  text-center text-lg-start nome my-auto">{{ nome }}</div>
+    <div class="col-12 col-sm-4 col-lg-2 justify-content-sm-center my-auto">
+      <div
+        class="status"
+        [ngStyle]="{ 'background-color': getColorByStatus(status) }"
+      >
+        {{ status }}
+      </div>
+    </div>
+
+    <!-- Colunas para dispositivos médios e maiores -->
+    <div class="col-lg-2 nomeServico my-auto">{{ nomeServico }}</div>
+    <div class="col-lg-2 align-middle data-hora d-flex justify-content-center my-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-2">
+            <img src="./assets/images/calendario.svg" />
+          </div>
+          <div class="col-10">
+            <span class="data">
+              {{ dataHora | date : "dd/MM/yyyy" }}
+            </span>
+          </div>
+          <div class="col-2">
+            <img src="./assets/images/horario.svg" />
+          </div>
+          <div class="col-10">
+            <span class="hora">
+              {{ dataHora | date : "HH:mm" : "+00:00" }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ export class CardAgendamentoClienteComponent {
   @Input() nome: string = '';
   @Input() urlImagem: string = '';
   @Input() status: string = '';
-  @Input() tipo: string = '';
+  @Input() nomeServico: string = '';
   @Input() dataHora: string = '';
 
   getColorByStatus(status: string) {

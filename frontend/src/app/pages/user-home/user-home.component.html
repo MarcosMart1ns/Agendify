@@ -3,12 +3,12 @@
   <a [routerLink]="'/'" >Agende um atendimento</a>
   <h1>Meus horários agendados</h1>
    <!-- Loop para criar os cards de agendamento -->
-  <div class="card-agendamento-wrapper" *ngFor="let agendamento of agendamentos">
+  <div class="card-agendamento-wrapper container" *ngFor="let agendamento of agendamentos">
     <app-card-agendamento-cliente
       [nome]="agendamento.estabelecimento.nome"
       [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
       [status]="agendamento.status"
-      [tipo]="agendamento.status"
+      [nomeServico]="agendamento.servico.nome"
       [dataHora]="agendamento.data"
     ></app-card-agendamento-cliente>
   </div>

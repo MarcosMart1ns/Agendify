@@ -41,7 +41,7 @@ export class AuthorizationService {
           onError(error);
         }
       )
-  }
+}
 
   getActiveUser() {
 

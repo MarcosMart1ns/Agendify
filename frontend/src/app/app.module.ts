@@ -21,6 +21,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UserHomeComponent } from './pages/user-home/user-home.component';
 import { LoggedUserNavBarComponent } from './components/logged-user-nav-bar/logged-user-nav-bar.component';
 import { CardAgendamentoClienteComponent } from './components/card-agendamento-cliente/card-agendamento-cliente.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CardAgendamentoClienteComponent } from './components/card-agendamento-c
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
