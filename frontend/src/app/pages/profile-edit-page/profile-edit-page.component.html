@@ -55,15 +55,63 @@
       *ngIf="userType==2 && enableBioDescription"
       [formGroup]="estabelecimentoExtraFormGroup"
     >
-      <p class="title"></p>
-      <label>Descrição</label>
-      <p class="description-text">Breve descrição sobre o seu estabelecimento para o cliente ter uma melhor compreensão de sesus serviços</p>
-      <textarea
-        placeholder="Insira sua descrição aqui"
-        class="description-input"
-        formControlName="descricao"
-      ></textarea>
+      <div class="description-container">
+        <p class="title"></p>
+        <label>Descrição</label>
+        <p class="description-text">Breve descrição sobre o seu estabelecimento para o cliente ter uma melhor compreensão de sesus serviços</p>
+        <textarea
+          placeholder="Insira sua descrição aqui"
+          class="description-input"
+          formControlName="descricao"
+        ></textarea>
+      </div>
 
+      <p class="title"></p>
+
+      <form [formGroup]="addServicoFormGroup">
+      <label>Serviços</label>
+      <table mat-table [dataSource]="servicos" multiTemplateDataRows>
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>Serviço</th>
+          <td mat-cell *matCellDef="let servico"> {{servico.nome}} </td>
+          <td mat-footer-cell *matFooterCellDef>
+            <mat-form-field>
+              <mat-label>Serviço</mat-label>
+              <input formControlName="nome" matInput placeholder="Ex. Consulta Médica">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="duracao">
+          <th mat-header-cell *matHeaderCellDef>Duracao</th>
+          <td mat-cell *matCellDef="let servico"> {{servico.duracao}} </td>
+          <td mat-footer-cell *matFooterCellDef>
+            <mat-form-field>
+              <mat-label>Duração</mat-label>
+              <input formControlName="duracao" matInput type="time" placeholder="Duração">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actionButton" >
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let servico" (click)="removeServico(servico)">
+            <button mat-icon-button>
+              <mat-icon >delete</mat-icon>
+            </button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            <button mat-icon-button aria-label="Adicionar Serviço" (click)="addServico()">
+              <mat-icon >add</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['nome','duracao','actionButton']"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['nome','duracao','actionButton']"></tr>
+        <tr mat-footer-row *matFooterRowDef="['nome','duracao','actionButton']"></tr>
+      </table>
+      </form>
       <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.dirty && estabelecimentoExtraFormGroup.valid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="false"/>
       <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.pristine || estabelecimentoExtraFormGroup.invalid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="true"/>
     </form>

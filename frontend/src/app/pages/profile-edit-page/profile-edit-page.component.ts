@@ -12,6 +12,7 @@ import {Authresponse} from "../../model/response/Authresponse";
 import {Estabelecimento} from "../../model/response/Estabelecimento";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
 import {Observable} from "rxjs";
+import {Servico} from "../../model/response/Servico";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -33,6 +34,8 @@ export class ProfileEditPageComponent {
 
   enableDadosPessoais: boolean = true;
   enableBioDescription: boolean = false;
+
+  servicos!:Servico[];
 
   onConfirmAction = () => {
     window.location.reload();
@@ -151,18 +154,12 @@ export class ProfileEditPageComponent {
     descricao: ''
   });
 
-  estabelecimentoExtraFormField = [
-    {
-      fieldName: "Descrição",
-      controlName: "descricao",
-      iconUrl: "",
-      fieldType: "text",
-      errorMessage: ""
-    }
-  ]
-
-
   private form: FormGroup | any;
+
+  addServicoFormGroup = new FormBuilder().group({
+    nome: ['', Validators.required],
+    duracao: ['', Validators.required]
+  });
 
   constructor(
     private authService: AuthorizationService,
@@ -255,6 +252,10 @@ export class ProfileEditPageComponent {
       this.estabelecimentoExtraFormGroup.get("descricao").patchValue(this.userDetails.descricao);
     }
 
+    if ("servicos" in this.userDetails) {
+      this.servicos = this.userDetails.servicos;
+    }
+
     this.form.get("email").patchValue(this.userDetails.email);
 
     if (this.userDetails.endereco != null) {
@@ -293,7 +294,8 @@ export class ProfileEditPageComponent {
     let estabelecimentoToSave: Estabelecimento = <Estabelecimento>  this.userDetails;
 
     estabelecimentoToSave.descricao = <string> this.estabelecimentoExtraFormGroup.value.descricao;
-
+    estabelecimentoToSave.servicos = [... this.servicos];
+    console.log(this.servicos)
     this.estabelecimentoService.updateCliente(estabelecimentoToSave, this.userDetails.id)
       .subscribe(
         (response) => {
@@ -305,5 +307,31 @@ export class ProfileEditPageComponent {
           this.showErrorDialog = true;
         }
       );
+  }
+
+  addServico(){
+    let newServicos = [... this.servicos]
+
+    newServicos.push({
+      id: "",
+      duracao: `${this.addServicoFormGroup.get("duracao")?.value}:00`,
+      nome: `${this.addServicoFormGroup.get("nome")?.value}`
+    })
+
+    this.servicos =  newServicos;
+
+    this.estabelecimentoExtraFormGroup.markAsDirty();
+  }
+
+  removeServico(servico:Servico) {
+    let newServicos:Servico[] = [... this.servicos]
+
+    const index = newServicos.findIndex(s => s === servico);
+
+    if (index !== -1) {
+      newServicos.splice(index, 1);
+      this.servicos = newServicos;
+    }
+    this.estabelecimentoExtraFormGroup.markAsDirty();
   }
 }
