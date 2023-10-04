@@ -5,6 +5,7 @@ import {SignUpPageComponent} from "./pages/sign-up-page/sign-up-page.component";
 import {SearchHomePageComponent} from "./pages/search-home-page/search-home-page.component";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {UserHomeComponent} from "./pages/user-home/user-home.component";
+import {ProfileEditPageComponent} from "./pages/profile-edit-page/profile-edit-page.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: UserHomeComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileEditPageComponent
   }
 ];
 

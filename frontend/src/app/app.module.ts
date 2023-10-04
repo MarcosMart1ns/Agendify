@@ -14,7 +14,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { LogoComponentComponent } from './components/logo-component/logo-component.component';
 import { FormComponentComponent } from './components/form-component/form-component.component';
 import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -22,6 +22,18 @@ import { UserHomeComponent } from './pages/user-home/user-home.component';
 import { LoggedUserNavBarComponent } from './components/logged-user-nav-bar/logged-user-nav-bar.component';
 import { CardAgendamentoClienteComponent } from './components/card-agendamento-cliente/card-agendamento-cliente.component';
 import { FormsModule } from '@angular/forms';
+import { ProfileEditPageComponent } from './pages/profile-edit-page/profile-edit-page.component';
+import { SucessDialogComponent } from './components/sucess-dialog/sucess-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatChipsModule} from "@angular/material/chips";
+import {AsyncPipe, NgFor} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatListModule} from "@angular/material/list";
+import {MatTableModule} from "@angular/material/table";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -42,13 +54,27 @@ import { FormsModule } from '@angular/forms';
     UserHomeComponent,
     LoggedUserNavBarComponent,
     CardAgendamentoClienteComponent
+    ProfileEditPageComponent,
+    SucessDialogComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    NgFor,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    MatListModule,
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

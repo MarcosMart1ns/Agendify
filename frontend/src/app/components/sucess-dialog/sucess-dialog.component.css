@@ -1,0 +1,15 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #162D59;
+  color: #F4EDE8;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #000000;
+  position: fixed;
+  padding: 24px;
+  left: 50%;
+  max-width: 340px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

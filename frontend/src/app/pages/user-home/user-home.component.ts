@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Cliente} from "../../model/response/Cliente";
 import {AuthorizationService} from "../../services/authorization.service";
-import { AgendaService } from 'src/app/services/agenda.service';
 import {Router} from "@angular/router";
-import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse';
 
 @Component({
   selector: 'app-user-home',
@@ -11,7 +9,7 @@ import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse'
   styleUrls: ['./user-home.component.css'],
 })
 export class UserHomeComponent {
-  loggedUser!: Cliente;
+  loggedUser!: Cliente | Estabelecimento ;
 
   agendamentos: AgendamentoResponse[] = []; // Inicialize a lista vazia aqui
 
@@ -19,17 +17,36 @@ export class UserHomeComponent {
     private authService: AuthorizationService,
     private agendaService: AgendaService,
     private router: Router
+  ,
+    private clienteService: ClienteService,
+    private estabelecimentoService: EstabelecimentoService
   ) {
-    let authenticated = this.authService.isUserLogged();
+    let authenticated: boolean = this.authService.isUserLogged();
 
     if (!authenticated) {
-      router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
-    this.authService.getActiveUser().subscribe((response) => {
-      this.loggedUser = <Cliente>response;
-      this.agendaService
-        .getUserCalendar(this.loggedUser.id)
-        .subscribe((response) => this.agendamentos = response);
-    });
+
+    let activeSession: Authresponse = this.authService.getActiveSession();
+
+    if (activeSession.tipo == 1) {
+      this.clienteService.getClienteLogado(activeSession.id).subscribe(
+        (response) => this.loggedUser = response,
+        () => {
+          this.authService.logoutUser();
+        }
+      )
+    }
+
+    if (activeSession.tipo == 2) {
+      this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
+        (response: Estabelecimento) => this.loggedUser = response,
+        () => {
+          this.authService.logoutUser();
+        }
+      )
+    }
+
   }
+
 }

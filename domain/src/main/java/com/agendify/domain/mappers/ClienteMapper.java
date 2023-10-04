@@ -14,13 +14,6 @@ public abstract class ClienteMapper {
 
     public abstract ClienteResponse toClienteResponse(com.agendify.domain.entities.Cliente cliente);
 
-    @Mapping(target = "senha", source = "senha", qualifiedByName = "encryptSenha")
     public abstract com.agendify.domain.entities.Cliente toEntity(Cliente cliente);
 
-
-    @Named("encryptSenha")
-    String decryptId(String senha) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
-        return encoder.encode(senha);
-    }
 }

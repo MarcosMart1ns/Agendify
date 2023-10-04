@@ -1,0 +1,5 @@
+<div *ngIf="showDialog" class="modal">
+  <img src="/assets/images/check.svg" alt="">
+  <p>{{message}}</p>
+  <app-confirm-button [buttonText]="'OK'" (click)="dismissDialog()"></app-confirm-button>
+</div>

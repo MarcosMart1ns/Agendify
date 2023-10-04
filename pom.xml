@@ -20,7 +20,7 @@
     <modules>
         <module>domain</module>
         <module>users</module>
-        <module>webapp</module>
+        <module>agendifyapplication</module>
         <module>Calendar</module>
     </modules>
 
