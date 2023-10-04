@@ -33,7 +33,7 @@ public class Endereco {
 
     private String bairro;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cidade cidade;
 
     private Long numero;

@@ -45,6 +45,6 @@ public class Usuario {
     @Transient
     private Long tipo;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 }

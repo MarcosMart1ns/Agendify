@@ -68,8 +68,10 @@ public class EstabelecimentoService {
         emailAlreadyExistValidation(estabelecimento.email(), id);
 
         if (estabelecimentoRepository.existsById(id)) {
-            com.agendify.domain.entities.Estabelecimento estabelecimentoSaved = estabelecimentoRepository.saveAndFlush(estabelecimentoMapper.toEntity(estabelecimento));
-            estabelecimentoSaved.setId(id);
+
+            com.agendify.domain.entities.Estabelecimento entity = estabelecimentoMapper.toEntity(estabelecimento);
+            entity.setId(id);
+            com.agendify.domain.entities.Estabelecimento estabelecimentoSaved = estabelecimentoRepository.saveAndFlush(entity);
             return estabelecimentoMapper.fromEntity(estabelecimentoSaved);
         }
         return null;

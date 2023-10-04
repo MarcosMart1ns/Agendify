@@ -28,9 +28,6 @@ public class Servico {
     @Column(updatable = false, unique = true, nullable = false)
     private UUID id;
 
-    @ManyToOne
-    private Estabelecimento estabelecimento;
-
     private String nome;
 
     private Time duracao;

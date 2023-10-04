@@ -1,4 +1,5 @@
 import {Endereco} from "./Endereco";
+import {Servico} from "./Servico";
 
 export interface Estabelecimento {
   id: string;
@@ -10,4 +11,5 @@ export interface Estabelecimento {
   endereco: Endereco;
   cnpj: string;
   descricao: string;
+  servicos: Servico[];
 }
