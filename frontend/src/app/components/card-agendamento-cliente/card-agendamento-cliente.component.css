@@ -1,0 +1,72 @@
+.card-agendamento-cliente {
+  width: auto;
+  background: white;
+  border-radius: 10px;
+  padding: 10px; /* Adicione espaçamento interno para evitar sobreposições */
+  position: relative;
+}
+
+.card-agendamento-cliente::before {
+  content: ""; /* Crie um elemento pseudo ::before */
+  width: 2px; /* Largura da borda esquerda */
+  height: 75%; /* Altura igual a 75% da altura da div */
+  background: rgba(8, 52, 140, 0.97);
+  position: absolute;
+  left: 0; /* Alinhe à esquerda */
+  top: 50%; /* Alinhe verticalmente ao centro */
+  transform: translateY(-50%); /* Corrija o alinhamento vertical */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px; /* Adicione os cantos arredondados à borda */
+  /* Outros estilos conforme necessário */
+}
+
+.barra-vertical {
+  width: 2px;
+  height: 61px;
+  background: rgba(8, 52, 140, 0.97);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: absolute; /* Mantenha a posição absoluta se necessário */
+  left: 0; /* Ajuste a posição conforme necessário */
+  top: 0; /* Ajuste a posição conforme necessário */
+}
+
+.nome {
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 22px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+  /* margin-left: 80px; Adicione margem esquerda para acomodar a imagem */
+}
+
+.imagem {
+  width: 60px;
+  height: 60.71px;
+  border-radius: 98.50px;
+  /* float: left; Use float para permitir que outros elementos fluam ao lado dele */
+  /* margin-right: 10px; Adicione margem direita para espaço entre a imagem e o nome */
+}
+
+.status {
+  color: #F2F2F2;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.nomeServico {
+  text-align: center;
+  margin-top: 10px; /* Adicione margem superior para espaço entre o status e o nome do serviço */
+}
+
+.data-hora {
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 14px;
+  font-weight: 400;
+  word-wrap: break-word;
+  clear: both; /* Limpe os floats anteriores para que esta div comece em uma nova linha */
+}

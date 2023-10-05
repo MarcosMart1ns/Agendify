@@ -40,7 +40,7 @@ export class AuthorizationService {
           onError(error);
         }
       )
-  }
+}
 
   getToken(): string {
     const activeSession = this.getActiveSession();

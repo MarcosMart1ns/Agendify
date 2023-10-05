@@ -10,3 +10,9 @@ a {
   line-height: 26px;
   color: #162d59;
 }
+
+.card-agendamento-wrapper{
+  display: block;
+  margin: 10px 0;
+  width: 80%;
+}
