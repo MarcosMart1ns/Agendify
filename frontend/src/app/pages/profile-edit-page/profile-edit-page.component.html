@@ -69,8 +69,10 @@
 
         <p class="title"></p>
 
-        <form [formGroup]="addServicoFormGroup">
+
+        <form [formGroup]="addServicoFormGroup" class="description-container">
           <label>Serviços</label>
+          <p class="description-text">Insira quais os serviços oferecidos e qual a duração do serviço em minutos</p>
           <mat-table mat-mat-table [dataSource]="servicos" multiTemplateDataRows>
 
             <ng-container matColumnDef="nome">
@@ -114,10 +116,11 @@
             <mat-row mat-footer-row *matFooterRowDef="['nome','duracao','actionButton']"></mat-row>
           </mat-table>
         </form>
+        <p class="title"></p>
 
-        <form [formGroup]="addAgendaFormGroup">
+        <form [formGroup]="addAgendaFormGroup" class="description-container">
           <label>Agenda Disponível</label>
-
+          <p class="description-text">Insira quais as datas disponíveis para agendamento</p>
           <mat-table [dataSource]="agendas" multiTemplateDataRows>
 
             <ng-container matColumnDef="diaDaSemana">
@@ -171,7 +174,8 @@
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-header-row>
-            <mat-row *matRowDef="let myRowData; columns: ['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-row>
+            <mat-row
+              *matRowDef="let myRowData; columns: ['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-row>
             <mat-row *matFooterRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-row>
           </mat-table>
         </form>
