@@ -21,7 +21,6 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UserHomeComponent } from './pages/user-home/user-home.component';
 import { LoggedUserNavBarComponent } from './components/logged-user-nav-bar/logged-user-nav-bar.component';
 import { CardAgendamentoClienteComponent } from './components/card-agendamento-cliente/card-agendamento-cliente.component';
-import { FormsModule } from '@angular/forms';
 import { ProfileEditPageComponent } from './pages/profile-edit-page/profile-edit-page.component';
 import { SucessDialogComponent } from './components/sucess-dialog/sucess-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -53,7 +52,7 @@ import {MatInputModule} from "@angular/material/input";
     LoginPageComponent,
     UserHomeComponent,
     LoggedUserNavBarComponent,
-    CardAgendamentoClienteComponent
+    CardAgendamentoClienteComponent,
     ProfileEditPageComponent,
     SucessDialogComponent
   ],

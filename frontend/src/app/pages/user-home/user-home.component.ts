@@ -1,7 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Cliente} from "../../model/response/Cliente";
-import {AuthorizationService} from "../../services/authorization.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Cliente } from '../../model/response/Cliente';
+import { AuthorizationService } from '../../services/authorization.service';
+import { Router } from '@angular/router';
+import { AgendaService } from 'src/app/services/agenda.service';
+import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse';
+import { Estabelecimento } from 'src/app/model/response/Estabelecimento';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { EstabelecimentoService } from 'src/app/services/estabelecimento.service';
+import { Authresponse } from 'src/app/model/response/Authresponse';
 
 @Component({
   selector: 'app-user-home',
@@ -9,15 +15,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-home.component.css'],
 })
 export class UserHomeComponent {
-  loggedUser!: Cliente | Estabelecimento ;
+  loggedUser!: Cliente | Estabelecimento;
 
   agendamentos: AgendamentoResponse[] = []; // Inicialize a lista vazia aqui
 
   constructor(
     private authService: AuthorizationService,
     private agendaService: AgendaService,
-    private router: Router
-  ,
+    private router: Router,
     private clienteService: ClienteService,
     private estabelecimentoService: EstabelecimentoService
   ) {
@@ -31,22 +36,34 @@ export class UserHomeComponent {
 
     if (activeSession.tipo == 1) {
       this.clienteService.getClienteLogado(activeSession.id).subscribe(
-        (response) => this.loggedUser = response,
+        (response) => {
+          this.loggedUser = response;
+          this.getAgendamentos();
+        },
         () => {
           this.authService.logoutUser();
         }
-      )
+      );
     }
 
     if (activeSession.tipo == 2) {
-      this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
-        (response: Estabelecimento) => this.loggedUser = response,
-        () => {
-          this.authService.logoutUser();
-        }
-      )
+      this.estabelecimentoService
+        .getEstabelecimentoLogado(activeSession.id)
+        .subscribe(
+          (response: Estabelecimento) => {
+            this.loggedUser = response;
+            this.getAgendamentos();
+          },
+          () => {
+            this.authService.logoutUser();
+          }
+        );
     }
-
   }
 
+  getAgendamentos() {
+    this.agendaService
+      .getUserCalendar(this.loggedUser.id)
+      .subscribe((response) => (this.agendamentos = response));
+  }
 }
