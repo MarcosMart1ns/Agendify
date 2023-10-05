@@ -13,6 +13,9 @@ import {Estabelecimento} from "../../model/response/Estabelecimento";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
 import {Observable} from "rxjs";
 import {Servico} from "../../model/response/Servico";
+import {Constants} from "../../Constants";
+import {PeriodoAtendimento} from "../../model/response/PeriodoAtendimento";
+import {DiaDaSemana} from "../../model/response/DiaDaSemana";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -22,7 +25,7 @@ import {Servico} from "../../model/response/Servico";
 export class ProfileEditPageComponent {
   userDetails!: Cliente | Estabelecimento;
 
-  profileImgUrl: string = 'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg';
+  profileImgUrl: string = Constants.DEFAULT_AVATAR;
 
   userType!: number;
 
@@ -35,7 +38,8 @@ export class ProfileEditPageComponent {
   enableDadosPessoais: boolean = true;
   enableBioDescription: boolean = false;
 
-  servicos!:Servico[];
+  servicos!: Servico[];
+  agendas!: PeriodoAtendimento[];
 
   onConfirmAction = () => {
     window.location.reload();
@@ -161,6 +165,15 @@ export class ProfileEditPageComponent {
     duracao: ['', Validators.required]
   });
 
+  addAgendaFormGroup = new FormBuilder().group({
+    diaDaSemana: ['', Validators.required],
+    horaInicio: ['', Validators.required],
+    horaFim: ['', Validators.required]
+  });
+
+  diasDaSemanaOptions =Object.keys(DiaDaSemana).filter((f) => isNaN(Number(f)));
+  diaDaSemanaSelected!: string | DiaDaSemana[];
+
   constructor(
     private authService: AuthorizationService,
     private router: Router,
@@ -256,12 +269,16 @@ export class ProfileEditPageComponent {
       this.servicos = this.userDetails.servicos;
     }
 
+    if ("periodosAtendimento" in this.userDetails) {
+      this.agendas = this.userDetails.periodosAtendimento;
+    }
+
     this.form.get("email").patchValue(this.userDetails.email);
 
     if (this.userDetails.endereco != null) {
       this.form.get("logradouro").patchValue(this.userDetails.endereco.logradouro);
       this.form.get("bairro").patchValue(this.userDetails.endereco.bairro);
-      this.form.get("cidade").patchValue(this.userDetails.endereco.cidade);
+      this.form.get("cidade").patchValue(this.userDetails.endereco.cidade.nome);
     }
 
   }
@@ -291,11 +308,12 @@ export class ProfileEditPageComponent {
   }
 
   saveBio() {
-    let estabelecimentoToSave: Estabelecimento = <Estabelecimento>  this.userDetails;
+    let estabelecimentoToSave: Estabelecimento = <Estabelecimento>this.userDetails;
 
-    estabelecimentoToSave.descricao = <string> this.estabelecimentoExtraFormGroup.value.descricao;
-    estabelecimentoToSave.servicos = [... this.servicos];
-    console.log(this.servicos)
+    estabelecimentoToSave.descricao = <string>this.estabelecimentoExtraFormGroup.value.descricao;
+    estabelecimentoToSave.servicos = [...this.servicos];
+    estabelecimentoToSave.periodosAtendimento = [...this.agendas];
+
     this.estabelecimentoService.updateCliente(estabelecimentoToSave, this.userDetails.id)
       .subscribe(
         (response) => {
@@ -309,8 +327,8 @@ export class ProfileEditPageComponent {
       );
   }
 
-  addServico(){
-    let newServicos = [... this.servicos]
+  addServico() {
+    let newServicos = [...this.servicos]
 
     newServicos.push({
       id: "",
@@ -318,19 +336,49 @@ export class ProfileEditPageComponent {
       nome: `${this.addServicoFormGroup.get("nome")?.value}`
     })
 
-    this.servicos =  newServicos;
+    this.servicos = newServicos;
 
     this.estabelecimentoExtraFormGroup.markAsDirty();
   }
 
-  removeServico(servico:Servico) {
-    let newServicos:Servico[] = [... this.servicos]
+  removeServico(servico: Servico) {
+    let newServicos: Servico[] = [...this.servicos]
 
     const index = newServicos.findIndex(s => s === servico);
 
     if (index !== -1) {
       newServicos.splice(index, 1);
       this.servicos = newServicos;
+    }
+    this.estabelecimentoExtraFormGroup.markAsDirty();
+  }
+
+  addAgenda() {
+    let newAgenda = [...this.agendas]
+
+    console.log(this.addAgendaFormGroup.get("diaDaSemana")?.value)
+
+    newAgenda.push({
+      id: "",
+      // @ts-ignore
+      diaDaSemana: DiaDaSemana[this.addAgendaFormGroup.get("diaDaSemana")?.value],
+      horaFim: `${this.addAgendaFormGroup.get("horaFim")?.value}:00.000`,
+      horaInicio: `${this.addAgendaFormGroup.get("horaInicio")?.value}:00.000`
+    })
+    console.log(newAgenda)
+    this.agendas = newAgenda;
+
+    this.estabelecimentoExtraFormGroup.markAsDirty();
+  }
+
+  removeAgenda(agenda: PeriodoAtendimento) {
+    let periodoAtendimentos: PeriodoAtendimento[] = [...this.agendas]
+
+    const index = periodoAtendimentos.findIndex(s => s === agenda);
+
+    if (index !== -1) {
+      periodoAtendimentos.splice(index, 1);
+      this.agendas = periodoAtendimentos;
     }
     this.estabelecimentoExtraFormGroup.markAsDirty();
   }

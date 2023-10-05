@@ -32,6 +32,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -54,25 +55,26 @@ import {MatInputModule} from "@angular/material/input";
     ProfileEditPageComponent,
     SucessDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatChipsModule,
-    NgFor,
-    MatIconModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    MatListModule,
-    MatTableModule,
-    MatButtonModule,
-    MatInputModule,
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatChipsModule,
+        NgFor,
+        MatIconModule,
+        MatAutocompleteModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        MatListModule,
+        MatTableModule,
+        MatButtonModule,
+        MatInputModule,
+        MatSelectModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

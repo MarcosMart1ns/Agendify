@@ -84,7 +84,7 @@
 
         <ng-container matColumnDef="duracao">
           <th mat-header-cell *matHeaderCellDef>Duracao</th>
-          <td mat-cell *matCellDef="let servico"> {{servico.duracao}} </td>
+          <td mat-cell *matCellDef="let servico"> {{servico.duracao.substring(3,5)+" Minutos"}} </td>
           <td mat-footer-cell *matFooterCellDef>
             <mat-form-field>
               <mat-label>Duração</mat-label>
@@ -111,6 +111,66 @@
         <tr mat-row *matRowDef="let myRowData; columns: ['nome','duracao','actionButton']"></tr>
         <tr mat-footer-row *matFooterRowDef="['nome','duracao','actionButton']"></tr>
       </table>
+      </form >
+
+      <form [formGroup]="addAgendaFormGroup">
+        <label>Agenda Disponível</label>
+
+        <table mat-table [dataSource]="agendas" multiTemplateDataRows>
+
+          <ng-container matColumnDef="diaDaSemana">
+            <th mat-header-cell *matHeaderCellDef>Dia da Semana</th>
+            <td mat-cell *matCellDef="let agenda"> {{agenda.diaDaSemana}} </td>
+            <td mat-footer-cell *matFooterCellDef>
+              <mat-form-field>
+                <mat-label>Dia da Semana</mat-label>
+                <mat-select [(value)]="diaDaSemanaSelected" formControlName="diaDaSemana" >
+                  <mat-option *ngFor="let diaDaSemana of diasDaSemanaOptions" value="{{diaDaSemana}}">{{diaDaSemana}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="horaInicio">
+            <th mat-header-cell *matHeaderCellDef>Hora Início</th>
+            <td mat-cell *matCellDef="let agenda"> {{agenda.horaInicio.substring(0,5)}} </td>
+            <td mat-footer-cell *matFooterCellDef>
+              <mat-form-field>
+                <mat-label>Horário de Inicio</mat-label>
+                <input formControlName="horaInicio" matInput type="time" placeholder="Horário Inicio">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="horaFim">
+            <th mat-header-cell *matHeaderCellDef>Hora Fim</th>
+            <td mat-cell *matCellDef="let agenda"> {{agenda.horaFim.substring(0,5)}} </td>
+            <td mat-footer-cell *matFooterCellDef>
+              <mat-form-field>
+                <mat-label>Horário de Encerramento</mat-label>
+                <input formControlName="horaFim" matInput type="time" placeholder="Horário Final">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actionButton" >
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let agenda" >
+              <button mat-icon-button (click)="removeAgenda(agenda)">
+                <mat-icon >delete</mat-icon>
+              </button>
+            </td>
+            <td mat-footer-cell *matFooterCellDef>
+              <button mat-icon-button aria-label="Adicionar Serviço" (click)="addAgenda()">
+                <mat-icon >add</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></tr>
+          <tr mat-row *matRowDef="let myRowData; columns: ['diaDaSemana','horaInicio','horaFim','actionButton']"></tr>
+          <tr mat-footer-row *matFooterRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></tr>
+        </table>
       </form>
       <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.dirty && estabelecimentoExtraFormGroup.valid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="false"/>
       <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.pristine || estabelecimentoExtraFormGroup.invalid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="true"/>
