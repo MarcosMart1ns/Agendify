@@ -361,11 +361,11 @@ export class ProfileEditPageComponent {
     newAgenda.push({
       id: "",
       // @ts-ignore
-      diaDaSemana: DiaDaSemana[this.addAgendaFormGroup.get("diaDaSemana")?.value],
+      diaDaSemana: this.obterDiaDaSemanaPelaString(this.addAgendaFormGroup.get("diaDaSemana")?.value),
       horaFim: `${this.addAgendaFormGroup.get("horaFim")?.value}:00.000`,
       horaInicio: `${this.addAgendaFormGroup.get("horaInicio")?.value}:00.000`
     })
-    console.log(newAgenda)
+
     this.agendas = newAgenda;
 
     this.estabelecimentoExtraFormGroup.markAsDirty();
@@ -382,4 +382,19 @@ export class ProfileEditPageComponent {
     }
     this.estabelecimentoExtraFormGroup.markAsDirty();
   }
+
+
+  obterDiaDaSemanaPelaString(nomeDoDia: string): DiaDaSemana | undefined {
+    nomeDoDia = nomeDoDia.toUpperCase();
+
+    for (const dia in DiaDaSemana) {
+      if (DiaDaSemana[dia].toString() === nomeDoDia) {
+        // @ts-ignore
+        return DiaDaSemana[dia] as DiaDaSemana;
+      }
+    }
+
+    return undefined;
+  }
+
 }
