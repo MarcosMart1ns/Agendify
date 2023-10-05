@@ -53,7 +53,7 @@ label{
 
 .description-text {
   color: #08348CF7;
-  max-width: 350px;
+  max-width: 100%;
   margin: 0px 10px;
   font-size: 12px;
 }

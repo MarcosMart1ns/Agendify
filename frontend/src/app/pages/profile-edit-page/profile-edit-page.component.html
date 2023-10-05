@@ -4,121 +4,191 @@
   <img class="avatar-img" src="{{profileImgUrl}}" alt="">
 
   <div>
-  <app-form-component
-    *ngIf="userType==1"
-    [model]="clienteFormGroup"
-    [formFieldsModel]="clienteFormField"
-
-    [formTitle]="'Minha Conta'"
-    [subtmitButtonText]="'Confirmar Mudanças'"
-    (formOutputData)="saveProfile($event)"
-    (outputFormGroup)="receiveForm($event)"
-  />
-
-
-  <div >
-
-    <div class="form-picker">
-      <div class="service-pick">
-
-        <p
-          (click)="toggleDadosPessoais()"
-          [ngClass]="{
-            'selected-service': enableDadosPessoais,
-            'unselected-service': enableBioDescription
-          }">
-          Minha Conta
-        </p>
-        <p (click)='toggleBioDescription()'
-           [ngClass]="{
-           'selected-service': enableBioDescription,
-           'unselected-service': enableDadosPessoais}">
-          Meu Perfil
-        </p>
-
-      </div>
-    </div>
-
     <app-form-component
-      *ngIf="userType==2 && enableDadosPessoais"
-      [model]="estabelecimentoFormGroup"
-      [formFieldsModel]="estabelecimentoFormField"
+      *ngIf="userType==1"
+      [model]="clienteFormGroup"
+      [formFieldsModel]="clienteFormField"
 
-      [formTitle]="''"
+      [formTitle]="'Minha Conta'"
       [subtmitButtonText]="'Confirmar Mudanças'"
       (formOutputData)="saveProfile($event)"
       (outputFormGroup)="receiveForm($event)"
     />
 
-    <form
-      class="form-bio"
-      *ngIf="userType==2 && enableBioDescription"
-      [formGroup]="estabelecimentoExtraFormGroup"
-    >
-      <div class="description-container">
-        <p class="title"></p>
-        <label>Descrição</label>
-        <p class="description-text">Breve descrição sobre o seu estabelecimento para o cliente ter uma melhor compreensão de sesus serviços</p>
-        <textarea
-          placeholder="Insira sua descrição aqui"
-          class="description-input"
-          formControlName="descricao"
-        ></textarea>
+
+    <div>
+
+      <div class="form-picker">
+        <div class="service-pick">
+
+          <p
+            (click)="toggleDadosPessoais()"
+            [ngClass]="{
+            'selected-service': enableDadosPessoais,
+            'unselected-service': enableBioDescription
+          }">
+            Minha Conta
+          </p>
+          <p (click)='toggleBioDescription()'
+             [ngClass]="{
+           'selected-service': enableBioDescription,
+           'unselected-service': enableDadosPessoais}">
+            Meu Perfil
+          </p>
+
+        </div>
       </div>
 
-      <p class="title"></p>
+      <app-form-component
+        *ngIf="userType==2 && enableDadosPessoais"
+        [model]="estabelecimentoFormGroup"
+        [formFieldsModel]="estabelecimentoFormField"
 
-      <form [formGroup]="addServicoFormGroup">
-      <label>Serviços</label>
-      <table mat-table [dataSource]="servicos" multiTemplateDataRows>
-        <ng-container matColumnDef="nome">
-          <th mat-header-cell *matHeaderCellDef>Serviço</th>
-          <td mat-cell *matCellDef="let servico"> {{servico.nome}} </td>
-          <td mat-footer-cell *matFooterCellDef>
-            <mat-form-field>
-              <mat-label>Serviço</mat-label>
-              <input formControlName="nome" matInput placeholder="Ex. Consulta Médica">
-            </mat-form-field>
-          </td>
-        </ng-container>
+        [formTitle]="''"
+        [subtmitButtonText]="'Confirmar Mudanças'"
+        (formOutputData)="saveProfile($event)"
+        (outputFormGroup)="receiveForm($event)"
+      />
 
-        <ng-container matColumnDef="duracao">
-          <th mat-header-cell *matHeaderCellDef>Duracao</th>
-          <td mat-cell *matCellDef="let servico"> {{servico.duracao}} </td>
-          <td mat-footer-cell *matFooterCellDef>
-            <mat-form-field>
-              <mat-label>Duração</mat-label>
-              <input formControlName="duracao" matInput type="time" placeholder="Duração">
-            </mat-form-field>
-          </td>
-        </ng-container>
+      <form
+        class="form-bio"
+        *ngIf="userType==2 && enableBioDescription"
+        [formGroup]="estabelecimentoExtraFormGroup"
+      >
+        <div class="description-container">
+          <p class="title"></p>
+          <label>Descrição</label>
+          <p class="description-text">Breve descrição sobre o seu estabelecimento para o cliente ter uma melhor
+            compreensão de sesus serviços</p>
+          <textarea
+            placeholder="Insira sua descrição aqui"
+            class="description-input"
+            formControlName="descricao"
+          ></textarea>
+        </div>
 
-        <ng-container matColumnDef="actionButton" >
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let servico" (click)="removeServico(servico)">
-            <button mat-icon-button>
-              <mat-icon >delete</mat-icon>
-            </button>
-          </td>
-          <td mat-footer-cell *matFooterCellDef>
-            <button mat-icon-button aria-label="Adicionar Serviço" (click)="addServico()">
-              <mat-icon >add</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+        <p class="title"></p>
 
-        <tr mat-header-row *matHeaderRowDef="['nome','duracao','actionButton']"></tr>
-        <tr mat-row *matRowDef="let myRowData; columns: ['nome','duracao','actionButton']"></tr>
-        <tr mat-footer-row *matFooterRowDef="['nome','duracao','actionButton']"></tr>
-      </table>
+
+        <form [formGroup]="addServicoFormGroup" class="description-container">
+          <label>Serviços</label>
+          <p class="description-text">Insira quais os serviços oferecidos e qual a duração do serviço em minutos</p>
+          <mat-table mat-mat-table [dataSource]="servicos" multiTemplateDataRows>
+
+            <ng-container matColumnDef="nome">
+              <mat-header-cell mat-header-cell *matHeaderCellDef>Serviço</mat-header-cell>
+              <mat-cell mat-cell *matCellDef="let servico"> {{servico.nome}} </mat-cell>
+              <mat-cell mat-footer-cell *matFooterCellDef>
+                <mat-form-field>
+                  <mat-label>Serviço</mat-label>
+                  <input formControlName="nome" matInput placeholder="Ex. Consulta Médica">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="duracao">
+              <mat-header-cell mat-header-cell *matHeaderCellDef>Duracao</mat-header-cell>
+              <mat-cell mat-cell *matCellDef="let servico"> {{servico.duracao.substring(3, 5) + " Minutos"}} </mat-cell>
+              <mat-cell mat-footer-cell *matFooterCellDef>
+                <mat-form-field>
+                  <mat-label>Duração</mat-label>
+                  <input formControlName="duracao" matInput type="time" placeholder="Duração">
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actionButton">
+              <mat-header-cell mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell mat-cell *matCellDef="let servico" (click)="removeServico(servico)">
+                <button mat-icon-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+              <mat-footer-cell mat-footer-cell *matFooterCellDef>
+                <button mat-icon-button aria-label="Adicionar Serviço" (click)="addServico()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row mat-header-row *matHeaderRowDef="['nome','duracao','actionButton']"></mat-header-row>
+            <mat-row mat-row *matRowDef="let myRowData; columns: ['nome','duracao','actionButton']"></mat-row>
+            <mat-row mat-footer-row *matFooterRowDef="['nome','duracao','actionButton']"></mat-row>
+          </mat-table>
+        </form>
+        <p class="title"></p>
+
+        <form [formGroup]="addAgendaFormGroup" class="description-container">
+          <label>Agenda Disponível</label>
+          <p class="description-text">Insira quais as datas disponíveis para agendamento</p>
+          <mat-table [dataSource]="agendas" multiTemplateDataRows>
+
+            <ng-container matColumnDef="diaDaSemana">
+              <mat-header-cell *matHeaderCellDef>Dia da Semana</mat-header-cell>
+              <mat-cell *matCellDef="let agenda"> {{agenda.diaDaSemana}} </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                <mat-form-field>
+                  <mat-label>Dia da Semana</mat-label>
+                  <mat-select [(value)]="diaDaSemanaSelected" formControlName="diaDaSemana">
+                    <mat-option *ngFor="let diaDaSemana of diasDaSemanaOptions"
+                                value="{{diaDaSemana}}">{{diaDaSemana}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="horaInicio">
+              <mat-header-cell *matHeaderCellDef>Hora Início</mat-header-cell>
+              <mat-cell *matCellDef="let agenda"> {{agenda.horaInicio.substring(0, 5)}} </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                <mat-form-field>
+                  <mat-label>Horário de Inicio</mat-label>
+                  <input formControlName="horaInicio" matInput type="time" placeholder="Horário Inicio">
+                </mat-form-field>
+              </mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="horaFim">
+              <mat-header-cell mat-header-cell *matHeaderCellDef>Hora Fim</mat-header-cell>
+              <mat-cell *matCellDef="let agenda"> {{agenda.horaFim.substring(0, 5)}} </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                <mat-form-field>
+                  <mat-label>Horário de Encerramento</mat-label>
+                  <input formControlName="horaFim" matInput type="time" placeholder="Horário Final">
+                </mat-form-field>
+              </mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actionButton">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let agenda">
+                <button mat-icon-button (click)="removeAgenda(agenda)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+              <mat-footer-cell *matFooterCellDef>
+                <button mat-icon-button aria-label="Adicionar Serviço" (click)="addAgenda()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-header-row>
+            <mat-row
+              *matRowDef="let myRowData; columns: ['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-row>
+            <mat-row *matFooterRowDef="['diaDaSemana','horaInicio','horaFim','actionButton']"></mat-row>
+          </mat-table>
+        </form>
+        <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.dirty && estabelecimentoExtraFormGroup.valid"
+                            (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="false"/>
+        <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.pristine || estabelecimentoExtraFormGroup.invalid"
+                            (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="true"/>
       </form>
-      <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.dirty && estabelecimentoExtraFormGroup.valid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="false"/>
-      <app-confirm-button *ngIf="estabelecimentoExtraFormGroup.pristine || estabelecimentoExtraFormGroup.invalid" (click)="saveBio()" [buttonText]="'Salvar'" [disabled]="true"/>
-    </form>
-  </div>
+    </div>
 
 
   </div>
   <app-error-dialog [showDialog]="showErrorDialog" [message]="errorMessage"></app-error-dialog>
-  <app-sucess-dialog [showDialog]="showSuccessDialog" [message]="sucessMessage" [onConfirmAction]="onConfirmAction"></app-sucess-dialog>
+  <app-sucess-dialog [showDialog]="showSuccessDialog" [message]="sucessMessage"
+                     [onConfirmAction]="onConfirmAction"></app-sucess-dialog>
 </main>
