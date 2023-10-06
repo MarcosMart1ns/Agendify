@@ -33,6 +33,8 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import {MatInputModule} from "@angular/material/input";
     LoggedUserNavBarComponent,
     CardAgendamentoClienteComponent,
     ProfileEditPageComponent,
-    SucessDialogComponent
+    SucessDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import {MatInputModule} from "@angular/material/input";
     MatTableModule,
     MatButtonModule,
     MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
