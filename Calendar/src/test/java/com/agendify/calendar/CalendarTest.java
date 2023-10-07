@@ -3,11 +3,13 @@ package com.agendify.calendar;
 import com.agendify.calendar.config.TestsConfig;
 import com.agendify.calendar.controllers.mappers.AgendamentoCreate;
 import com.agendify.calendar.controllers.mappers.AgendamentoResponse;
+import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.Cliente;
 import com.agendify.domain.entities.DiaDaSemana;
 import com.agendify.domain.entities.Estabelecimento;
 import com.agendify.domain.entities.PeriodoAtendimento;
 import com.agendify.domain.entities.Servico;
+import com.agendify.domain.entities.Status;
 import com.agendify.domain.repositories.AgendamentoRepository;
 import com.agendify.domain.repositories.ClienteRepository;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
@@ -37,6 +39,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -193,6 +196,75 @@ public class CalendarTest {
                                 .accept(MediaType.APPLICATION_JSON)
                 ).andExpect(status().isConflict())
                 .andExpect(jsonPath("$.msg").value("O horário solicitado não está disponível"));
+    }
+
+    @Test
+    @DisplayName("Cancelar um agendamento com statusAgendado")
+    void cancelarAgendamento_statusAgendado() throws Exception {
+        PeriodoAtendimento periodoAtendimento = PeriodoAtendimento.builder()
+                .estabelecimento(estabelecimento)
+                .diaDaSemana(DiaDaSemana.fromDayOfWeek(LocalDate.now().getDayOfWeek()))
+                .horaInicio(LocalTime.of(0, 0, 0))
+                .horaFim(LocalTime.of(23, 59, 59))
+                .build();
+        periodoAtendimentoRepository.saveAndFlush(periodoAtendimento);
+
+        Agendamento agendamento = Agendamento.builder()
+                .status(Status.AGENDADO)
+                .estabelecimento(this.estabelecimento)
+                .cliente(this.cliente)
+                .servico(this.servico)
+                .data(new Date(new Date().getTime() + 60_000))
+                .build();
+        agendamentoRepository.saveAndFlush(agendamento);
+
+        mockMvc.perform(
+                patch("/agenda/" + agendamento.getId().toString() + "/cancelar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    @DisplayName("Cancelar um agendamento com status diferente de Agendado")
+    void cancelarAgendamento_statusConcluido() throws Exception {
+        PeriodoAtendimento periodoAtendimento = PeriodoAtendimento.builder()
+                .estabelecimento(estabelecimento)
+                .diaDaSemana(DiaDaSemana.fromDayOfWeek(LocalDate.now().getDayOfWeek()))
+                .horaInicio(LocalTime.of(0, 0, 0))
+                .horaFim(LocalTime.of(23, 59, 59))
+                .build();
+        periodoAtendimentoRepository.saveAndFlush(periodoAtendimento);
+
+        Agendamento agendamento = Agendamento.builder()
+                .status(Status.CONCLUIDO)
+                .estabelecimento(this.estabelecimento)
+                .cliente(this.cliente)
+                .servico(this.servico)
+                .data(new Date(new Date().getTime() + 60_000))
+                .build();
+        agendamentoRepository.saveAndFlush(agendamento);
+
+        mockMvc.perform(
+                patch("/agenda/" + agendamento.getId().toString() + "/cancelar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.msg")
+                        .value("Não é possível cancelar um agendamento com status diferente de Agendado."));
+    }
+
+    @Test
+    @DisplayName("Cancelar um agendamento que o id não existe")
+    void cancelarAgendamento_notFound() throws Exception {
+        String id = "148e4a66-1a70-48de-af79-3e221b97569c";
+        mockMvc.perform(
+                        patch("/agenda/" + id + "/cancelar")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.msg")
+                        .value("Agendamento não encontrado com o ID: " + id));
     }
 
     private Estabelecimento createEstabelecimentoEntity() {
