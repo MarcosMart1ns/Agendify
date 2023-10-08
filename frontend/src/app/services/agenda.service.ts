@@ -22,4 +22,11 @@ export class AgendaService {
       this.httpOptions
     );
   }
+
+  cancelarAgendamento(agendamentoId:string): Observable<AgendamentoResponse>{
+    return this.httpClient.patch<AgendamentoResponse>(
+      `${this.baseUrl}/agenda/${agendamentoId}/cancelar`,
+      this.httpOptions
+    );
+  }
 }

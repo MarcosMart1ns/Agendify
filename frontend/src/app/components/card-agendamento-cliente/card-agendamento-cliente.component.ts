@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { AgendaService } from 'src/app/services/agenda.service';
 
 @Component({
   selector: 'app-card-agendamento-cliente',
@@ -14,17 +15,29 @@ export class CardAgendamentoClienteComponent {
   @Input() nomeServico: string = '';
   @Input() dataHora: string = '';
   @Input() nomeEstabelecimento: string = '';
+  @Input() idAgendamento: string = '';
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private agendaService: AgendaService
+  ) {}
 
-  getColorByStatus(status: string) {
+  ngAfterContentInit() {
+    this.setColorByStatus(this.status);
+  }
+
+  statusColor: string = '';
+
+  setColorByStatus(status: string) {
     switch (status) {
-      case 'Agendado':
-        return '#5F5F5F';
-      case 'Cancelado':
-        return '#D31004';
+      case 'AGENDADO':
+        this.statusColor = '#04D361';
+        break;
+      case 'CANCELADO':
+        this.statusColor = '#D31004';
+        break;
       default:
-        return '#04D361';
+        this.statusColor = '#5F5F5F';
     }
   }
 
@@ -52,9 +65,20 @@ export class CardAgendamentoClienteComponent {
         title: 'Deseja realmente cancelar este agendamento?',
         content: `${this.nomeServico} para ${this.nome} as ${horaFormatada} com ${this.nomeEstabelecimento}`,
         confirmFunction: () => {
-          dialogRef.close();
+          this.agendaService.cancelarAgendamento(this.idAgendamento).subscribe(
+            (response) => {
+              this.status = response.status;
+              this.setColorByStatus(this.status);
+              dialogRef.close();
+            },
+            (error) => {
+              console.log(error);
+              dialogRef.close();
+            }
+          );
         },
       },
     });
   }
+  
 }
