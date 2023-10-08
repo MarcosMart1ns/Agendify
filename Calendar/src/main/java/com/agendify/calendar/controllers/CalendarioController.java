@@ -52,8 +52,8 @@ public class CalendarioController {
     }
 
     @PatchMapping("/{id}/cancelar")
-    public ResponseEntity<?> cancelarAgendamento(@PathVariable UUID id) throws ValidationException, NotFoundException {
-        calendarioService.cancelarAgendamento(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<AgendamentoResponse> cancelarAgendamento(@PathVariable UUID id) throws ValidationException, NotFoundException {
+        Agendamento agendamento = calendarioService.cancelarAgendamento(id);
+        return ResponseEntity.ok(agendamentoMapper.fromEntity(agendamento));
     }
 }

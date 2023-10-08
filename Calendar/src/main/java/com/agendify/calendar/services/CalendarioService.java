@@ -45,7 +45,7 @@ public class CalendarioService {
         return agendamentoRepository.save(entity);
     }
 
-    public void cancelarAgendamento(UUID id) throws NotFoundException, ValidationException {
+    public Agendamento cancelarAgendamento(UUID id) throws NotFoundException, ValidationException {
         Agendamento agendamento = agendamentoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Agendamento não encontrado com o ID: " + id));
 
@@ -58,7 +58,7 @@ public class CalendarioService {
         agendamento.setStatus(Status.CANCELADO);
 
         // Salva as alterações no banco de dados
-        agendamentoRepository.save(agendamento);
+        return agendamentoRepository.save(agendamento);
     }
 
     private void validaHorarioDisponivel(Agendamento entity) throws HorarioIndisponivelException {
