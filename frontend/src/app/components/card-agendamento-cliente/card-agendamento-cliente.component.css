@@ -50,6 +50,7 @@
 
 .status {
   color: #F2F2F2;
+  height: 30px;
   font-size: 16px;
   font-family: Inter;
   font-weight: 500;
@@ -68,5 +69,5 @@
   font-size: 14px;
   font-weight: 400;
   word-wrap: break-word;
-  clear: both; /* Limpe os floats anteriores para que esta div comece em uma nova linha */
+  /* clear: both; Limpe os floats anteriores para que esta div comece em uma nova linha */
 }
