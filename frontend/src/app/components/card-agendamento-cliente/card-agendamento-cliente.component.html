@@ -54,8 +54,8 @@
         </div>
       </div>
     </div>
-    <!-- *ngIf="status === 'AGENDADO'" -->
-    <div class="col-12 col-xl-auto d-flex justify-content-end order-1 order-xl-last">
+    <div class="col-12 col-xl-auto d-flex justify-content-end order-1 order-xl-last"
+    *ngIf="status === 'AGENDADO'">
       <img src="./assets/images/cancel_x.svg" (click)="openCancelDialog()" />
     </div>
   </div>
