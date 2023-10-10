@@ -1,5 +1,6 @@
 import {Endereco} from "./Endereco";
 import {Servico} from "./Servico";
+import {PeriodoAtendimento} from "./PeriodoAtendimento";
 
 export interface Estabelecimento {
   id: string;
@@ -12,4 +13,5 @@ export interface Estabelecimento {
   cnpj: string;
   descricao: string;
   servicos: Servico[];
+  periodosAtendimento:PeriodoAtendimento[];
 }

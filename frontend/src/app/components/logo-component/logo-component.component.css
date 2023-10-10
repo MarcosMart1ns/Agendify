@@ -6,4 +6,9 @@
   display: flex;
   justify-content: center;
   font-size: 24px;
+  align-items: center;
+}
+
+.logo{
+  margin: 0px;
 }
