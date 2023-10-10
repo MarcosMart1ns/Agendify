@@ -42,6 +42,11 @@ app-navbar {
   width: 100%;
 }
 
+app-search-component {
+  width: 100%;
+  margin: 40px 0px;
+}
+
 .my-appointments {
   font-size: 20px;
   font-style: normal;
