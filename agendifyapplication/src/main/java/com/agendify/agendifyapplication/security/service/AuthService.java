@@ -14,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -49,6 +51,10 @@ public class AuthService {
 
     private final String EMAIL_SENHA_INVALIDOS = "Email ou senha incorretos, verique os dados informados e tente novamente";
 
+    final String ERROR_MSG = "Erro ao obter ao token de acesso, verifique o client id e/ou secret id";
+
+    final String GENERIC_ERROR_MSG = "Erro genérico ao obter ao token de acesso";
+
     public AuthResponse handleAuthRequest(AuthRequest authRequest) throws InvalidCredentialsException, RequestTokenException {
         if (authRequest.password() == null)
             throw new InvalidCredentialsException("O campo password não foi informado");
@@ -57,7 +63,7 @@ public class AuthService {
 
         Usuario usuario = clienteRepository.findByEmail(authRequest.email());
 
-        if(usuario == null){
+        if (usuario == null) {
             usuario = estabelecimentoRepository.findByEmail(authRequest.email());
         }
 
@@ -71,7 +77,7 @@ public class AuthService {
     private void checkPassword(AuthRequest authRequest, Usuario usuario) throws InvalidCredentialsException {
         logger.info("Verificando senha fornecida");
 
-        if (usuario == null ) {
+        if (usuario == null) {
             logger.debug("Usuario {} inválido", authRequest.email());
             throw new InvalidCredentialsException(EMAIL_SENHA_INVALIDOS);
         }
@@ -103,10 +109,22 @@ public class AuthService {
             response = restTemplate.postForEntity(verifyTokenUrl, request, KeycloakTokenResponse.class);
             return response.getBody().access_token();
 
-        } catch (Exception e) {
-            logger.error("Erro ao solicitar token ao keycloak", e);
+        } catch (HttpClientErrorException e) {
 
-            throw new RequestTokenException("Erro ao obter ao token de acesso");
+            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
+
+
+                logger.error(ERROR_MSG, e);
+                throw new RequestTokenException(ERROR_MSG);
+            }
+
+            logger.error(GENERIC_ERROR_MSG, e);
+            throw new RequestTokenException();
+
+        } catch (Exception e) {
+            logger.error(GENERIC_ERROR_MSG, e);
+            throw new RequestTokenException();
         }
+
     }
 }

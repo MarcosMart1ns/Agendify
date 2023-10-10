@@ -10,6 +10,10 @@ public class RequestTokenException extends Exception{
         super(message);
     }
 
+    public RequestTokenException() {
+        super("Erro ao obter ao token de acesso");
+    }
+
     public RequestTokenException(String message, Throwable cause) {
         super(message, cause);
     }
