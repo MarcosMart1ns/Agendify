@@ -1,6 +1,8 @@
 package com.agendify.calendar.services;
 
 import com.agendify.calendar.controllers.exception.HorarioIndisponivelException;
+import com.agendify.calendar.controllers.exception.NotFoundException;
+import com.agendify.calendar.controllers.exception.ValidationException;
 import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.DiaDaSemana;
 import com.agendify.domain.entities.Estabelecimento;
@@ -41,6 +43,22 @@ public class CalendarioService {
         validaPeriodoAtendimento(entity.getData(), entity.getEstabelecimento());
         validaHorarioDisponivel(entity);
         return agendamentoRepository.save(entity);
+    }
+
+    public Agendamento cancelarAgendamento(UUID id) throws NotFoundException, ValidationException {
+        Agendamento agendamento = agendamentoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Agendamento não encontrado com o ID: " + id));
+
+        // Verifica se o status é "fechado" antes de cancelar
+        if (agendamento.getStatus() != Status.AGENDADO) {
+            throw new ValidationException("Não é possível cancelar um agendamento com status diferente de Agendado.");
+        }
+
+        // Define o status como "CANCELADO"
+        agendamento.setStatus(Status.CANCELADO);
+
+        // Salva as alterações no banco de dados
+        return agendamentoRepository.save(agendamento);
     }
 
     private void validaHorarioDisponivel(Agendamento entity) throws HorarioIndisponivelException {

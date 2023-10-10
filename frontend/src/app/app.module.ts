@@ -33,7 +33,10 @@ import {MatListModule} from "@angular/material/list";
 import {MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatSelectModule} from "@angular/material/select";
+
 
 @NgModule({
   declarations: [
@@ -55,28 +58,30 @@ import {MatSelectModule} from "@angular/material/select";
     LoggedUserNavBarComponent,
     CardAgendamentoClienteComponent,
     ProfileEditPageComponent,
-    SucessDialogComponent
+    SucessDialogComponent,
+    ConfirmDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatChipsModule,
-        NgFor,
-        MatIconModule,
-        MatAutocompleteModule,
-        ReactiveFormsModule,
-        AsyncPipe,
-        MatListModule,
-        MatTableModule,
-        MatButtonModule,
-        MatInputModule,
-        MatSelectModule,
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    NgFor,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    MatListModule,
+    MatTableModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

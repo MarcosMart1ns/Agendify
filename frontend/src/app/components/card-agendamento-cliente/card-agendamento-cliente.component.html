@@ -1,7 +1,7 @@
 <div class="card-agendamento-cliente container">
   <div class="row">
     <!-- Colunas para dispositivos pequenos -->
-    <div class="col-12 col-sm-3 col-xl-2 text-center">
+    <div class="col-12 col-sm-3 col-xl-2 text-center order-2 order-xl-1">
       <img
         class="imagem"
         [src]="
@@ -10,19 +10,29 @@
         alt="Imagem do Cliente"
       />
     </div>
-    <div class="col-12 col-sm-5 col-xl-2  text-center text-lg-start nome my-auto">{{ nome }}</div>
-    <div class="col-12 col-sm-4 col-xl-2 justify-content-sm-center my-auto">
+    <div
+      class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
+    >
+      {{ nome }}
+    </div>
+    <div
+      class="col-12 col-sm-4 col-xl-2 justify-content-sm-center my-auto order-4 order-xl-3"
+    >
       <div
-        class="status"
-        [ngStyle]="{ 'background-color': getColorByStatus(status) }"
+        class="status d-flex align-items-center text-center justify-content-center"
+        [ngStyle]="{ 'background-color': statusColor }"
       >
         {{ status }}
       </div>
     </div>
 
     <!-- Colunas para dispositivos médios e maiores -->
-    <div class="col-xl-2 col-sm-6 nomeServico my-auto">{{ nomeServico }}</div>
-    <div class="col-xl-2 col-sm-6 align-middle data-hora d-flexjustify-content-center my-auto">
+    <div class="col-xl-2 col-sm-6 nomeServico my-auto order-5 order-xl-4">
+      {{ nomeServico }}
+    </div>
+    <div
+      class="data-hora col-xl-3 col-sm-6 order-last order-xl-5 align-middle d-flex justify-content-center my-auto"
+    >
       <div class="container">
         <div class="row">
           <div class="col-2">
@@ -43,6 +53,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-12 col-xl-auto d-flex justify-content-end order-1 order-xl-last"
+    *ngIf="status === 'AGENDADO'">
+      <img src="./assets/images/cancel_x.svg" (click)="openCancelDialog()" />
     </div>
   </div>
 </div>
