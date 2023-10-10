@@ -61,6 +61,8 @@ export class CardAgendamentoClienteComponent {
     const horaFormatada = `${horas}:${minutos}`;
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      height: '398px',
+      width: '336px',
       data: {
         title: 'Deseja realmente cancelar este agendamento?',
         content: `${this.nomeServico} para ${this.nome} as ${horaFormatada} com ${this.nomeEstabelecimento}`,

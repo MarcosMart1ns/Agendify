@@ -1,7 +1,7 @@
 <div class="card-agendamento-cliente container">
   <div class="row">
     <!-- Colunas para dispositivos pequenos -->
-    <div class="col-12 col-sm-3 col-xl-2 text-center order-2 order-xl-1">
+    <div class="col-12 col-sm-3 col-xl-1 text-center order-2 order-xl-1">
       <img
         class="imagem"
         [src]="
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Colunas para dispositivos médios e maiores -->
-    <div class="col-xl-2 col-sm-6 nomeServico my-auto order-5 order-xl-4">
+    <div class="col-xl-3 col-sm-6 nomeServico my-auto order-5 order-xl-4">
       {{ nomeServico }}
     </div>
     <div
@@ -54,8 +54,10 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-xl-auto d-flex justify-content-end order-1 order-xl-last"
-    *ngIf="status === 'AGENDADO'">
+    <div
+      class="col-12 col-xl-auto d-flex justify-content-end order-1 order-xl-last"
+      *ngIf="status === 'AGENDADO'"
+    >
       <img src="./assets/images/cancel_x.svg" (click)="openCancelDialog()" />
     </div>
   </div>

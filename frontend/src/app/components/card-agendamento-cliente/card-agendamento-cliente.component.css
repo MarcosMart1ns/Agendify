@@ -43,13 +43,13 @@
 .imagem {
   width: 60px;
   height: 60.71px;
-  border-radius: 98.50px;
+  border-radius: 98.5px;
   /* float: left; Use float para permitir que outros elementos fluam ao lado dele */
   /* margin-right: 10px; Adicione margem direita para espaço entre a imagem e o nome */
 }
 
 .status {
-  color: #F2F2F2;
+  color: #f2f2f2;
   height: 30px;
   font-size: 16px;
   font-family: Inter;
@@ -62,11 +62,20 @@
 .nomeServico {
   text-align: center;
   margin-top: 10px; /* Adicione margem superior para espaço entre o status e o nome do serviço */
+  color: #636e74;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 500;
+  word-wrap: break-word;
 }
 
 .data-hora {
   color: rgba(8, 52, 140, 0.97);
   font-size: 14px;
+  font-weight: 400;
+  word-wrap: break-word;
+  font-size: 16px;
+  font-family: Roboto Slab;
   font-weight: 400;
   word-wrap: break-word;
   /* clear: both; Limpe os floats anteriores para que esta div comece em uma nova linha */

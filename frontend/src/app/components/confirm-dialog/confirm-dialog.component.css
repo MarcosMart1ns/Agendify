@@ -3,7 +3,7 @@
 }
 
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__title {
-  margin: auto;
+  margin: 87px auto 23px;
   width: 199.75px;
   text-align: center;
   color: #f4ede8;
@@ -23,6 +23,14 @@
   font-weight: 500;
   line-height: 24px;
   word-wrap: break-word;
+  padding: 0;
+  margin: auto auto 70px;
+}
+
+.mat-mdc-dialog-actions {
+  width: 100%;
+  bottom: 56px; /* Define a distância de 56px do fundo da div pai */
+  justify-content: space-evenly;
   padding: 0;
 }
 
