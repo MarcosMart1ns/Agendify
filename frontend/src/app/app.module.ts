@@ -36,6 +36,8 @@ import {MatInputModule} from "@angular/material/input";
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatSelectModule} from "@angular/material/select";
+import { ListaAgendamentosClienteComponentComponent } from './components/lista-agendamentos-cliente-component/lista-agendamentos-cliente-component.component';
+import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import {MatSelectModule} from "@angular/material/select";
     CardAgendamentoClienteComponent,
     ProfileEditPageComponent,
     SucessDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ListaAgendamentosClienteComponentComponent,
+    ListaAgendamentosEstabelecimentoComponentComponent
   ],
   imports: [
     BrowserModule,
