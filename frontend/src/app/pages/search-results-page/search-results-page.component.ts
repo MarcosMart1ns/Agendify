@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {query} from "@angular/animations";
+import {EstabelecimentoService} from "../../services/estabelecimento.service";
+import {Estabelecimento} from "../../model/response/Estabelecimento";
+import {Constants} from "../../Constants";
 
 @Component({
   selector: 'app-search-results-page',
@@ -10,8 +12,12 @@ import {query} from "@angular/animations";
 export class SearchResultsPageComponent implements OnInit {
 
   queryText!: string
+  estabelecimentoList!:Estabelecimento[];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private estabelecimentoService: EstabelecimentoService
+  ) {
   }
 
   ngOnInit(): void {
@@ -21,7 +27,19 @@ export class SearchResultsPageComponent implements OnInit {
         this.queryText = queryParam;
       }
     })
+
+    this.searchText()
   }
 
-  protected readonly query = query;
+  searchText(){
+    this.estabelecimentoService.searchEstabelecimentos(this.queryText)
+      .subscribe(
+        (response)=>{
+          this.estabelecimentoList = <Estabelecimento[]> response;
+        }
+      )
+  }
+
+  protected readonly Constants = Constants;
+
 }

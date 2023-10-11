@@ -41,4 +41,11 @@ export class EstabelecimentoService {
         headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`})
       });
   }
+
+  searchEstabelecimentos(queryText: string) {
+    return this.httpClient.get(
+      `${this.url}?searchText=${queryText}`,
+      this.httpOptions
+    )
+  }
 }
