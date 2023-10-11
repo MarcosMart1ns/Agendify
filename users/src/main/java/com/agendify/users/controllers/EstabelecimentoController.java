@@ -1,6 +1,7 @@
 package com.agendify.users.controllers;
 
 import com.agendify.domain.records.Estabelecimento;
+import com.agendify.users.exceptions.InsufficientSearchArguments;
 import com.agendify.users.exceptions.UserAlreadyExistsException;
 import com.agendify.users.exceptions.UserNotFoundException;
 import com.agendify.users.services.EstabelecimentoService;
@@ -42,7 +43,7 @@ public class EstabelecimentoController {
     }
 
     @GetMapping
-    public List<Estabelecimento> searchEstabelecimentos(@RequestParam("searchText") String searchText){
+    public List<Estabelecimento> searchEstabelecimentos(@RequestParam("searchText") String searchText) throws InsufficientSearchArguments {
         return estabelecimentoService.searchEstabelecimento(searchText);
     }
 

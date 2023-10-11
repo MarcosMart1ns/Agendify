@@ -1,4 +1,51 @@
 <main>
-  <app-navbar mode='NavBarmodeEnum.non_logged_home'></app-navbar>
-  <app-search-home-page></app-search-home-page><p>search-results-page works!</p>
+  <app-navbar mode='logged-home-back'></app-navbar>
+  <main style="margin:40px">
+    <h1>
+      Agende seu atendimento!
+    </h1>
+    <div class="search-bar">
+      <mat-form-field>
+        <mat-label>
+          O que você precisa?
+        </mat-label>
+        <input class="input-bar" matInput type="text" [(ngModel)]="queryText">
+
+        <button *ngIf="queryText" matSuffix mat-icon-button aria-label="Clear" (click)="queryText=''">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </mat-form-field>
+
+      <app-confirm-button buttonText="Procurar" (click)="searchText()"/>
+    </div>
+    <div class="results-container">
+
+      <div class="card-container" *ngFor="let estabelecimento of estabelecimentoList">
+        <mat-card>
+          <mat-card-content matRipple (click)="openEstabelecimentoDetails(estabelecimento)">
+            <div class="card-info">
+              <img class="avatar-card-img"
+                   src="{{estabelecimento.urlFotoPerfil?estabelecimento.urlFotoPerfil:Constants.DEFAULT_AVATAR}}"
+                   alt="avatar-image">
+              <div class="estabelecimento-info">
+                <p class="estabelecimento-name">{{estabelecimento.nome}}</p>
+
+                <div *ngIf="estabelecimento.periodosAtendimento.length>0">
+                  <p class="avaliabilty-info"><img src="assets/images/horario-b.svg"> Disponível para atendimento</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-services">
+              <mat-chip *ngFor="let servico of estabelecimento.servicos">
+                <p class="services-info">{{servico.nome}}</p>
+              </mat-chip>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </main>
 </main>
