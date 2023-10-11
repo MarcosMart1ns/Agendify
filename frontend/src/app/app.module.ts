@@ -38,6 +38,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
 import {MatRippleModule} from "@angular/material/core";
+import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {MatRippleModule} from "@angular/material/core";
     CardAgendamentoClienteComponent,
     ProfileEditPageComponent,
     SucessDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EstabelecimentoDetailsDialogComponent
   ],
   imports: [
     BrowserModule,

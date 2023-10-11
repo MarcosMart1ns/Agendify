@@ -1,0 +1,71 @@
+.provider-profile-modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 26px;
+}
+
+.services-info {
+  margin: 0;
+  color: #162d59;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.services-info-container {
+  width: 100%;
+}
+
+.servicelist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+mat-chip {
+  margin: 2px 5px;
+  align-items: center;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+}
+
+.avatar-card-img {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  border-radius: 124.5px;
+  background: lightgray 50% / cover no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.estabelecimento-name {
+  margin: 0;
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.estabelecimento-info {
+  padding-left: 15px;
+}
+
+.desc-item {
+  color: #162d59;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}

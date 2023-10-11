@@ -20,9 +20,10 @@
       <app-confirm-button buttonText="Procurar" (click)="searchText()"/>
     </div>
     <div class="results-container">
+
       <div class="card-container" *ngFor="let estabelecimento of estabelecimentoList">
         <mat-card>
-          <mat-card-content matRipple>
+          <mat-card-content matRipple (click)="openEstabelecimentoDetails(estabelecimento)">
             <div class="card-info">
               <img class="avatar-card-img"
                    src="{{estabelecimento.urlFotoPerfil?estabelecimento.urlFotoPerfil:Constants.DEFAULT_AVATAR}}"
@@ -44,6 +45,7 @@
           </mat-card-content>
         </mat-card>
       </div>
+
     </div>
   </main>
 </main>

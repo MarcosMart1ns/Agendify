@@ -1,0 +1,39 @@
+<div mat-dialog-content class="provider-profile-modal-container">
+  <div class="info-container">
+    <div class="card-info">
+      <img class="avatar-card-img"
+           src="{{estabelecimento.urlFotoPerfil?estabelecimento.urlFotoPerfil:Constants.DEFAULT_AVATAR}}"
+           alt="avatar-image">
+
+      <div class="estabelecimento-info">
+
+        <p class="estabelecimento-name">{{estabelecimento.nome}}</p>
+
+      </div>
+  </div>
+
+  <div class="horarios-container">
+
+  </div>
+
+  <div class="services-info-container">
+    <p class="desc-item">Serviços</p>
+    <div class="servicelist">
+      <mat-chip *ngFor="let servico of estabelecimento.servicos">
+        <p class="services-info">{{servico.nome}}</p>
+      </mat-chip>
+    </div>
+  </div>
+
+  <div class="description-info-container">
+    <p class="desc-item">Descrição</p>
+    <p>{{estabelecimento.descricao}}</p>
+  </div>
+
+
+  <div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Close</button>
+    <button mat-raised-button color="primary">Agendar Atendimento</button>
+  </div>
+</div>
+

@@ -3,6 +3,10 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
 import {Estabelecimento} from "../../model/response/Estabelecimento";
 import {Constants} from "../../Constants";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  EstabelecimentoDetailsDialogComponent
+} from "../../components/estabelecimento-details-dialog/estabelecimento-details-dialog.component";
 
 @Component({
   selector: 'app-search-results-page',
@@ -12,11 +16,12 @@ import {Constants} from "../../Constants";
 export class SearchResultsPageComponent implements OnInit {
 
   queryText!: string
-  estabelecimentoList!:Estabelecimento[];
+  estabelecimentoList!: Estabelecimento[];
 
   constructor(
     private route: ActivatedRoute,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -31,15 +36,20 @@ export class SearchResultsPageComponent implements OnInit {
     this.searchText()
   }
 
-  searchText(){
+  searchText() {
     this.estabelecimentoService.searchEstabelecimentos(this.queryText)
       .subscribe(
-        (response)=>{
-          this.estabelecimentoList = <Estabelecimento[]> response;
+        (response) => {
+          this.estabelecimentoList = <Estabelecimento[]>response;
         }
       )
   }
 
   protected readonly Constants = Constants;
 
+  openEstabelecimentoDetails(estabelecimento: Estabelecimento) {
+    this.dialog.open(EstabelecimentoDetailsDialogComponent,{
+      data: estabelecimento
+    });
+  }
 }
