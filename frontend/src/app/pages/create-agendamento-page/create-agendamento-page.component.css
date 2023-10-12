@@ -1,0 +1,96 @@
+.flex {
+  display: flex;
+}
+
+.page-container{
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 40px;
+  align-items: center;
+}
+
+.agendamento-container {
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.item-description {
+  color: #162D59;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0;
+}
+
+.estabelecimento-details-container {
+  flex-direction: column;
+}
+
+.avatar-card-img {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 124.5px;
+  background: lightgray 50% / cover no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.estabelecimento-name {
+  margin:0;
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.estabelecimento-info {
+  padding-left: 15px;
+}
+
+mat-card {
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+mat-card-content {
+  border-radius: 10px;
+}
+
+.card-services {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.services-info {
+  margin: 0;
+  /*color: #162d59;*/
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+mat-chip {
+  margin: 2px 5px;
+}
+
+.services-container{
+  margin: 15px 0;
+}
