@@ -40,6 +40,9 @@ import { ListaAgendamentosClienteComponentComponent } from './components/lista-a
 import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatCardModule} from "@angular/material/card";
+import {MatRippleModule} from "@angular/material/core";
+import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
 
 
 @NgModule({
@@ -66,6 +69,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ConfirmDialogComponent,
     ListaAgendamentosClienteComponentComponent,
     ListaAgendamentosEstabelecimentoComponentComponent
+    EstabelecimentoDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +92,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule,
+    MatRippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

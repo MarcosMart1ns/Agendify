@@ -1,5 +1,14 @@
 <div class="seach-component-container">
-  <app-search-input inputText="O que você precisa?"></app-search-input>
-  <app-confirm-button buttonText="Procurar"></app-confirm-button>
+  <mat-form-field>
+    <mat-label>
+      O que você precisa?
+    </mat-label>
+    <input class="input-bar" matInput type="text" [(ngModel)]="queryText">
+    <button *ngIf="queryText" matSuffix mat-icon-button aria-label="Clear" (click)="queryText=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <app-confirm-button buttonText="Procurar" [routerLink]="['/search', queryText]"/>
 </div>
 

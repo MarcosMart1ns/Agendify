@@ -1,0 +1,116 @@
+.results-container {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.card-container{
+  max-width: 350px;
+  width: 100%;
+  padding-right: 20px;
+}
+
+mat-card {
+  box-shadow: 5px 4px 11px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+}
+
+.estabelecimento-info {
+  padding-left: 15px;
+}
+
+.card-services {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-chip {
+  margin: 2px 5px;
+}
+
+.avatar-card-img{
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 124.5px;
+  background: lightgray 50% / cover no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.avaliabilty-info {
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.estabelecimento-name {
+  margin:0;
+  color: rgba(8, 52, 140, 0.97);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.services-info {
+  margin: 0;
+  color: #162d59;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.seach-component-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-form-field {
+  max-width: 600px;
+  height: 90px ;
+  width: 100%;
+}
+
+.input-field {
+  background-color: #f2f2f2;
+}
+
+::placeholder {
+  color: #08348CF7;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+app-confirm-button {
+  padding: 10px 20px;
+}
+

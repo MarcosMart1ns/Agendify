@@ -17,7 +17,7 @@ const routes: Routes = [
     component: SignUpPageComponent
   },
   {
-    path: 'search',
+    path: 'search/:query',
     component: SearchResultsPageComponent
   },
   {

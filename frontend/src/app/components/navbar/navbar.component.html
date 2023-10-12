@@ -1,48 +1,54 @@
+<!-- Default -->
+
 <!-- NavBar apresentada na tela inicial sem usuário logado -->
-<div  *ngIf="mode==='non-logged'" class="non-logged-nav-bar">
-
-  <div class="logo-container">
-    <app-logo-component></app-logo-component>
-  </div>
-
-  <div class="links-container">
-    <app-nav-bar-link buttonName="Cadastrar-se" url="/signup"></app-nav-bar-link>
-    <app-nav-bar-link buttonName="Login" url="/login"></app-nav-bar-link>
-  </div>
-
-</div>
-<!-- NavBar apresentada forada tela inicial sem usuário logado, com botão voltar -->
-<div *ngIf="mode==='non-logged-back'" class="signup-login-nav-bar">
-  <a (click)="window.history.back()" style="text-decoration: none;margin: 2%">
-    <img src="./assets/images/back.svg" alt="">
-  </a>
-  <app-logo-component></app-logo-component>
-</div>
-
-<!--NavBar quando usuário está logado-->
-<div *ngIf="mode==='logged-home'" class="non-logged-nav-bar">
-  <div class="logo-container">
-    <app-logo-component></app-logo-component>
-  </div>
-
-  <div class="links-container">
-    <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
-  </div>
-</div>
-
-<!--NavBar quando usuário está logado e com botão voltar -->
-
-<div *ngIf="mode==='logged-home-back'" class="non-logged-nav-bar">
-  <div style="text-decoration: none;margin: 2%">
-    <a (click)="window.history.back()" style="text-decoration: none;margin-right: 2%">
-      <img src="./assets/images/back.svg" alt="">
-    </a>
+<div  *ngIf="!backButton">
+  <div *ngIf="!user" class="navbar-container">
     <div class="logo-container">
-      <app-logo-component></app-logo-component>
+      <app-logo-component *ngIf="showLogo"></app-logo-component>
+    </div>
+
+    <div class="links-container">
+      <app-nav-bar-link buttonName="Cadastrar-se" url="/signup"></app-nav-bar-link>
+      <app-nav-bar-link buttonName="Login" url="/login"></app-nav-bar-link>
     </div>
   </div>
 
-  <div class="links-container">
-    <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
+  <div *ngIf="user" class="navbar-container">
+    <div class="logo-container">
+      <app-logo-component *ngIf="showLogo"></app-logo-component>
+    </div>
+
+    <div class="links-container">
+      <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
+    </div>
   </div>
+
+</div>
+
+<!-- NavBar apresentada fora da tela inicial com botão voltar -->
+
+<div *ngIf="backButton" class="signup-login-nav-bar">
+
+  <div *ngIf="!user" class="signup-login-nav-bar">
+    <a (click)="window.history.back()" style="text-decoration: none;margin: 2%">
+      <img src="./assets/images/back.svg" alt="">
+    </a>
+    <app-logo-component *ngIf="showLogo"></app-logo-component>
+  </div>
+
+  <div *ngIf="user" class="navbar-container">
+    <div style="text-decoration: none;margin: 2%">
+      <a (click)="window.history.back()" style="text-decoration: none;margin-right: 2%">
+        <img src="./assets/images/back.svg" alt="">
+      </a>
+      <div class="logo-container">
+        <app-logo-component *ngIf="showLogo"></app-logo-component>
+      </div>
+    </div>
+
+    <div class="links-container">
+      <app-logged-user-nav-bar [activeUser]="user"></app-logged-user-nav-bar>
+    </div>
+  </div>
+
 </div>

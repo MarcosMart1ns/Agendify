@@ -1,4 +1,4 @@
-<app-navbar [mode]="'non-logged-back'" [user]="userDetails"></app-navbar>
+<app-navbar [backButton]="true" [showLogo]="false"></app-navbar>
 
 <main class="form">
   <img class="avatar-img" src="{{profileImgUrl}}" alt="">
@@ -18,7 +18,7 @@
 
     <div>
 
-      <div class="form-picker">
+      <div class="form-picker" *ngIf="userType==2">
         <div class="service-pick">
 
           <p

@@ -1,0 +1,47 @@
+<div mat-dialog-content class="provider-profile-modal-container">
+  <div class="info-container">
+    <div class="card-info">
+      <img class="avatar-card-img"
+           src="{{estabelecimento.urlFotoPerfil?estabelecimento.urlFotoPerfil:Constants.DEFAULT_AVATAR}}"
+           alt="avatar-image">
+
+      <div class="estabelecimento-info">
+
+        <p class="estabelecimento-name">{{estabelecimento.nome}}</p>
+        <p class="details-info" *ngIf="estabelecimento.endereco"> {{estabelecimento.endereco.logradouro}}
+          - {{estabelecimento.endereco.cidade}}</p>
+      </div>
+    </div>
+
+    <div class="horarios-container spacer">
+      <p class="desc-item">Horário(s) de atendimento</p>
+      <p *ngIf="estabelecimento.periodosAtendimento.length===0">Este estabelecimento não possui horários de atendimento
+        disponíveis</p>
+      <ul>
+        <li *ngFor="let horario of estabelecimento.periodosAtendimento">
+          <p class="details-info horario">{{horario.diaDaSemana}} - {{horario.horaInicio}} as {{horario.horaFim}}</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="services-info-container spacer">
+      <p class="desc-item">Serviços</p>
+      <div class="servicelist">
+        <p *ngIf="estabelecimento.servicos.length===0">Este estabelecimento não possui serviços disponíveis</p>
+        <mat-chip *ngFor="let servico of estabelecimento.servicos">
+          <p class="services-info">{{servico.nome}}</p>
+        </mat-chip>
+      </div>
+    </div>
+
+    <div class="description-info-container spacer">
+      <p class="desc-item">Descrição</p>
+      <p>{{estabelecimento.descricao}}</p>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button mat-dialog-close>Close</button>
+      <button mat-raised-button color="primary">Agendar Atendimento</button>
+    </div>
+  </div>
+

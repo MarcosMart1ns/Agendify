@@ -3,6 +3,7 @@ package com.agendify.users.services;
 import com.agendify.domain.mappers.EstabelecimentoMapper;
 import com.agendify.domain.records.Estabelecimento;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
+import com.agendify.users.exceptions.InsufficientSearchArguments;
 import com.agendify.users.exceptions.UserAlreadyExistsException;
 import com.agendify.users.exceptions.UserNotFoundException;
 import org.slf4j.Logger;
@@ -43,19 +44,12 @@ public class EstabelecimentoService {
         return estabelecimentoMapper.fromEntity(estabelecimentoCreated);
     }
 
-    public List<Estabelecimento> searchEstabelecimento(String searchText) {
+    public List<Estabelecimento> searchEstabelecimento(String searchText) throws InsufficientSearchArguments {
+        if(searchText.length() < 5){
+            throw new InsufficientSearchArguments();
+        }
 
-        List<com.agendify.domain.entities.Estabelecimento> nome = estabelecimentoRepository.findByNome(searchText);
-
-        List<com.agendify.domain.entities.Estabelecimento> descricao = estabelecimentoRepository.findByDescricao(searchText);
-        //TODO: findByServiços
-//        List<com.agendify.domain.entities.Estabelecimento> servicos = estabelecimentoRepository.findByServicos(searchText);
-
-        List<com.agendify.domain.entities.Estabelecimento> result = new ArrayList<>();
-
-        result.addAll(nome);
-        result.addAll(descricao);
-
+        List<com.agendify.domain.entities.Estabelecimento> result = new ArrayList<>(estabelecimentoRepository.findByNomeOrDescricaoOrNomeServico(searchText));
 
         return result
                 .stream()
