@@ -1,0 +1,11 @@
+<div class="container" *ngFor="let agendamento of agendamentos">
+    <app-card-agendamento-cliente
+      [nome]="agendamento.cliente.nome"
+      [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
+      [status]="agendamento.status"
+      [nomeServico]="agendamento.servico.nome"
+      [dataHora]="agendamento.data"
+      [nomeEstabelecimento]="agendamento.estabelecimento.nome"
+      [idAgendamento]="agendamento.id"
+    ></app-card-agendamento-cliente>
+  </div>
