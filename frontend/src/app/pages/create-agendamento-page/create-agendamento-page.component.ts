@@ -5,6 +5,10 @@ import {Estabelecimento} from "../../model/response/Estabelecimento";
 import {Constants} from "../../Constants";
 import {Servico} from "../../model/response/Servico";
 import {Agendamento} from "../../model/Agendamento";
+import {AuthorizationService} from "../../services/authorization.service";
+import {AgendaService} from "../../services/agenda.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {AgendamentoResponse} from "../../model/response/AgendamentoResponse";
 
 @Component({
   selector: 'app-create-agendamento-page',
@@ -35,11 +39,14 @@ export class CreateAgendamentoPageComponent  implements OnInit {
     "16:00",
     "19:00",
   ]
+
   private selectedHorario!: string;
 
   constructor(
     private route: ActivatedRoute,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    private authService:AuthorizationService,
+    private agendaService:AgendaService
   ) {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const estabelecimentoid = params.get('estabelecimentoid')
@@ -73,17 +80,54 @@ export class CreateAgendamentoPageComponent  implements OnInit {
   createAgendamento() {
     // TODO: Inserir validação de caso o usuário não esteja logado redirecione para a página de cadastro
 
-    this.agendamento.estabelecimentoId = this.estabelecimento.id;
-    console.log(Number(this.selectedHorario.substring(0, 2)),Number(this.selectedHorario.substring(3,4)))
-    this.selectedDate.setUTCHours(Number(this.selectedHorario.substring(0, 2)),Number(this.selectedHorario.substring(3,5)));
-    this.agendamento = {
-      clienteId: '',
-      // @ts-ignore
-      data:this.selectedDate?.toJSON(),
-      estabelecimentoId:  this.estabelecimento.id,
-      servicoId: this.selectedService.id
-    }
+    if(this.authService.isUserLogged()){
 
-    console.log(this.agendamento)
+      this.verifyUserType();
+
+      this.agendamento.estabelecimentoId = this.estabelecimento.id;
+      this.selectedDate.setUTCHours(Number(this.selectedHorario.substring(0, 2)), Number(this.selectedHorario.substring(3, 5)));
+
+      this.agendamento = {
+        clienteId: this.authService.getActiveSession().id,
+        data: this.selectedDate?.toJSON(),
+        estabelecimentoId: this.estabelecimento.id,
+        servicoId: this.selectedService.id
+      }
+
+      this.agendaService.createAgenda(this.agendamento)
+        .subscribe(
+          (response) => {
+            this.onSuccess(response);
+          },
+          (errorResponse: HttpErrorResponse) => {
+            this.onError(errorResponse);
+          }
+        );
+
+    }else {
+      this.userNeedsLogInWarning();
+    }
+  }
+
+  onSuccess(agendamento:AgendamentoResponse){
+    window.alert("Agendamento concluido com sucesso");
+    //TODO: mostrar dialog de sucesso
+  }
+
+  onError(error:HttpErrorResponse){
+    //TODO: Mostrar dialog de erro
+    window.alert("Agendamento com erro \n"+ error.error.msg)
+  }
+
+  private userNeedsLogInWarning() {
+    //TODO: Mostrar dialog de erro
+    window.alert("Usuáriio Precisar estar logado para efetuar um agendamento")
+  }
+
+  private verifyUserType() {
+    if(this.authService.getActiveSession().tipo !=1){
+      //TODO: Mostrar dialog de erro
+      window.alert("Usuário do tipo estabelecimento não pode efetuar agendamentos, por gentileza faça login com um usuário comum.")
+    }
   }
 }
