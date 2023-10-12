@@ -1,6 +1,5 @@
 <main>
-  <app-navbar *ngIf="!isUserLogged" mode="non-logged"></app-navbar>
-  <app-navbar *ngIf="isUserLogged" mode="logged-home"></app-navbar>
+  <app-navbar [user]="loggedUser" [backButton]="false"></app-navbar>
   <a *ngIf="isUserLogged" [routerLink]="'/home'" class="my-appointments">Meus atendimentos</a>
     <div>
         <img src="./assets/images/homeimg.svg" alt="Bem vindo! Escreva abaixo o que procuras">
