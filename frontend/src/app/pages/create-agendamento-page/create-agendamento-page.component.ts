@@ -13,8 +13,10 @@ import {Agendamento} from "../../model/Agendamento";
 })
 export class CreateAgendamentoPageComponent  implements OnInit {
 
+  estabelecimentoAvatar:string = Constants.DEFAULT_AVATAR;
   estabelecimento!:Estabelecimento;
   selectedService!:Servico;
+  selectedDate!: Date;
   agendamento: Agendamento = {
     clienteId: '',
     data: '',
@@ -22,14 +24,23 @@ export class CreateAgendamentoPageComponent  implements OnInit {
     servicoId: ''
   }
 
+  avaliableTimes = [
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "19:00",
+  ]
+  private selectedHorario!: string;
+
   constructor(
     private route: ActivatedRoute,
     private estabelecimentoService: EstabelecimentoService
   ) {
-
-  }
-
-  ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const estabelecimentoid = params.get('estabelecimentoid')
 
@@ -38,26 +49,37 @@ export class CreateAgendamentoPageComponent  implements OnInit {
           .subscribe(
             (response:Estabelecimento)=>{
               this.estabelecimento = response;
+              if (response.urlFotoPerfil != undefined){
+                this.estabelecimentoAvatar = response.urlFotoPerfil;
+              }
             }
           )
       }
     })
   }
 
-  protected readonly Constants = Constants;
+  ngOnInit(): void {
+
+  }
 
   selectService(servico: Servico) {
     this.selectedService = servico;
+  }
+
+  selectHorario(horario:string) {
+    this.selectedHorario = horario;
   }
 
   createAgendamento() {
     // TODO: Inserir validação de caso o usuário não esteja logado redirecione para a página de cadastro
 
     this.agendamento.estabelecimentoId = this.estabelecimento.id;
-
+    console.log(Number(this.selectedHorario.substring(0, 2)),Number(this.selectedHorario.substring(3,4)))
+    this.selectedDate.setUTCHours(Number(this.selectedHorario.substring(0, 2)),Number(this.selectedHorario.substring(3,5)));
     this.agendamento = {
       clienteId: '',
-      data: '',
+      // @ts-ignore
+      data:this.selectedDate?.toJSON(),
       estabelecimentoId:  this.estabelecimento.id,
       servicoId: this.selectedService.id
     }

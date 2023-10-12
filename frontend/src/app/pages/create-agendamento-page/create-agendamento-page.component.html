@@ -8,7 +8,7 @@
         <mat-card-content matRipple>
           <div class="card-info">
             <img class="avatar-card-img"
-                 src="{{estabelecimento.urlFotoPerfil?estabelecimento.urlFotoPerfil:Constants.DEFAULT_AVATAR}}"
+                 src="{{estabelecimentoAvatar}}"
                  alt="avatar-image">
             <div class="estabelecimento-info">
               <p class="estabelecimento-name">{{estabelecimento.nome}}</p>
@@ -29,12 +29,24 @@
       </div>
     </div>
 
-    <div class="date-picker">
+    <div class="flex date-picker">
       <p class="item-description">Escolha uma data</p>
+      <div class="calendar">
+        <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+      </div>
     </div>
 
     <div class="time-picker">
       <p class="item-description">Escolha um horário</p>
+      <div class="services-container">
+        <div class="card-services">
+          <mat-chip-listbox>
+            <mat-chip-option *ngFor="let horario of avaliableTimes" (click)="selectHorario(horario)">
+              <p class="services-info">{{horario}}</p>
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+      </div>
     </div>
 
   </div>
