@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse';
 
+
 @Component({
   selector: 'app-lista-agendamentos-estabelecimento-component',
   templateUrl: './lista-agendamentos-estabelecimento-component.component.html',
@@ -8,6 +9,8 @@ import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse'
 })
 export class ListaAgendamentosEstabelecimentoComponentComponent {
   @Input() agendamentos: AgendamentoResponse[] = [];
+
+  selectedDate: Date | null = new Date;
 
   periodos: {
     manha: AgendamentoResponse[];

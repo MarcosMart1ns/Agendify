@@ -38,6 +38,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import {MatSelectModule} from "@angular/material/select";
 import { ListaAgendamentosClienteComponentComponent } from './components/lista-agendamentos-cliente-component/lista-agendamentos-cliente-component.component';
 import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -85,6 +87,8 @@ import { ListaAgendamentosEstabelecimentoComponentComponent } from './components
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

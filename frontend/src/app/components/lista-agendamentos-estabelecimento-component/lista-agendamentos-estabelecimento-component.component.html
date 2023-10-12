@@ -1,2 +1,29 @@
 <p>lista-agendamentos-estabelecimento-component works!</p>
-<p>${{ periodos | json }}</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <div class="card row">
+        <div class="col-12 col-sm-3 col-xl-1 text-center order-2 order-xl-1">
+          <img
+            class="imagem"
+            [src]="'https://via.placeholder.com/60x61'"
+            alt="Imagem do Cliente"
+          />
+        </div>
+        <div
+          class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
+        >
+          {{ proximoAgendamento?.cliente?.nome }}
+        </div>
+        <div
+          class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
+        >
+          {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6">
+      <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+    </div>
+  </div>
+</div>
