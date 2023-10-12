@@ -1,17 +1,28 @@
 <app-navbar [backButton]="false" [user]="loggedUser"></app-navbar>
 <main>
-  <a [routerLink]="'/'" >Agende um atendimento</a>
+  <a [routerLink]="'/'">Agende um atendimento</a>
   <h1>Meus horários agendados</h1>
-   <!-- Loop para criar os cards de agendamento -->
-  <div class="card-agendamento-wrapper container" *ngFor="let agendamento of agendamentos">
-    <app-card-agendamento-cliente
-      [nome]="agendamento.estabelecimento.nome"
-      [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
-      [status]="agendamento.status"
-      [nomeServico]="agendamento.servico.nome"
-      [dataHora]="agendamento.data"
-      [nomeEstabelecimento]="agendamento.estabelecimento.nome"
-      [idAgendamento]="agendamento.id"
-    ></app-card-agendamento-cliente>
-  </div>
+
+  <ng-container *ngIf="loggedUser">
+    <ng-container
+      *ngIf="
+        loggedUser.tipo == 1;
+        then clienteComponent;
+        else estabelecimentoComponent
+      "
+    ></ng-container>
+
+    <ng-template #clienteComponent>
+      <app-lista-agendamentos-cliente-component
+        class="card-agendamento-wrapper"
+        [agendamentos]="agendamentos"
+      />
+    </ng-template>
+
+    <ng-template #estabelecimentoComponent>
+      <app-lista-agendamentos-estabelecimento-component
+        [agendamentos]="agendamentos"
+      />
+    </ng-template>
+  </ng-container>
 </main>

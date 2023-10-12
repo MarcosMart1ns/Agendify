@@ -62,8 +62,13 @@ export class UserHomeComponent {
   }
 
   getAgendamentos() {
+    console.log(this.loggedUser.constructor.name);
     this.agendaService
       .getUserCalendar(this.loggedUser.id)
-      .subscribe((response) => (this.agendamentos = response));
+      .subscribe((response) => {
+        this.agendamentos = response;
+        console.log('agendamento callback na homepage');
+        console.log(this.agendamentos);
+      });
   }
 }

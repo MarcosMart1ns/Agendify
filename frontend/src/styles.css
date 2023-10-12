@@ -1,13 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 @import "~bootstrap/dist/css/bootstrap.css";
 
-*{
+* {
   font-family: inter, serif;
 }
 
 body {
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   margin: 0;
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
+
+.mat-calendar-period-button {
+  color: #08348cf7 !important;
+  font-family: Inter !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: normal;
+}
+
+.mat-calendar {
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.mat-calendar-table-header th {
+  color: #08348cf7 !important;
+  font-family: Inter;
+  font-weight: 400;
+}
+
+.mat-calendar-table-header-divider::after {
+  height: 0px !important;
+}
+
+.mat-calendar-body-label{
+  display: none;
+}
+
+.mat-calendar-body-cell-content{
+  color: #636E74 !important;
+}
+
+.mat-calendar-body-selected {
+    background-color: #F2CD88 !important;
+    color: #162D59 !important;
+}
+
+.mat-calendar-body-cell-content {
+  border-radius: 10px !important;
+}
+

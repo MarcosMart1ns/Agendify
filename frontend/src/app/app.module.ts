@@ -36,6 +36,10 @@ import {MatInputModule} from "@angular/material/input";
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import {MatSelectModule} from "@angular/material/select";
+import { ListaAgendamentosClienteComponentComponent } from './components/lista-agendamentos-cliente-component/lista-agendamentos-cliente-component.component';
+import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from "@angular/material/card";
 import {MatRippleModule} from "@angular/material/core";
 import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
@@ -63,6 +67,8 @@ import { EstabelecimentoDetailsDialogComponent } from './components/estabelecime
     ProfileEditPageComponent,
     SucessDialogComponent,
     ConfirmDialogComponent,
+    ListaAgendamentosClienteComponentComponent,
+    ListaAgendamentosEstabelecimentoComponentComponent
     EstabelecimentoDetailsDialogComponent
   ],
   imports: [
@@ -85,6 +91,8 @@ import { EstabelecimentoDetailsDialogComponent } from './components/estabelecime
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatCardModule,
     MatRippleModule,
   ],
