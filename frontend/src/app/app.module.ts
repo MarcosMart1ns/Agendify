@@ -39,6 +39,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
 import {MatRippleModule} from "@angular/material/core";
 import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
+import { CreateAgendamentoPageComponent } from './pages/create-agendamento-page/create-agendamento-page.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { EstabelecimentoDetailsDialogComponent } from './components/estabelecime
     ProfileEditPageComponent,
     SucessDialogComponent,
     ConfirmDialogComponent,
-    EstabelecimentoDetailsDialogComponent
+    EstabelecimentoDetailsDialogComponent,
+    CreateAgendamentoPageComponent
   ],
   imports: [
     BrowserModule,

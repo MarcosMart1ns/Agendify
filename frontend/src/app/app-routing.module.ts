@@ -6,6 +6,7 @@ import {SearchHomePageComponent} from "./pages/search-home-page/search-home-page
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {UserHomeComponent} from "./pages/user-home/user-home.component";
 import {ProfileEditPageComponent} from "./pages/profile-edit-page/profile-edit-page.component";
+import {CreateAgendamentoPageComponent} from "./pages/create-agendamento-page/create-agendamento-page.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileEditPageComponent
+  },
+  {
+    path: 'agendamento/:estabelecimentoid',
+    component: CreateAgendamentoPageComponent
   }
 ];
 
