@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse';
-
+import { Authresponse } from 'src/app/model/response/Authresponse';
+import { AgendaService } from 'src/app/services/agenda.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 @Component({
   selector: 'app-lista-agendamentos-estabelecimento-component',
@@ -8,9 +10,9 @@ import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse'
   styleUrls: ['./lista-agendamentos-estabelecimento-component.component.css'],
 })
 export class ListaAgendamentosEstabelecimentoComponentComponent {
-  @Input() agendamentos: AgendamentoResponse[] = [];
+  selectedDate: Date | null = new Date();
 
-  selectedDate: Date | null = new Date;
+  agendamentos: AgendamentoResponse[] = [];
 
   periodos: {
     manha: AgendamentoResponse[];
@@ -23,7 +25,10 @@ export class ListaAgendamentosEstabelecimentoComponentComponent {
   };
   proximoAgendamento: AgendamentoResponse | null = null;
 
-  constructor() {
+  constructor(
+    private agendaService: AgendaService,
+    private authService: AuthorizationService
+  ) {
     console.log('Agendamentos constructor: ');
     console.log(this.agendamentos);
   }
@@ -35,9 +40,7 @@ export class ListaAgendamentosEstabelecimentoComponentComponent {
   }
 
   ngOnInit(): void {
-    console.log('Agendamentos init: ');
-    console.log(this.agendamentos);
-    this.organizarAgendamentos();
+    this.getAgendamentoByDate(new Date());
   }
 
   organizarAgendamentos() {
@@ -73,7 +76,22 @@ export class ListaAgendamentosEstabelecimentoComponentComponent {
       }
     }
     console.log(this.agendamentos);
-    console.log(this.proximoAgendamento);
-    console.log(this.periodos);
+  }
+
+  changedSelectedDate() {
+    console.log(`new date value: ${this.selectedDate}`);
+    if (this.selectedDate != null) {
+      this.getAgendamentoByDate(this.selectedDate);
+    }
+  }
+
+  private getAgendamentoByDate(date: Date) {
+    let activeSession: Authresponse = this.authService.getActiveSession();
+    this.agendaService
+      .getAgendamentoByUserAndDate(activeSession.id, date)
+      .subscribe((response) => {
+        this.agendamentos = response;
+        this.organizarAgendamentos();
+      });
   }
 }

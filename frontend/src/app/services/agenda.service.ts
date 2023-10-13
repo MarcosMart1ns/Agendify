@@ -23,7 +23,16 @@ export class AgendaService {
     );
   }
 
-  cancelarAgendamento(agendamentoId:string): Observable<AgendamentoResponse>{
+  getAgendamentoByUserAndDate(
+    userId: string,
+    data: Date
+  ): Observable<AgendamentoResponse[]> {
+    const formattedDate = data.toISOString().split('T')[0]; // Formata a data no formato YYYY-MM-DD
+    const url = `${this.baseUrl}/agenda/${userId}/agendamentos?data=${formattedDate}`;
+    return this.httpClient.get<AgendamentoResponse[]>(url);
+  }
+
+  cancelarAgendamento(agendamentoId: string): Observable<AgendamentoResponse> {
     return this.httpClient.patch<AgendamentoResponse>(
       `${this.baseUrl}/agenda/${agendamentoId}/cancelar`,
       this.httpOptions

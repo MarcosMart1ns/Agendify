@@ -13,6 +13,7 @@ import com.agendify.domain.repositories.PeriodoAtendimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -87,5 +88,9 @@ public class CalendarioService {
                 .findAny()
                 .orElseThrow(() ->
                         new HorarioIndisponivelException("O horário se encontra fora do periodo de atendimento do prestador"));
+    }
+
+    public List<Agendamento> findAgendamentosPorData(UUID id, LocalDate data) {
+        return agendamentoRepository.findAgendamentosPorData(id, Date.from(data.atStartOfDay(ZoneId.systemDefault()).toInstant()));
     }
 }

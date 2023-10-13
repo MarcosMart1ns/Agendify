@@ -1,29 +1,67 @@
-<p>lista-agendamentos-estabelecimento-component works!</p>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12 col-sm-6">
-      <div class="card row">
-        <div class="col-12 col-sm-3 col-xl-1 text-center order-2 order-xl-1">
-          <img
-            class="imagem"
-            [src]="'https://via.placeholder.com/60x61'"
-            alt="Imagem do Cliente"
-          />
+      <div class="cardEstabelecimento">
+        <div class="row">
+          <div class="col-sm-3 col-xl-2 text-center">
+            <img
+              class="imagem"
+              [src]="'https://via.placeholder.com/60x61'"
+              alt="Imagem do Cliente"
+            />
+          </div>
+          <div
+            class="col-sm-5 col-xl-3 text-center text-sm-center text-lg-start nome my-auto"
+          >
+            {{ proximoAgendamento?.cliente?.nome }}
+          </div>
+          <div class="col-xl-3 col-sm-4 nomeServico my-auto">
+            {{ proximoAgendamento?.servico?.nome }}
+          </div>
+          <div
+            class="col-6 col-sm-auto p-2 d-flex justify-content-end justify-content-sm-center my-auto"
+          >
+            <img height="24px" width="24px" src="./assets/images/horario.svg" />
+          </div>
+          <div
+            class="col-6 col-sm-5 col-xl-2 p-2 text-start text-sm-center text-lg-start dataHora my-auto"
+          >
+            {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
+          </div>
+          <div class="col-sm-1 p-2 d-flex justify-content-end my-auto">
+            <img
+              height="24px"
+              width="24px"
+              src="./assets/images/check_verde.svg"
+            />
+          </div>
         </div>
-        <div
-          class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
-        >
-          {{ proximoAgendamento?.cliente?.nome }}
-        </div>
-        <div
-          class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
-        >
-          {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
+      </div>
+
+      <div *ngIf="periodos.manha.length > 0">
+        <p class="labelDivider">Manhã</p>
+        <hr class="hr" />
+        <div class="containerPeriodos" *ngFor="let agendamento of periodos.manha">
+          <app-card-agendamento-estabelecimento
+            [nome]="agendamento.cliente.nome"
+            [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
+            [status]="agendamento.status"
+            [nomeServico]="agendamento.servico.nome"
+            [dataHora]="agendamento.data"
+          ></app-card-agendamento-estabelecimento>
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-6">
-      <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+    <div *ngIf="periodos.tarde.length > 0">
+      <p class="labelDivider">Tarde</p>
+      <hr class="hr" />
+    </div>
+    <div *ngIf="periodos.noite.length > 0">
+      <p class="labelDivider">Noite</p>
+      <hr class="hr" />
+    </div>
+    <div class="col-12 col-sm-6 d-flex justify-content-sm-end">
+      <mat-calendar class="calendar" [(selected)]="selectedDate" (selectedChange)="changedSelectedDate()"></mat-calendar>
     </div>
   </div>
 </div>
