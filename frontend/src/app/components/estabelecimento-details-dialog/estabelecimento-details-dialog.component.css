@@ -1,3 +1,8 @@
+.component-container {
+  all: initial;
+  all: unset;
+}
+
 .provider-profile-modal-container {
   display: flex;
   flex-direction: column;

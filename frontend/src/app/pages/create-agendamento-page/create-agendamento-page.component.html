@@ -1,0 +1,54 @@
+<app-navbar [backButton]="true"></app-navbar>
+<main class="flex page-container">
+  <div class="flex agendamento-container">
+
+    <div class="flex estabelecimento-details-container">
+      <p class="item-description">Agendando atendimento com:</p>
+      <mat-card>
+        <mat-card-content matRipple>
+          <div class="card-info">
+            <img class="avatar-card-img"
+                 src="{{estabelecimentoAvatar}}"
+                 alt="avatar-image">
+            <div class="estabelecimento-info">
+              <p class="estabelecimento-name">{{estabelecimento.nome}}</p>
+
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <p class="item-description">Selecione o serviço:</p>
+      <div class="services-container">
+        <div class="card-services">
+          <mat-chip-listbox>
+            <mat-chip-option *ngFor="let servico of estabelecimento.servicos" (click)="selectService(servico)">
+              <p class="services-info">{{servico.nome}}</p>
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex date-picker">
+      <p class="item-description">Escolha uma data</p>
+      <div class="calendar">
+        <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+      </div>
+    </div>
+
+    <div class="time-picker">
+      <p class="item-description">Escolha um horário</p>
+      <div class="services-container">
+        <div class="card-services">
+          <mat-chip-listbox>
+            <mat-chip-option *ngFor="let horario of avaliableTimes" (click)="selectHorario(horario)">
+              <p class="services-info">{{horario}}</p>
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <app-confirm-button [buttonText]="'Confirmar Agendamento'" (click)="createAgendamento()"></app-confirm-button>
+</main>

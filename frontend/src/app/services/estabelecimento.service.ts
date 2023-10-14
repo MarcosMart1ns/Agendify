@@ -33,13 +33,12 @@ export class EstabelecimentoService {
     )
   }
 
-  getEstabelecimentoLogado(id: string):Observable<Estabelecimento>{
+  getEstabelecimento(id: string):Observable<Estabelecimento>{
 
     return <Observable<Estabelecimento>> this.httpClient.get(
       `http://localhost:9090/estabelecimento/${id}`,
-      {
-        headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.authService.getToken()}`})
-      });
+        this.httpOptions
+      );
   }
 
   searchEstabelecimentos(queryText: string) {
