@@ -32,23 +32,35 @@ public abstract class EstabelecimentoMapper {
     public abstract com.agendify.domain.entities.Estabelecimento toEntity(Estabelecimento estabelecimento);
 
     @Named("fromPeriodoEntity")
-    List<PeriodoAtendimentoDTO> fromPeriodoEntity(List<PeriodoAtendimento> periodoAtendimento){
-        return periodoAtendimento.stream().map(periodo->periodoAtendimentoMapper.fromEntity(periodo)).toList();
+    List<PeriodoAtendimentoDTO> fromPeriodoEntity(List<PeriodoAtendimento> periodoAtendimento) {
+        if (periodoAtendimento == null) {
+            return null;
+        }
+        return periodoAtendimento.stream().map(periodo -> periodoAtendimentoMapper.fromEntity(periodo)).toList();
     }
 
     @Named("toPeriodoEntity")
-    List<PeriodoAtendimento> toPeriodoEntity(List<PeriodoAtendimentoDTO> periodoAtendimento){
-        return periodoAtendimento.stream().map(periodo->periodoAtendimentoMapper.toEntity(periodo)).toList();
+    List<PeriodoAtendimento> toPeriodoEntity(List<PeriodoAtendimentoDTO> periodoAtendimento) {
+        if (periodoAtendimento == null) {
+            return null;
+        }
+        return periodoAtendimento.stream().map(periodo -> periodoAtendimentoMapper.toEntity(periodo)).toList();
     }
 
     @Named("fromServicoEntity")
-    List<ServicoResponse> fromServicoEntity(List<com.agendify.domain.entities.Servico> servicos){
-        return servicos.stream().map(periodo->servicoMapper.fromEntity(periodo)).toList();
+    List<ServicoResponse> fromServicoEntity(List<com.agendify.domain.entities.Servico> servicos) {
+        if (servicos == null) {
+            return null;
+        }
+        return servicos.stream().map(periodo -> servicoMapper.fromEntity(periodo)).toList();
     }
 
     @Named("toServicoEntity")
-    List<Servico> toServicoEntity(List<ServicoResponse> servicos){
-        return servicos.stream().map(periodo->servicoMapper.toEntity(periodo)).toList();
+    List<Servico> toServicoEntity(List<ServicoResponse> servicos) {
+        if (servicos == null) {
+            return null;
+        }
+        return servicos.stream().map(periodo -> servicoMapper.toEntity(periodo)).toList();
     }
 
 }

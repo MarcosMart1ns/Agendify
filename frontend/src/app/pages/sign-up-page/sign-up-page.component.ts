@@ -9,6 +9,8 @@ import {EstabelecimentoFormGroup} from "../../model/form-model/signup/Estabeleci
 import {EstabelecimentoService} from "../../services/estabelecimento.service";
 import {AuthorizationService} from "../../services/authorization.service";
 import {Router} from "@angular/router";
+import {ErrorDialogModalComponent} from "../../components/error-dialog-modal/error-dialog-modal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-sign-up-page',
@@ -26,14 +28,12 @@ export class SignUpPageComponent {
   enableClienteField: boolean = true;
   enableEstabelecimentoField: boolean = false;
 
-  showErrorDialog: boolean = false;
-  errorMessage: string = 'Exemplo';
-
   constructor(
     private clienteService: ClienteService,
     private estabelecimentoService: EstabelecimentoService,
     private authService:AuthorizationService,
-    private router:Router
+    private router:Router,
+    private dialog: MatDialog
   ) {
 
     if(this.authService.isUserLogged()){
@@ -53,8 +53,12 @@ export class SignUpPageComponent {
         this.authService.login({email: cliente.email, password: `${cliente.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
-        this.showErrorDialog = true;
+        this.dialog.open(ErrorDialogModalComponent,{
+          data:{
+            title: "Erro ao criar usuário",
+            content:`${error.error.message}`
+          }
+        })
       }
     )
   }
@@ -70,8 +74,12 @@ export class SignUpPageComponent {
         this.authService.login({email: estabelecimento.email, password: `${estabelecimento.senha}`}, onSuccess, () => {})
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = `Erro ao criar usuário: \n ${error.error.message}`;
-        this.showErrorDialog = true;
+        this.dialog.open(ErrorDialogModalComponent,{
+          data:{
+            title: "Erro ao criar usuário",
+            content:`${error.error.message}`
+          }
+        })
       }
     )
   }

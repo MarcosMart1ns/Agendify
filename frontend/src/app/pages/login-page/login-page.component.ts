@@ -6,6 +6,8 @@ import {AuthorizationService} from "../../services/authorization.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Authresponse} from "../../model/response/Authresponse";
 import {Router} from '@angular/router';
+import {MatDialog} from "@angular/material/dialog";
+import {ErrorDialogModalComponent} from "../../components/error-dialog-modal/error-dialog-modal.component";
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +24,8 @@ export class LoginPageComponent {
 
   constructor(
     private authorizationService: AuthorizationService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     if (this.authorizationService.isUserLogged()) {
       this.router.navigateByUrl('/home');
@@ -30,14 +33,17 @@ export class LoginPageComponent {
   }
 
   login(user: any) {
-    this.showErrorDialog = false;
     const onSuccess = () => {
       this.router.navigateByUrl('/home').then(()=>window.location.reload());
     }
 
     const onError = (error: HttpErrorResponse) => {
-      this.errorMessage = `${error.error.message}`;
-      this.showErrorDialog = true;
+        this.dialog.open(ErrorDialogModalComponent,{
+          data:{
+            title: "Erro ao tentar efetuar login",
+            content:`${error.error.message}`
+          }
+        })
     }
 
     this.authorizationService.login(user, onSuccess, onError)
