@@ -44,18 +44,12 @@ export class CardAgendamentoClienteComponent {
   openCancelDialog() {
     const data = new Date(this.dataHora);
 
-    // Obtém o fuso horário atual do sistema
-    const fusoHorario = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    // Obtém o deslocamento em minutos para o fuso horário atual
-    const deslocamentoMinutos = new Date().getTimezoneOffset();
-
-    // Aplica o deslocamento do fuso horário à data
-    data.setMinutes(data.getMinutes() - deslocamentoMinutos);
-
     // Obter hora e minutos
-    const horas = data.getHours().toString().padStart(2, '0');
-    const minutos = data.getMinutes().toString().padStart(2, '0');
+    const horas = data.getUTCHours();
+    const minutos =
+      data.getUTCMinutes() < 10
+        ? `0${data.getUTCMinutes()}`
+        : data.getUTCMinutes();
 
     // Formatar como "hh:mm"
     const horaFormatada = `${horas}:${minutos}`;
@@ -82,5 +76,4 @@ export class CardAgendamentoClienteComponent {
       },
     });
   }
-  
 }
