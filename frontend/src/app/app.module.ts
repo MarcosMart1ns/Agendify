@@ -14,8 +14,8 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { LogoComponentComponent } from './components/logo-component/logo-component.component';
 import { FormComponentComponent } from './components/form-component/form-component.component';
 import { FormInputComponentComponent } from './components/form-input-component/form-input-component.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { UserHomeComponent } from './pages/user-home/user-home.component';
@@ -24,29 +24,29 @@ import { CardAgendamentoClienteComponent } from './components/card-agendamento-c
 import { ProfileEditPageComponent } from './pages/profile-edit-page/profile-edit-page.component';
 import { SucessDialogComponent } from './components/sucess-dialog/sucess-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatChipsModule} from "@angular/material/chips";
-import {AsyncPipe, NgFor} from "@angular/common";
-import {MatIconModule} from "@angular/material/icon";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {MatListModule} from "@angular/material/list";
-import {MatTableModule} from "@angular/material/table";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { AsyncPipe, NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import {MatSelectModule} from "@angular/material/select";
+import { MatSelectModule } from '@angular/material/select';
 import { ListaAgendamentosClienteComponentComponent } from './components/lista-agendamentos-cliente-component/lista-agendamentos-cliente-component.component';
 import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatCardModule} from "@angular/material/card";
-import {MatRippleModule} from "@angular/material/core";
+import { MatCardContent, MatCardModule } from '@angular/material/card';
+import { MatRippleModule } from '@angular/material/core';
 import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
 import { CreateAgendamentoPageComponent } from './pages/create-agendamento-page/create-agendamento-page.component';
 import { ErrorDialogModalComponent } from './components/error-dialog-modal/error-dialog-modal.component';
 import { SuccessDialogModalComponent } from './components/success-dialog-modal/success-dialog-modal.component';
-
+import { CardAgendamentoEstabelecimentoComponent } from './components/card-agendamento-estabelecimento/card-agendamento-estabelecimento.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +76,8 @@ import { SuccessDialogModalComponent } from './components/success-dialog-modal/s
     ListaAgendamentosEstabelecimentoComponentComponent,
     EstabelecimentoDetailsDialogComponent,
     ErrorDialogModalComponent,
-    SuccessDialogModalComponent
+    SuccessDialogModalComponent,
+    CardAgendamentoEstabelecimentoComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,9 +100,12 @@ import { SuccessDialogModalComponent } from './components/success-dialog-modal/s
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    // MatCardContent,
+    MatCardModule,
+    MatRippleModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
