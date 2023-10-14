@@ -40,6 +40,12 @@ import { ListaAgendamentosClienteComponentComponent } from './components/lista-a
 import { ListaAgendamentosEstabelecimentoComponentComponent } from './components/lista-agendamentos-estabelecimento-component/lista-agendamentos-estabelecimento-component.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatCardModule} from "@angular/material/card";
+import {MatRippleModule} from "@angular/material/core";
+import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
+import { CreateAgendamentoPageComponent } from './pages/create-agendamento-page/create-agendamento-page.component';
+import { ErrorDialogModalComponent } from './components/error-dialog-modal/error-dialog-modal.component';
+import { SuccessDialogModalComponent } from './components/success-dialog-modal/success-dialog-modal.component';
 
 
 @NgModule({
@@ -64,8 +70,13 @@ import { MatNativeDateModule } from '@angular/material/core';
     ProfileEditPageComponent,
     SucessDialogComponent,
     ConfirmDialogComponent,
+    EstabelecimentoDetailsDialogComponent,
+    CreateAgendamentoPageComponent,
     ListaAgendamentosClienteComponentComponent,
-    ListaAgendamentosEstabelecimentoComponentComponent
+    ListaAgendamentosEstabelecimentoComponentComponent,
+    EstabelecimentoDetailsDialogComponent,
+    ErrorDialogModalComponent,
+    SuccessDialogModalComponent
   ],
   imports: [
     BrowserModule,

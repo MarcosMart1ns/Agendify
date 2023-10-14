@@ -37,7 +37,7 @@ export class SearchHomePageComponent {
       }
 
       if (this.authService.getActiveSession().tipo == 2) {
-        this.estabelecimentoService.getEstabelecimentoLogado(this.authService.getActiveSession().id)
+        this.estabelecimentoService.getEstabelecimento(this.authService.getActiveSession().id)
           .subscribe(
             (response: Estabelecimento) => {
               this.loggedUser = response;

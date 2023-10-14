@@ -48,7 +48,7 @@ export class UserHomeComponent {
 
     if (activeSession.tipo == 2) {
       this.estabelecimentoService
-        .getEstabelecimentoLogado(activeSession.id)
+        .getEstabelecimento(activeSession.id)
         .subscribe(
           (response: Estabelecimento) => {
             this.loggedUser = response;

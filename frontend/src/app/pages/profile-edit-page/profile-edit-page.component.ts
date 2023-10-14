@@ -200,7 +200,7 @@ export class ProfileEditPageComponent {
     }
 
     if (activeSession.tipo == 2) {
-      this.estabelecimentoService.getEstabelecimentoLogado(activeSession.id).subscribe(
+      this.estabelecimentoService.getEstabelecimento(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
         (error: HttpErrorResponse) => {
           this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
