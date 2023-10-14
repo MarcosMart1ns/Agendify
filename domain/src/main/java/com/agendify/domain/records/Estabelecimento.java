@@ -1,6 +1,5 @@
 package com.agendify.domain.records;
 
-import com.agendify.domain.entities.PeriodoAtendimento;
 import com.agendify.domain.entities.Servico;
 
 import java.util.List;
@@ -17,8 +16,7 @@ public record Estabelecimento(
         String cnpj,
         String descricao,
 
-        //TODO: Criar records e substituir as entidades abaixo
-        List<Servico> servicos,
-        List<PeriodoAtendimento> periodosAtendimento
+        List<ServicoResponse> servicos,
+        List<PeriodoAtendimentoDTO> periodosAtendimento
 ) {
 }

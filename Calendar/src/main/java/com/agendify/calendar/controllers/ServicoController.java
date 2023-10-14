@@ -1,8 +1,8 @@
 package com.agendify.calendar.controllers;
 
-import com.agendify.calendar.controllers.mappers.ServicoCreate;
-import com.agendify.calendar.controllers.mappers.ServicoMapper;
-import com.agendify.calendar.controllers.mappers.ServicoResponse;
+import com.agendify.domain.records.ServicoCreate;
+import com.agendify.domain.mappers.ServicoMapper;
+import com.agendify.domain.records.ServicoResponse;
 import com.agendify.calendar.services.ServicoService;
 import com.agendify.domain.entities.Servico;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -26,6 +26,10 @@ public abstract class PeriodoAtendimentoMapper {
 
     @Named("getEstabelecimento")
     Estabelecimento getEstabelecimento(UUID estabelecimentoId) {
+        if ( estabelecimentoId == null ) {
+            return null;
+        }
+
         return estabelecimentoRepository.findById(estabelecimentoId)
                 .orElseThrow(() -> new EntityNotFoundException("Estabelecimento não encontrado: " + estabelecimentoId));
     }

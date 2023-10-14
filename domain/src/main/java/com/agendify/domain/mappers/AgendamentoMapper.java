@@ -1,4 +1,4 @@
-package com.agendify.calendar.controllers.mappers;
+package com.agendify.domain.mappers;
 
 import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.Cliente;
@@ -6,8 +6,12 @@ import com.agendify.domain.entities.Estabelecimento;
 import com.agendify.domain.entities.Servico;
 import com.agendify.domain.mappers.ClienteMapper;
 import com.agendify.domain.mappers.EstabelecimentoMapper;
+import com.agendify.domain.mappers.ServicoMapper;
+import com.agendify.domain.records.AgendamentoCreate;
+import com.agendify.domain.records.AgendamentoResponse;
 import com.agendify.domain.records.ClienteResponse;
 import com.agendify.domain.records.EstabelecimentoResponse;
+import com.agendify.domain.records.ServicoResponse;
 import com.agendify.domain.repositories.ClienteRepository;
 import com.agendify.domain.repositories.EstabelecimentoRepository;
 import com.agendify.domain.repositories.ServicoRepository;

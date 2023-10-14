@@ -333,7 +333,8 @@ export class ProfileEditPageComponent {
     newServicos.push({
       id: "",
       duracao: `${this.addServicoFormGroup.get("duracao")?.value}:00`,
-      nome: `${this.addServicoFormGroup.get("nome")?.value}`
+      nome: `${this.addServicoFormGroup.get("nome")?.value}`,
+      estabelecimentoId: this.userDetails.id
     })
 
     this.servicos = newServicos;
@@ -363,7 +364,8 @@ export class ProfileEditPageComponent {
       // @ts-ignore
       diaDaSemana: this.obterDiaDaSemanaPelaString(this.addAgendaFormGroup.get("diaDaSemana")?.value),
       horaFim: `${this.addAgendaFormGroup.get("horaFim")?.value}:00.000`,
-      horaInicio: `${this.addAgendaFormGroup.get("horaInicio")?.value}:00.000`
+      horaInicio: `${this.addAgendaFormGroup.get("horaInicio")?.value}:00.000`,
+      estabelecimentoId: this.userDetails.id
     })
 
     this.agendas = newAgenda;
