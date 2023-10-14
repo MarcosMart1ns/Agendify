@@ -1,0 +1,12 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-icon {
+  font-size: 80px;
+  width: 80px;
+  height: 80px;
+  color: red;
+}
