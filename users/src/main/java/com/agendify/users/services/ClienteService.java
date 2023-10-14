@@ -25,6 +25,9 @@ public class ClienteService {
     @Autowired
     private ClienteMapper clienteMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public Cliente find(UUID id) throws UserNotFoundException {
         com.agendify.domain.entities.Cliente cliente = clienteRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return clienteMapper.fromEntity(cliente);
@@ -32,7 +35,7 @@ public class ClienteService {
 
     public Cliente createCliente(Cliente cliente) throws UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(cliente.email());
+        emailService.emailAlreadyExistValidation(cliente.email());
 
         com.agendify.domain.entities.Cliente clientEntity = clienteMapper.toEntity(cliente);
         clientEntity.setSenha(encryptSenha(clientEntity.getSenha()));
@@ -43,7 +46,7 @@ public class ClienteService {
 
     public Cliente updateCliente(UUID id, Cliente cliente) throws NotFound, UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(cliente.email(), id);
+        emailService.emailAlreadyExistValidation(cliente.email(), id);
 
         if (clienteRepository.existsById(id)) {
 
@@ -55,23 +58,6 @@ public class ClienteService {
             return clienteMapper.fromEntity(clienteSaved);
         }
         return null;
-    }
-
-    public void emailAlreadyExistValidation(String email) throws UserAlreadyExistsException {
-        emailAlreadyExistValidation(email, null);
-    }
-
-    public void emailAlreadyExistValidation(String email, UUID id) throws UserAlreadyExistsException {
-        com.agendify.domain.entities.Cliente cliente = clienteRepository.findByEmail(email);
-
-        if (cliente != null) {
-            if ((cliente.getId().equals(id))) {
-                return;
-            }
-
-            log.error("Email {} já possui cadastro e pertence a outro usuário", email);
-            throw new UserAlreadyExistsException("Email já utilizado por outro usuário, escolha outro email.");
-        }
     }
 
     String encryptSenha(String senha) {
