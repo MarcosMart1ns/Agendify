@@ -6,6 +6,7 @@ import com.agendify.domain.repositories.EstabelecimentoRepository;
 import com.agendify.users.config.TestsConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,12 @@ class EstabelecimentoTest {
     BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 
     @BeforeEach
-    void beforeAllTests(){
+    void beforeEachTests(){
+        estabelecimentoRepository.deleteAll();
+    }
+
+    @AfterEach
+    void afterEachTests(){
         estabelecimentoRepository.deleteAll();
     }
 
