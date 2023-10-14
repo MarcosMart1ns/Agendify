@@ -16,6 +16,9 @@ import {Servico} from "../../model/response/Servico";
 import {Constants} from "../../Constants";
 import {PeriodoAtendimento} from "../../model/response/PeriodoAtendimento";
 import {DiaDaSemana} from "../../model/response/DiaDaSemana";
+import {MatDialog} from "@angular/material/dialog";
+import {SuccessDialogModalComponent} from "../../components/success-dialog-modal/success-dialog-modal.component";
+import {ErrorDialogModalComponent} from "../../components/error-dialog-modal/error-dialog-modal.component";
 
 @Component({
   selector: 'app-profile-edit-page',
@@ -28,12 +31,6 @@ export class ProfileEditPageComponent {
   profileImgUrl: string = Constants.DEFAULT_AVATAR;
 
   userType!: number;
-
-  showErrorDialog: boolean = false;
-  errorMessage: string = 'Exemplo';
-
-  showSuccessDialog: boolean = false;
-  sucessMessage: string = "Dados alterados com sucesso";
 
   enableDadosPessoais: boolean = true;
   enableBioDescription: boolean = false;
@@ -178,7 +175,8 @@ export class ProfileEditPageComponent {
     private authService: AuthorizationService,
     private router: Router,
     private clienteService: ClienteService,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    public dialog: MatDialog
   ) {
     if (!this.authService.isUserLogged()) {
       this.router.navigateByUrl('/login');
@@ -191,9 +189,12 @@ export class ProfileEditPageComponent {
       this.clienteService.getClienteLogado(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
         (error: HttpErrorResponse) => {
-          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
-          this.showErrorDialog = true;
-
+          this.dialog.open(ErrorDialogModalComponent,{
+            data:{
+              title:"Erro ao atualizar dados do usuário",
+              content: `${error.error.message}`
+            }
+          })
           this.authService.logoutUser();
         }
       )
@@ -203,9 +204,12 @@ export class ProfileEditPageComponent {
       this.estabelecimentoService.getEstabelecimento(activeSession.id).subscribe(
         (response) => this.setUserOnForm(response),
         (error: HttpErrorResponse) => {
-          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
-          this.showErrorDialog = true;
-
+          this.dialog.open(ErrorDialogModalComponent,{
+            data:{
+              title:"Erro ao atualizar dados do usuário",
+              content: `${error.error.message}`
+            }
+          })
           this.authService.logoutUser();
         }
       )
@@ -287,11 +291,19 @@ export class ProfileEditPageComponent {
     user.subscribe(
       (response) => {
         this.setUserOnForm(<Cliente>response);
-        this.showSuccessDialog = true;
+        this.dialog.open(SuccessDialogModalComponent,{
+          data:{
+            title:"Dados alterados com sucesso"
+          }
+        })
       },
       (error: HttpErrorResponse) => {
-        this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
-        this.showErrorDialog = true;
+        this.dialog.open(ErrorDialogModalComponent,{
+          data:{
+            title:"Erro ao atualizar dados do usuário",
+            content: `${error.error.message}`
+          }
+        })
       }
     );
   }
@@ -318,11 +330,19 @@ export class ProfileEditPageComponent {
       .subscribe(
         (response) => {
           this.setUserOnForm(<Cliente>response);
-          this.showSuccessDialog = true;
+          this.dialog.open(SuccessDialogModalComponent,{
+            data:{
+              title:"Dados alterados com sucesso"
+            }
+          })
         },
         (error: HttpErrorResponse) => {
-          this.errorMessage = `Erro ao atualizar usuário:  \n ${error.error.message}`;
-          this.showErrorDialog = true;
+          this.dialog.open(ErrorDialogModalComponent,{
+            data:{
+              title:"Erro ao atualizar dados do usuário",
+              content: `${error.error.message}`
+            }
+          })
         }
       );
   }
