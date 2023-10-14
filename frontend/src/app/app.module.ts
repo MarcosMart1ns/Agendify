@@ -44,6 +44,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatRippleModule} from "@angular/material/core";
 import { EstabelecimentoDetailsDialogComponent } from './components/estabelecimento-details-dialog/estabelecimento-details-dialog.component';
 import { CreateAgendamentoPageComponent } from './pages/create-agendamento-page/create-agendamento-page.component';
+import { ErrorDialogModalComponent } from './components/error-dialog-modal/error-dialog-modal.component';
+import { SuccessDialogModalComponent } from './components/success-dialog-modal/success-dialog-modal.component';
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import { CreateAgendamentoPageComponent } from './pages/create-agendamento-page/
     CreateAgendamentoPageComponent,
     ListaAgendamentosClienteComponentComponent,
     ListaAgendamentosEstabelecimentoComponentComponent,
-    EstabelecimentoDetailsDialogComponent
+    EstabelecimentoDetailsDialogComponent,
+    ErrorDialogModalComponent,
+    SuccessDialogModalComponent
   ],
   imports: [
     BrowserModule,

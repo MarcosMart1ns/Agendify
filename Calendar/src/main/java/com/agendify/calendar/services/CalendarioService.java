@@ -35,13 +35,13 @@ public class CalendarioService {
     }
 
     public Agendamento createAgendamento(Agendamento entity) throws HorarioIndisponivelException {
-        entity.setStatus(Status.AGENDADO);
         if(entity.getData().before(new Date())){
 //            TODO: Criar uma exception  para este cenário
             throw new HorarioIndisponivelException("A data e horário do agendamento deve ser maior que a data e horário atual.");
         }
         validaPeriodoAtendimento(entity.getData(), entity.getEstabelecimento());
         validaHorarioDisponivel(entity);
+        entity.setStatus(Status.AGENDADO);
         return agendamentoRepository.save(entity);
     }
 
