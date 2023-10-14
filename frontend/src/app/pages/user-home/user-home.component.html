@@ -1,8 +1,5 @@
 <app-navbar [backButton]="false" [user]="loggedUser"></app-navbar>
 <main>
-  <a [routerLink]="'/'">Agende um atendimento</a>
-  <h1>Meus horários agendados</h1>
-
   <ng-container *ngIf="loggedUser">
     <ng-container
       *ngIf="
@@ -13,6 +10,8 @@
     ></ng-container>
 
     <ng-template #clienteComponent>
+      <a [routerLink]="'/'">Agende um atendimento</a>
+      <h1>Meus horários agendados</h1>
       <app-lista-agendamentos-cliente-component
         class="card-agendamento-wrapper"
         [agendamentos]="agendamentos"
@@ -20,6 +19,7 @@
     </ng-template>
 
     <ng-template #estabelecimentoComponent>
+      <h1>Meus horários agendados</h1>
       <app-lista-agendamentos-estabelecimento-component />
     </ng-template>
   </ng-container>
