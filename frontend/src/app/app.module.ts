@@ -99,9 +99,7 @@ import { SuccessDialogModalComponent } from './components/success-dialog-modal/s
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    MatCardModule,
-    MatRippleModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

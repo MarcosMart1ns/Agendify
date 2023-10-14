@@ -1,24 +1,8 @@
 .cardEstabelecimento {
-  width: auto;
   background: white;
   border-radius: 10px;
   padding: 10px; /* Adicione espaçamento interno para evitar sobreposições */
   position: relative;
-  margin-bottom: 30px;
-}
-
-.cardEstabelecimento::before {
-  content: ""; /* Crie um elemento pseudo ::before */
-  width: 2px; /* Largura da borda esquerda */
-  height: 75%; /* Altura igual a 75% da altura da div */
-  background: rgba(8, 52, 140, 0.97);
-  position: absolute;
-  left: 0; /* Alinhe à esquerda */
-  top: 50%; /* Alinhe verticalmente ao centro */
-  transform: translateY(-50%); /* Corrija o alinhamento vertical */
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px; /* Adicione os cantos arredondados à borda */
-  /* Outros estilos conforme necessário */
 }
 
 .nome {
@@ -49,7 +33,7 @@
   text-align: center;
 }
 
-.nomeServico {
+.servico {
   text-align: center;
   margin-top: 10px; /* Adicione margem superior para espaço entre o status e o nome do serviço */
   color: #636e74;
@@ -72,7 +56,6 @@
 .calendar {
   height: 360px;
   width: 360px;
-  margin-bottom: 30px;
 }
 
 .labelDivider {
@@ -82,8 +65,4 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-}
-
-.containerPeriodos{
- margin: 10px 0;
 }
