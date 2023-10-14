@@ -28,6 +28,9 @@ public class EstabelecimentoService {
     @Autowired
     private EstabelecimentoMapper estabelecimentoMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public Estabelecimento findEstabelecimento(UUID id) throws UserNotFoundException {
         com.agendify.domain.entities.Estabelecimento estabelecimento = estabelecimentoRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return estabelecimentoMapper.fromEntity(estabelecimento);
@@ -35,7 +38,7 @@ public class EstabelecimentoService {
 
     public Estabelecimento createEstabelecimento(Estabelecimento estabelecimento) throws UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(estabelecimento.email());
+        emailService.emailAlreadyExistValidation(estabelecimento.email());
 
         com.agendify.domain.entities.Estabelecimento estabelecimentoEntity = estabelecimentoMapper.toEntity(estabelecimento);
         estabelecimentoEntity.setSenha(encryptSenha(estabelecimentoEntity.getSenha()));
@@ -59,7 +62,7 @@ public class EstabelecimentoService {
 
     public Estabelecimento updateEstabelecimento(UUID id, Estabelecimento estabelecimento) throws HttpClientErrorException.NotFound, UserAlreadyExistsException {
 
-        emailAlreadyExistValidation(estabelecimento.email(), id);
+        emailService.emailAlreadyExistValidation(estabelecimento.email(), id);
 
         if (estabelecimentoRepository.existsById(id)) {
 
@@ -69,23 +72,6 @@ public class EstabelecimentoService {
             return estabelecimentoMapper.fromEntity(estabelecimentoSaved);
         }
         return null;
-    }
-
-    public void emailAlreadyExistValidation(String email) throws UserAlreadyExistsException {
-        emailAlreadyExistValidation(email, null);
-    }
-
-    public void emailAlreadyExistValidation(String email, UUID id) throws UserAlreadyExistsException {
-        com.agendify.domain.entities.Estabelecimento estabelecimento = estabelecimentoRepository.findByEmail(email);
-
-        if (estabelecimento != null) {
-            if (estabelecimento.getId().equals(id)) {
-                return;
-            }
-
-            log.error("Email {} já possui cadastro e pertence a outro usuário", email);
-            throw new UserAlreadyExistsException("Email já utilizado por outro usuário, escolha outro email.");
-        }
     }
 
     String encryptSenha(String senha) {
