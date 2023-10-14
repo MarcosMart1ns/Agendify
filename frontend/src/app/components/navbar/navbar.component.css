@@ -8,7 +8,7 @@
   justify-content: center;
 }
 
-.non-logged-nav-bar {
+.navbar-container {
   height: 100px;
   width: 100%;
   align-items: stretch;

@@ -21,17 +21,6 @@
   /* Outros estilos conforme necessário */
 }
 
-.barra-vertical {
-  width: 2px;
-  height: 61px;
-  background: rgba(8, 52, 140, 0.97);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  position: absolute; /* Mantenha a posição absoluta se necessário */
-  left: 0; /* Ajuste a posição conforme necessário */
-  top: 0; /* Ajuste a posição conforme necessário */
-}
-
 .nome {
   color: rgba(8, 52, 140, 0.97);
   font-size: 22px;
@@ -83,6 +72,7 @@
 .calendar {
   height: 360px;
   width: 360px;
+  margin-bottom: 30px;
 }
 
 .labelDivider {

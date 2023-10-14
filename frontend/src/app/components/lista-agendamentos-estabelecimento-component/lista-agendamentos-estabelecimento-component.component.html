@@ -1,9 +1,9 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-12 col-sm-6">
-      <div class="cardEstabelecimento">
+    <div class="col-sm-12 col-xl-6 order-sm-2 order-xl-1">
+      <div class="cardEstabelecimento" *ngIf="proximoAgendamento">
         <div class="row">
-          <div class="col-sm-3 col-xl-2 text-center">
+          <div class="col-sm-12 col-xl-2 text-center">
             <img
               class="imagem"
               [src]="'https://via.placeholder.com/60x61'"
@@ -11,24 +11,24 @@
             />
           </div>
           <div
-            class="col-sm-5 col-xl-3 text-center text-sm-center text-lg-start nome my-auto"
+            class="col-sm-12 col-xl-3 text-center text-sm-center text-lg-start nome my-auto"
           >
             {{ proximoAgendamento?.cliente?.nome }}
           </div>
-          <div class="col-xl-3 col-sm-4 nomeServico my-auto">
+          <div class="col-sm-12 col-xl-12  nomeServico my-auto">
             {{ proximoAgendamento?.servico?.nome }}
           </div>
           <div
-            class="col-6 col-sm-auto p-2 d-flex justify-content-end justify-content-sm-center my-auto"
+            class="col-sm-6 col-xl-auto p-2 d-flex justify-content-sm-end justify-content-xl-center my-auto"
           >
             <img height="24px" width="24px" src="./assets/images/horario.svg" />
           </div>
           <div
-            class="col-6 col-sm-5 col-xl-2 p-2 text-start text-sm-center text-lg-start dataHora my-auto"
+            class="col-6 col-sm-5 col-xl-2 p-2 text-sm-start text-xl-center dataHora my-auto"
           >
             {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
           </div>
-          <div class="col-sm-1 p-2 d-flex justify-content-end my-auto">
+          <div class="col-sm-1 p-2 d-none d-xl-flex justify-content-end my-auto">
             <img
               height="24px"
               width="24px"
@@ -51,16 +51,34 @@
           ></app-card-agendamento-estabelecimento>
         </div>
       </div>
+      <div *ngIf="periodos.tarde.length > 0">
+        <p class="labelDivider">Tarde</p>
+        <hr class="hr" />
+        <div class="containerPeriodos" *ngFor="let agendamento of periodos.tarde">
+          <app-card-agendamento-estabelecimento
+            [nome]="agendamento.cliente.nome"
+            [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
+            [status]="agendamento.status"
+            [nomeServico]="agendamento.servico.nome"
+            [dataHora]="agendamento.data"
+          ></app-card-agendamento-estabelecimento>
+        </div>
+      </div>
+      <div *ngIf="periodos.noite.length > 0">
+        <p class="labelDivider">Noite</p>
+        <hr class="hr" />
+        <div class="containerPeriodos" *ngFor="let agendamento of periodos.noite">
+          <app-card-agendamento-estabelecimento
+            [nome]="agendamento.cliente.nome"
+            [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
+            [status]="agendamento.status"
+            [nomeServico]="agendamento.servico.nome"
+            [dataHora]="agendamento.data"
+          ></app-card-agendamento-estabelecimento>
+        </div>
+      </div>
     </div>
-    <div *ngIf="periodos.tarde.length > 0">
-      <p class="labelDivider">Tarde</p>
-      <hr class="hr" />
-    </div>
-    <div *ngIf="periodos.noite.length > 0">
-      <p class="labelDivider">Noite</p>
-      <hr class="hr" />
-    </div>
-    <div class="col-12 col-sm-6 d-flex justify-content-sm-end">
+    <div class="col-sm-12 col-xl-6 d-flex justify-content-sm-center justify-content-xl-end order-sm-1 order-xl-2">
       <mat-calendar class="calendar" [(selected)]="selectedDate" (selectedChange)="changedSelectedDate()"></mat-calendar>
     </div>
   </div>

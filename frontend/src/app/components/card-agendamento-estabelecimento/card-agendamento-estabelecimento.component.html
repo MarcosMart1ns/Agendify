@@ -3,10 +3,10 @@
     <div class="col-1 my-auto">
       <img height="24px" width="24px" src="./assets/images/horario.svg" />
     </div>
-    <div class="col-2 dataHora my-auto">{{ dataHora | date : "HH:mm" : "+00:00" }}</div>
-    <div class="col-9 cardEstabelecimento">
+    <div class="col-sm-11 col-xl-2 dataHora my-auto">{{ dataHora | date : "HH:mm" : "+00:00" }}</div>
+    <div class="col-sm-12 col-xl-9 cardEstabelecimento">
       <div class="row">
-        <div class="col-sm-3 col-xl-2 text-center my-auto">
+        <div class="col-sm-12 col-xl-2 text-center my-auto">
           <img
             class="imagem"
             [src]="
@@ -17,13 +17,13 @@
             alt="Imagem do Cliente"
           />
         </div>
-        <div class="col-5 nome my-auto">
+        <div class="col-12 col-xl-5 nome text-center my-auto">
           {{ nome }}
         </div>
-        <div class="col-4 servico my-auto">
+        <div class="col-12 col-xl-4 servico my-auto">
             {{nomeServico}}
         </div>
-        <div class="col-sm-1 p-2 d-flex justify-content-end my-auto">
+        <div class="col-sm-1 p-2 d-none d-xl-flex justify-content-end my-auto">
             <img
               height="24px"
               width="24px"

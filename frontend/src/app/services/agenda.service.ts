@@ -27,7 +27,7 @@ export class AgendaService {
     userId: string,
     data: Date
   ): Observable<AgendamentoResponse[]> {
-    const formattedDate = data.toISOString().split('T')[0]; // Formata a data no formato YYYY-MM-DD
+    const formattedDate = data.toLocaleDateString(); // Formata a data no formato YYYY-MM-DD
     const url = `${this.baseUrl}/agenda/${userId}/agendamentos?data=${formattedDate}`;
     return this.httpClient.get<AgendamentoResponse[]>(url);
   }
