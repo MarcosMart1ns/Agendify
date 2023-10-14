@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-xl-6 order-sm-2 order-xl-1">
+    <div class="col-sm-12 col-xl-6 order-2 order-xl-1">
       <div class="cardEstabelecimento" *ngIf="proximoAgendamento">
         <div class="row">
           <div class="col-sm-12 col-xl-2 text-center">
@@ -11,20 +11,20 @@
             />
           </div>
           <div
-            class="col-sm-12 col-xl-3 text-center text-sm-center text-lg-start nome my-auto"
+            class="col-12 col-xl-3 text-center text-sm-center text-lg-start nome my-auto"
           >
             {{ proximoAgendamento?.cliente?.nome }}
           </div>
-          <div class="col-sm-12 col-xl-12  nomeServico my-auto">
+          <div class="col-12 col-xl-3  nomeServico my-auto">
             {{ proximoAgendamento?.servico?.nome }}
           </div>
           <div
-            class="col-sm-6 col-xl-auto p-2 d-flex justify-content-sm-end justify-content-xl-center my-auto"
+            class="col-6 col-xl-auto p-2 d-flex justify-content-end justify-content-xl-center my-auto"
           >
             <img height="24px" width="24px" src="./assets/images/horario.svg" />
           </div>
           <div
-            class="col-6 col-sm-5 col-xl-2 p-2 text-sm-start text-xl-center dataHora my-auto"
+            class="col-6 col-sm-5 col-xl-2 p-2 text-start text-xl-center dataHora my-auto"
           >
             {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
           </div>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 col-xl-6 d-flex justify-content-sm-center justify-content-xl-end order-sm-1 order-xl-2">
+    <div class="col-sm-12 col-xl-6 d-flex justify-content-sm-center justify-content-xl-end order-1 order-xl-2">
       <mat-calendar class="calendar" [(selected)]="selectedDate" (selectedChange)="changedSelectedDate()"></mat-calendar>
     </div>
   </div>
