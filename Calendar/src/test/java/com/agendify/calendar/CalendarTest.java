@@ -1,8 +1,8 @@
 package com.agendify.calendar;
 
 import com.agendify.calendar.config.TestsConfig;
-import com.agendify.calendar.controllers.mappers.AgendamentoCreate;
-import com.agendify.calendar.controllers.mappers.AgendamentoResponse;
+import com.agendify.domain.records.AgendamentoCreate;
+import com.agendify.domain.records.AgendamentoResponse;
 import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.Cliente;
 import com.agendify.domain.entities.DiaDaSemana;

@@ -1,4 +1,4 @@
-package com.agendify.calendar.controllers.mappers;
+package com.agendify.domain.records;
 
 import java.util.Date;
 import java.util.UUID;

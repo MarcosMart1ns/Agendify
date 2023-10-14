@@ -1,9 +1,9 @@
-package com.agendify.calendar.controllers.mappers;
+package com.agendify.domain.records;
 
 import com.agendify.domain.entities.Status;
 import com.agendify.domain.records.ClienteResponse;
-import com.agendify.domain.records.Estabelecimento;
 import com.agendify.domain.records.EstabelecimentoResponse;
+import com.agendify.domain.records.ServicoResponse;
 
 import java.util.Date;
 import java.util.UUID;

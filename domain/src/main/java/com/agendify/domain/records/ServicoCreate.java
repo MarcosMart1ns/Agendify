@@ -1,4 +1,4 @@
-package com.agendify.calendar.controllers.mappers;
+package com.agendify.domain.records;
 
 import com.agendify.domain.entities.Estabelecimento;
 import jakarta.persistence.Column;
