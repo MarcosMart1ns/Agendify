@@ -121,10 +121,14 @@ export class CreateAgendamentoPageComponent {
   }
 
   onSuccess(agendamento: AgendamentoResponse) {
+    const date = new Date(agendamento.data);
+    const dateString:string = `Dia ${date.toLocaleDateString()} ás ${date.toLocaleTimeString()}`;
+
     this.dialog.open(SuccessDialogModalComponent, {
+
         data: {
           title: "Agendamento concluido com sucesso",
-          content: `${agendamento.data} para o serviço de ${agendamento.servico.nome} com ${agendamento.estabelecimento.nome}`,
+          content: `Agendado para: \n${dateString} para o serviço de ${agendamento.servico.nome} com ${agendamento.estabelecimento.nome}`,
           confirmFunction: () => {
             this.router.navigateByUrl("/home");
           }
@@ -139,6 +143,8 @@ export class CreateAgendamentoPageComponent {
 
     if (error.status === 400) {
       errorMsg = `Agendamento com erro \n + ${error.error.msg}`
+    } else if (error.status === 409) {
+      errorMsg = error.error.msg;
     } else {
       errorMsg = "Agendamento não foi concluído pois aconteceu um erro inesperdo, tente novamente mais tarde";
     }

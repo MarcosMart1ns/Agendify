@@ -1,9 +1,11 @@
-<h2 mat-dialog-title class="title">
-  <mat-icon fontIcon="done"></mat-icon>
-  <p>{{data.title}}</p>
-</h2>
+<ng-container class="flex">
+  <h2 mat-dialog-title class="title">
+    <mat-icon fontIcon="done"></mat-icon>
+    <p>{{data.title}}</p>
+  </h2>
 
-<mat-dialog-content>{{data.content}}</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close class="buttonNao" [mat-dialog-close]="true">Ok</button>
-</mat-dialog-actions>
+  <mat-dialog-content>{{data.content}}</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close class="buttonNao" [mat-dialog-close]="true" (click)="data.confirmFunction">OK</button>
+  </mat-dialog-actions>
+</ng-container>
