@@ -9,7 +9,7 @@ import {Agendamento} from "../model/Agendamento";
   providedIn: 'root',
 })
 export class AgendaService {
-  private baseUrl = 'http://localhost:80';
+  private baseUrl = 'https://agendify.azurewebsites.net';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

@@ -9,7 +9,7 @@ import {Estabelecimento} from "../model/response/Estabelecimento";
   providedIn: 'root'
 })
 export class EstabelecimentoService {
-  url = 'http://localhost:80/estabelecimento'
+  url = 'https://agendify.azurewebsites.net/estabelecimento'
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -36,7 +36,7 @@ export class EstabelecimentoService {
   getEstabelecimento(id: string):Observable<Estabelecimento>{
 
     return <Observable<Estabelecimento>> this.httpClient.get(
-      `http://localhost:80/estabelecimento/${id}`,
+      `https://agendify.azurewebsites.net/estabelecimento/${id}`,
         this.httpOptions
       );
   }

@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class AuthorizationService {
 
-  url = 'http://localhost:80/auth/login'
+  url = 'https://agendify.azurewebsites.net/auth/login'
 
   constructor(private httpClient: HttpClient, private router: Router) {
   }
