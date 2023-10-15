@@ -6,7 +6,11 @@
           <div class="col-sm-12 col-xl-2 text-center">
             <img
               class="imagem"
-              [src]="'https://via.placeholder.com/60x61'"
+              [src]="
+                proximoAgendamento?.cliente?.urlFotoPerfil
+                  ? proximoAgendamento?.cliente?.urlFotoPerfil
+                  : Constants.DEFAULT_AVATAR
+              "
               alt="Imagem do Cliente"
             />
           </div>
@@ -15,7 +19,7 @@
           >
             {{ proximoAgendamento?.cliente?.nome }}
           </div>
-          <div class="col-12 col-xl-3  nomeServico my-auto">
+          <div class="col-12 col-xl-3 nomeServico my-auto">
             {{ proximoAgendamento?.servico?.nome }}
           </div>
           <div
@@ -28,7 +32,9 @@
           >
             {{ proximoAgendamento?.data | date : "HH:mm" : "+00:00" }}
           </div>
-          <div class="col-sm-1 p-2 d-none d-xl-flex justify-content-end my-auto">
+          <div
+            class="col-sm-1 p-2 d-none d-xl-flex justify-content-end my-auto"
+          >
             <img
               height="24px"
               width="24px"
@@ -41,7 +47,10 @@
       <div *ngIf="periodos.manha.length > 0">
         <p class="labelDivider">Manhã</p>
         <hr class="hr" />
-        <div class="containerPeriodos" *ngFor="let agendamento of periodos.manha">
+        <div
+          class="containerPeriodos"
+          *ngFor="let agendamento of periodos.manha"
+        >
           <app-card-agendamento-estabelecimento
             [nome]="agendamento.cliente.nome"
             [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
@@ -54,7 +63,10 @@
       <div *ngIf="periodos.tarde.length > 0">
         <p class="labelDivider">Tarde</p>
         <hr class="hr" />
-        <div class="containerPeriodos" *ngFor="let agendamento of periodos.tarde">
+        <div
+          class="containerPeriodos"
+          *ngFor="let agendamento of periodos.tarde"
+        >
           <app-card-agendamento-estabelecimento
             [nome]="agendamento.cliente.nome"
             [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
@@ -67,7 +79,10 @@
       <div *ngIf="periodos.noite.length > 0">
         <p class="labelDivider">Noite</p>
         <hr class="hr" />
-        <div class="containerPeriodos" *ngFor="let agendamento of periodos.noite">
+        <div
+          class="containerPeriodos"
+          *ngFor="let agendamento of periodos.noite"
+        >
           <app-card-agendamento-estabelecimento
             [nome]="agendamento.cliente.nome"
             [urlImagem]="agendamento.estabelecimento.urlFotoPerfil"
@@ -78,8 +93,14 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 col-xl-6 d-flex justify-content-sm-center justify-content-xl-end order-1 order-xl-2">
-      <mat-calendar class="calendar" [(selected)]="selectedDate" (selectedChange)="changedSelectedDate()"></mat-calendar>
+    <div
+      class="col-sm-12 col-xl-6 d-flex justify-content-sm-center justify-content-xl-end order-1 order-xl-2"
+    >
+      <mat-calendar
+        class="calendar"
+        [(selected)]="selectedDate"
+        (selectedChange)="changedSelectedDate()"
+      ></mat-calendar>
     </div>
   </div>
 </div>

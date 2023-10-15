@@ -3,6 +3,7 @@ import { AgendamentoResponse } from 'src/app/model/response/AgendamentoResponse'
 import { Authresponse } from 'src/app/model/response/Authresponse';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { Constants } from 'src/app/Constants';
 
 @Component({
   selector: 'app-lista-agendamentos-estabelecimento-component',
@@ -10,6 +11,9 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
   styleUrls: ['./lista-agendamentos-estabelecimento-component.component.css'],
 })
 export class ListaAgendamentosEstabelecimentoComponentComponent {
+
+  protected readonly Constants = Constants;
+  
   selectedDate: Date | null = new Date();
 
   agendamentos: AgendamentoResponse[] = [];

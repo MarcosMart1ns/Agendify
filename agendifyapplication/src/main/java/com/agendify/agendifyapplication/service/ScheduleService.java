@@ -1,4 +1,4 @@
-package com.agendify.agendifyapplication.security.service;
+package com.agendify.agendifyapplication.service;
 
 import com.agendify.domain.entities.Agendamento;
 import com.agendify.domain.entities.Status;
