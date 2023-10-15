@@ -17,6 +17,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -24,9 +28,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 
 @Service
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
     Logger logger = LoggerFactory.getLogger(AuthService.class);
 
@@ -55,6 +61,9 @@ public class AuthService {
 
     final String GENERIC_ERROR_MSG = "Erro genérico ao obter ao token de acesso";
 
+    @Autowired
+    JwtService jwtService;
+
     public AuthResponse handleAuthRequest(AuthRequest authRequest) throws InvalidCredentialsException, RequestTokenException {
         if (authRequest.password() == null)
             throw new InvalidCredentialsException("O campo password não foi informado");
@@ -69,7 +78,7 @@ public class AuthService {
 
         checkPassword(authRequest, usuario);
 
-        String token = getToken();
+        String token = jwtService.generateToken(usuario);
 
         return new AuthResponse(usuario.getId().toString(), usuario.getEmail(), token, usuario.getTipo());
     }
@@ -90,6 +99,7 @@ public class AuthService {
         }
     }
 
+//    Deprecated
     private String getToken() throws RequestTokenException {
         logger.info("Solicitando novo token ao Keycloak");
 
@@ -127,4 +137,20 @@ public class AuthService {
         }
 
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        Usuario usuario = clienteRepository.findByEmail(username);
+
+        if (usuario == null) {
+            usuario = estabelecimentoRepository.findByEmail(username);
+        }
+
+        return Optional
+                .of(usuario)
+                .map(UserDetail::new)
+                .orElseThrow(()->new UsernameNotFoundException("Usuário não encontrado pelo Security"));
+    }
+
 }
