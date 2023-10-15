@@ -38,6 +38,7 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
             @Param("estabelecimentoId") UUID estabelecimentoId);
 
     @Query("SELECT a FROM Agendamento a WHERE (a.cliente.id = :id or a.estabelecimento.id = :id) " +
+            " AND a.status = com.agendify.domain.entities.Status.AGENDADO " +
             "AND date(a.data) = date(:data)")
     List<Agendamento> findAgendamentosPorData(@Param("id") UUID id, @Param("data") Date date);
 
