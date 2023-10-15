@@ -10,7 +10,7 @@ import {Cliente} from "../model/response/Cliente";
 })
 export class ClienteService {
 
-  url = 'http://localhost:9090/cliente'
+  url = 'http://localhost:80/cliente'
 
   constructor(private httpClient: HttpClient, private authService: AuthorizationService) {
   }
@@ -40,7 +40,7 @@ export class ClienteService {
   getClienteLogado(id: string): Observable<Cliente> {
 
     return <Observable<Cliente>>this.httpClient.get(
-      `http://localhost:9090/cliente/${id}`,
+      `http://localhost:80/cliente/${id}`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

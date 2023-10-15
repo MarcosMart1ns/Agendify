@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class AuthorizationService {
 
-  url = 'http://localhost:9090/auth/login'
+  url = 'http://localhost:80/auth/login'
 
   constructor(private httpClient: HttpClient, private router: Router) {
   }

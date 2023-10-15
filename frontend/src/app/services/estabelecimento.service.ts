@@ -9,7 +9,7 @@ import {Estabelecimento} from "../model/response/Estabelecimento";
   providedIn: 'root'
 })
 export class EstabelecimentoService {
-  url = 'http://localhost:9090/estabelecimento'
+  url = 'http://localhost:80/estabelecimento'
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -36,7 +36,7 @@ export class EstabelecimentoService {
   getEstabelecimento(id: string):Observable<Estabelecimento>{
 
     return <Observable<Estabelecimento>> this.httpClient.get(
-      `http://localhost:9090/estabelecimento/${id}`,
+      `http://localhost:80/estabelecimento/${id}`,
         this.httpOptions
       );
   }

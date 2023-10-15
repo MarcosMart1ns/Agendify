@@ -9,7 +9,7 @@ import {Agendamento} from "../model/Agendamento";
   providedIn: 'root',
 })
 export class AgendaService {
-  private baseUrl = 'http://localhost:9090';
+  private baseUrl = 'http://localhost:80';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
