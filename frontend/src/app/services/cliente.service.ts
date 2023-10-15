@@ -10,7 +10,7 @@ import {Cliente} from "../model/response/Cliente";
 })
 export class ClienteService {
 
-  url = 'http://localhost:80/cliente'
+  url = 'https://agendify.azurewebsites.net/cliente'
 
   constructor(private httpClient: HttpClient, private authService: AuthorizationService) {
   }
@@ -40,7 +40,7 @@ export class ClienteService {
   getClienteLogado(id: string): Observable<Cliente> {
 
     return <Observable<Cliente>>this.httpClient.get(
-      `http://localhost:80/cliente/${id}`,
+      `https://agendify.azurewebsites.net/cliente/${id}`,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
