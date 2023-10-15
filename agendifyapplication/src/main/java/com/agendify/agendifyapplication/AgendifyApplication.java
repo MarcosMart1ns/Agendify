@@ -12,6 +12,7 @@ import java.util.TimeZone;
 public class AgendifyApplication {
 
     public static void main(String[] args) {
+        System.out.println("-------------> INICIADO <------------");
         SpringApplication.run(AgendifyApplication.class, args);
     }
 
