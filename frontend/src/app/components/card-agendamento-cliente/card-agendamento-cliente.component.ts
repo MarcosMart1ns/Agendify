@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { Constants } from 'src/app/Constants';
 
 @Component({
   selector: 'app-card-agendamento-cliente',
@@ -27,6 +28,8 @@ export class CardAgendamentoClienteComponent {
   }
 
   statusColor: string = '';
+
+  protected readonly Constants = Constants;
 
   setColorByStatus(status: string) {
     switch (status) {

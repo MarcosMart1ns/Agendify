@@ -67,6 +67,9 @@ export class UserHomeComponent {
       .getUserCalendar(this.loggedUser.id)
       .subscribe((response) => {
         this.agendamentos = response;
+        this.agendamentos.sort(
+          (a, b) => new Date(a.data).getTime() - new Date(b.data).getTime()
+        );
         console.log('agendamento callback na homepage');
         console.log(this.agendamentos);
       });

@@ -4,16 +4,14 @@
     <div class="col-12 col-sm-3 col-xl-1 text-center order-2 order-xl-1">
       <img
         class="imagem"
-        [src]="
-          urlImagem == null ? 'https://via.placeholder.com/60x61' : urlImagem
-        "
+        [src]="urlImagem ? urlImagem : Constants.DEFAULT_AVATAR"
         alt="Imagem do Cliente"
       />
     </div>
     <div
       class="col-12 col-sm-5 col-xl-2 text-center text-lg-start nome my-auto order-3 order-xl-2"
     >
-      {{ nome }}
+      {{ nomeEstabelecimento}}
     </div>
     <div
       class="col-12 col-sm-4 col-xl-2 justify-content-sm-center my-auto order-4 order-xl-3"

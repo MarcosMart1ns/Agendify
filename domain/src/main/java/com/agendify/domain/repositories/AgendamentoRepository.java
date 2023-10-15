@@ -14,29 +14,18 @@ import java.util.UUID;
 public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> {
 
     @Query("SELECT a FROM Agendamento a " +
-            "WHERE a.cliente.id = :id OR a.estabelecimento.id = :id " +
-            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
+            "WHERE (a.cliente.id = :id OR a.estabelecimento.id = :id) " +
+            "AND CAST(a.data as date) >= CURRENT_DATE")
     List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoId(@Param("id") UUID id);
 
-    //TODO: Provavelmente esse será o metodo usado na pesquisa de agendamento
     @Query("SELECT a FROM Agendamento a " +
             "WHERE (a.cliente.id = :id OR a.estabelecimento.id = :id) " +
-//            "AND FUNCTION('TRUNC', a.data, 'MM') = FUNCTION('TRUNC', :data, 'MM') " +
-//            "AND FUNCTION('TRUNC', a.data, 'YYYY') = FUNCTION('TRUNC', :data, 'YYYY') ")
+
             "AND FUNCTION('YEAR', a.data) = FUNCTION('YEAR', :data) " +
             "AND FUNCTION('MONTH', a.data) = FUNCTION('MONTH', :data) " +
             "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
     List<Agendamento> findAgendamentoByUserIdOrEstabelecimentoIdAndMonthYear(@Param("id") UUID id,
                                                                              @Param("data") Date data);
-//    @Query("SELECT a FROM Agendamento a " +
-//            "WHERE a.data BETWEEN :horaInicio AND :horaFim " +
-//            "AND a.estabelecimento.id = :estabelecimentoId " +
-//            "AND a.status = com.agendify.domain.entities.Status.AGENDADO")
-//    List<Agendamento> findAgendamentosDisponiveis(
-//            @Param("horaInicio") Date horaInicio,
-//            @Param("horaFim") Date horaFim,
-//            @Param("estabelecimentoId") UUID estabelecimentoId
-//    );
 
     @Query(value = "SELECT a.* FROM agendamento a " +
             "JOIN servico s ON a.servico_id = s.id " +
@@ -52,4 +41,6 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, UUID> 
             "AND date(a.data) = date(:data)")
     List<Agendamento> findAgendamentosPorData(@Param("id") UUID id, @Param("data") Date date);
 
+    @Query("SELECT a FROM Agendamento a WHERE a.status = com.agendify.domain.entities.Status.AGENDADO AND a.data < CURRENT_DATE")
+    List<Agendamento> findAgendamentosAbertosAntesDaDataAtual();
 }
