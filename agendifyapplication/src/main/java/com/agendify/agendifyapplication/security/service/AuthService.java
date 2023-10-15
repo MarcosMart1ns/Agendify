@@ -44,15 +44,6 @@ public class AuthService implements UserDetailsService {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Value("${spring.security.oauth2.client.provider.keycloak.token-uri}")
-    private String verifyTokenUrl;
-
-    @Value("${spring.security.oauth2.client.registration.keycloak.client-id}")
-    private String clientId;
-
-    @Value("${spring.security.oauth2.client.registration.keycloak.clientSecret}")
-    private String clientSecret;
-
     private final RestTemplate restTemplate = new RestTemplate();
 
     private final String EMAIL_SENHA_INVALIDOS = "Email ou senha incorretos, verique os dados informados e tente novamente";
@@ -97,45 +88,6 @@ public class AuthService implements UserDetailsService {
             logger.debug("Senha inválida");
             throw new InvalidCredentialsException(EMAIL_SENHA_INVALIDOS);
         }
-    }
-
-//    Deprecated
-    private String getToken() throws RequestTokenException {
-        logger.info("Solicitando novo token ao Keycloak");
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("client_id", clientId);
-        map.add("client_secret", clientSecret);
-        map.add("grant_type", "client_credentials");
-
-        HttpEntity<Object> request = new HttpEntity<>(map, headers);
-        ResponseEntity<KeycloakTokenResponse> response;
-
-        try {
-
-            response = restTemplate.postForEntity(verifyTokenUrl, request, KeycloakTokenResponse.class);
-            return response.getBody().access_token();
-
-        } catch (HttpClientErrorException e) {
-
-            if (e.getStatusCode().equals(HttpStatus.UNAUTHORIZED)) {
-
-
-                logger.error(ERROR_MSG, e);
-                throw new RequestTokenException(ERROR_MSG);
-            }
-
-            logger.error(GENERIC_ERROR_MSG, e);
-            throw new RequestTokenException();
-
-        } catch (Exception e) {
-            logger.error(GENERIC_ERROR_MSG, e);
-            throw new RequestTokenException();
-        }
-
     }
 
     @Override
