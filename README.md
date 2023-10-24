@@ -40,6 +40,8 @@ Utilizamos o Padrão Arquitetural MVC organizado em um Monolito Modular, onde a 
 - Banco de Dados
   -	MySQL
 - Infra
+  - CI/CD Github Actions
+   - Pipelines de Testes e Deploy
   - Azure
   - Azure Application Services
   - Docker
